@@ -1,0 +1,8 @@
+@mixin font-title() {
+	font-family: 'Oswald';
+}
+
+@mixin font-primary() {
+	font-family: 'Exo';
+	line-height: 1.4em;
+}

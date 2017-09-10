@@ -1,0 +1,26 @@
+.text {
+	@include font-primary();
+	@include text-rendering();
+}
+
+p {
+	margin: 0;
+	margin-bottom: 1.6em;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.block-title {
+	@include font-title();
+	@include text-rendering();
+
+	font-size: 1.8rem;
+	letter-spacing: 0.1em;
+
+	text-transform: uppercase;
+	font-weight: normal;
+
+	margin: 0;
+}

@@ -1,0 +1,16 @@
+html, body, #seventyonepictures, #main {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+.button {
+	outline: none;
+	border: none;
+	cursor: hand;
+	cursor: pointer;
+}
