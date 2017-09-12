@@ -58,7 +58,6 @@ const Carousel = Component.extend({
 	},
 
 	_setPosition: function () {
-
 		if (this._currentIndex === 0) {
 			TweenLite.to(this.ui.buttonPrev, 0.3, {scaleX: 0, autoAlpha: 0});
 		} else {

@@ -1,7 +1,7 @@
 <?php?>
-		
-		</div> <!-- END #main -->
-	</div> <!-- END #seventyonepictures -->
+
+		</main>  <!-- .page-container#main-region -->
+	</div > <!-- #seventyonepictures -->
 
 <?php wp_footer(); ?>
 	

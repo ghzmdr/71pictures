@@ -1,16 +1,15 @@
 import { Component } from '../lib/Component';
 import $ from 'jquery';
 import Size from '../lib/Size';
+import Scroll from '../lib/Scroll';
 import { TweenLite, TimelineLite } from 'gsap';
 import { bindAll } from 'underscore';
 
 const BackgroundVideo = Component.extend({
 
 	ui: {
-		canvas: '.js-video-canvas',
-		poster: '.js-video-poster',
-		video: '.js-video-element'
-		// masks: '.js-video-mask'
+		canvas: '.js-canvas',
+		video: '.js-video'
 	},
 
 	events: {
@@ -29,6 +28,7 @@ const BackgroundVideo = Component.extend({
 		};
 
 		this._skippedTicks = 0;
+		this._listen();
 	},
 
 	_onInitialized: function () {
@@ -39,7 +39,6 @@ const BackgroundVideo = Component.extend({
 		this._ctx = this.ui.canvas[0].getContext('2d');
 		this.ui.video[0].play();
 
-		this._listen();
 		this._setSizes();
 
 		const maskTimeline = this._obtainMaskTimeline();
@@ -48,6 +47,7 @@ const BackgroundVideo = Component.extend({
 	_listen: function () {
 		TweenLite.ticker.addEventListener('tick', this._tickHandler); 
 		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);	
+		this.listenTo(Scroll, 'scroll', this._scrollHandler);
 	},
 
 	_setSizes: function () {
@@ -83,7 +83,7 @@ const BackgroundVideo = Component.extend({
 
 	progress: function(value) {
 		console.log('[Set Progress: ]', value)
-		TweenMax.set(this._maskTimeline, {progress: value});
+		TweenLite.set(this._maskTimeline, {progress: value});
 	},
 
 	_getCurrentMaskFrame: function () {
@@ -149,6 +149,11 @@ const BackgroundVideo = Component.extend({
 
 	_resizeCompleteHandler: function () {
 		this._setSizes();
+	},
+
+	_scrollHandler: function (e) {
+		var progress = Math.min(Math.max(e.viewports, 0), 1);
+		this.progress(progress);
 	}
 });
 

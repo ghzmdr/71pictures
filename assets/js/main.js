@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -21775,71 +21775,6 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.View = undefined;
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _backbone = __webpack_require__(3);
-
-var _underscore = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _viewInitialize = function _viewInitialize(options) {
-	if ((0, _underscore.isFunction)(this._initialize)) this._initialize(options || {});
-
-	if (this.ui) {
-		var ui = Object.assign({}, this.ui);
-		Object.keys(ui).forEach(function (key) {
-			ui[key] = (0, _jquery2.default)(options.el).find(ui[key]);
-		});
-		this.ui = ui;
-	}
-
-	if (this.components) {
-		var components = Object.assign({}, this.components);
-		Object.keys(components).forEach(function (key) {
-			components[key] = _initComponents(options.el, components[key]);
-		});
-		this.components = components;
-	}
-
-	if ((0, _underscore.isFunction)(this._onInitialized)) this._onInitialized();
-};
-
-var _initComponents = function _initComponents(parentElement, component) {
-	var components = [];
-
-	(0, _jquery2.default)(parentElement).find(component.selector).each(function (index, element) {
-		var options = Object.assign({ el: (0, _jquery2.default)(element) }, component.options || {});
-		components.push(new component.type(options));
-	});
-
-	return components.length < 2 ? components[0] : components;
-};
-
-var View = {
-	extend: function extend(child) {
-		var view = _backbone.View.extend(child);
-		view.prototype.initialize = _viewInitialize;
-		return view;
-	}
-};
-
-exports.View = View;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -21897,6 +21832,71 @@ var Size = function () {
 }();
 
 exports.default = new Size();
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.View = undefined;
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _backbone = __webpack_require__(3);
+
+var _underscore = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _viewInitialize = function _viewInitialize(options) {
+	if ((0, _underscore.isFunction)(this._initialize)) this._initialize(options || {});
+
+	if (this.ui) {
+		var ui = Object.assign({}, this.ui);
+		Object.keys(ui).forEach(function (key) {
+			ui[key] = (0, _jquery2.default)(options.el).find(ui[key]);
+		});
+		this.ui = ui;
+	}
+
+	if (this.components) {
+		var components = Object.assign({}, this.components);
+		Object.keys(components).forEach(function (key) {
+			components[key] = _initComponents(options.el, components[key]);
+		});
+		this.components = components;
+	}
+
+	if ((0, _underscore.isFunction)(this._onInitialized)) this._onInitialized();
+};
+
+var _initComponents = function _initComponents(parentElement, component) {
+	var components = [];
+
+	(0, _jquery2.default)(parentElement).find(component.selector).each(function (index, element) {
+		var options = Object.assign({ el: (0, _jquery2.default)(element) }, component.options || {});
+		components.push(new component.type(options));
+	});
+
+	return components.length < 2 ? components[0] : components;
+};
+
+var View = {
+	extend: function extend(child) {
+		var ViewClass = _backbone.View.extend(child);
+		ViewClass.prototype.initialize = _viewInitialize;
+		return ViewClass;
+	}
+};
+
+exports.View = View;
 
 /***/ }),
 /* 7 */
@@ -23845,6 +23845,91 @@ exports.default = new Size();
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TemplateManager = function () {
+	function TemplateManager() {
+		_classCallCheck(this, TemplateManager);
+
+		this._pages = {};
+
+		this._treatSame = {
+			'home': ['', 'ntsc'],
+			'ntsc': ['', 'home'],
+			'': ['ntsc', 'home']
+		};
+	}
+
+	_createClass(TemplateManager, [{
+		key: 'add',
+		value: function add(slug, element) {
+			if (slug[slug.length] === '/') slug = slug.substr(0, slug.length - 2);
+			return this._pages[slug];
+		}
+	}, {
+		key: 'get',
+		value: function get(slug) {
+			return this._obtainPageBySlug(slug);
+		}
+	}, {
+		key: '_obtainPageBySlug',
+		value: function _obtainPageBySlug(slug) {
+			var _this = this;
+
+			return new Promise(function (res, rej) {
+				var page = _this._pages[slug] || _this._getSamePage(slug);
+
+				if (page) res(page);else _this._fetchPage(slug).then(function (page) {
+					return res((0, _jquery2.default)(page).find('.js-page'));
+				}).catch(rej);
+			});
+		}
+	}, {
+		key: '_getSamePage',
+		value: function _getSamePage(slug) {
+			var _this2 = this;
+
+			if (this._treatSame[slug]) {
+				this._treatSame[slug].forEach(function (alias) {
+					if (_this2._pages[alias]) return alias;
+				});
+			}
+		}
+	}, {
+		key: '_fetchPage',
+		value: function _fetchPage(pathname) {
+			return new Promise(function (res, rej) {
+				return fetch(pathname).then(function (response) {
+					return response.text();
+				}).then(res).catch(rej);
+			});
+		}
+	}]);
+
+	return TemplateManager;
+}();
+
+exports.default = new TemplateManager();
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 exports.Component = undefined;
 
 var _jquery = __webpack_require__(0);
@@ -23882,7 +23967,86 @@ var Component = {
 exports.Component = Component;
 
 /***/ }),
-/* 9 */
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _backbone = __webpack_require__(3);
+
+var _underscore = __webpack_require__(1);
+
+var _Size = __webpack_require__(5);
+
+var _Size2 = _interopRequireDefault(_Size);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Scroll = function () {
+	function Scroll() {
+		_classCallCheck(this, Scroll);
+
+		(0, _underscore.extend)(this, _backbone.Events);
+
+		(0, _underscore.bindAll)(this, '_scrollHandler');
+
+		this._setAndTrigger();
+
+		window.addEventListener('scroll', this._scrollHandler, { passive: true });
+		this.listenTo(_Size2.default, 'resize:complete', this._resizeCompleteHandler);
+	}
+
+	_createClass(Scroll, [{
+		key: 'scrollY',
+		value: function scrollY() {
+			return this._scrollY;
+		}
+	}, {
+		key: 'scrollX',
+		value: function scrollX() {
+			return this._scrollX;
+		}
+	}, {
+		key: '_setScroll',
+		value: function _setScroll() {
+			this._scrollY = window.scrollY;
+			this._scrollX = window.scrollX;
+		}
+	}, {
+		key: '_setAndTrigger',
+		value: function _setAndTrigger() {
+			this._setScroll();
+			var viewports = this._scrollY / _Size2.default.innerHeight();
+			this.trigger('scroll', { x: this._scrollX, y: this._scrollY, viewports: viewports });
+		}
+	}, {
+		key: '_scrollHandler',
+		value: function _scrollHandler(e) {
+			this._setAndTrigger();
+		}
+	}, {
+		key: '_resizeCompleteHandler',
+		value: function _resizeCompleteHandler() {
+			this._setAndTrigger();
+		}
+	}]);
+
+	return Scroll;
+}();
+
+exports.default = new Scroll();
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23894,17 +24058,21 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _gsap = __webpack_require__(2);
 
-var _CSSPlugin = __webpack_require__(10);
+var _CSSPlugin = __webpack_require__(12);
 
 var _CSSPlugin2 = _interopRequireDefault(_CSSPlugin);
 
-var _ApplicationRouter = __webpack_require__(11);
+var _ApplicationRouter = __webpack_require__(13);
 
 var _ApplicationRouter2 = _interopRequireDefault(_ApplicationRouter);
 
-var _ApplicationView = __webpack_require__(19);
+var _ApplicationView = __webpack_require__(18);
 
 var _ApplicationView2 = _interopRequireDefault(_ApplicationView);
+
+var _TemplateManager = __webpack_require__(8);
+
+var _TemplateManager2 = _interopRequireDefault(_TemplateManager);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23916,11 +24084,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 		}
 	};
 
+	_TemplateManager2.default.add(window.location.pathname, (0, _jquery2.default)('.js-page'));
 	Backbone.history.start({ pushState: true });
 });
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -26841,7 +27010,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26857,13 +27026,17 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _regions = __webpack_require__(12);
+var _regions = __webpack_require__(14);
 
 var _regions2 = _interopRequireDefault(_regions);
 
-var _HomePage = __webpack_require__(14);
+var _TemplateManager = __webpack_require__(8);
 
-var _HomePage2 = _interopRequireDefault(_HomePage);
+var _TemplateManager2 = _interopRequireDefault(_TemplateManager);
+
+var _NTSCPage = __webpack_require__(16);
+
+var _NTSCPage2 = _interopRequireDefault(_NTSCPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26872,22 +27045,20 @@ var ApplicationRouter = _backbone.Router.extend({
 	routes: {
 		'': '_home',
 		'home': '_home',
-		'ntsc': '_ntsc'
+		'ntsc': '_home'
 	},
 
 	_home: function _home() {
-		this._activeMainView = _regions2.default.main.show(_HomePage2.default, { el: (0, _jquery2.default)('.js-page-home') });
-	},
-
-	_ntsc: function _ntsc() {
-		this._activeMainView = _regions2.default.main.show(_HomePage2.default, { el: (0, _jquery2.default)('.js-page-home'), scrollToNTSC: true });
+		_TemplateManager2.default.get('').then(function (node) {
+			return _regions2.default.main.show(_NTSCPage2.default, { el: node });
+		});
 	}
 });
 
 exports.default = ApplicationRouter;
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26897,18 +27068,18 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _Region = __webpack_require__(13);
+var _Region = __webpack_require__(15);
 
 var _Region2 = _interopRequireDefault(_Region);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-	main: new _Region2.default('#region-main')
+	main: new _Region2.default('#main-region')
 };
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26970,149 +27141,6 @@ var Region = function () {
 exports.default = Region;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _View = __webpack_require__(5);
-
-var _gsap = __webpack_require__(2);
-
-var _Scroll = __webpack_require__(15);
-
-var _Scroll2 = _interopRequireDefault(_Scroll);
-
-var _Size = __webpack_require__(6);
-
-var _Size2 = _interopRequireDefault(_Size);
-
-var _BackgroundVideo = __webpack_require__(16);
-
-var _BackgroundVideo2 = _interopRequireDefault(_BackgroundVideo);
-
-var _NTSCPage = __webpack_require__(17);
-
-var _NTSCPage2 = _interopRequireDefault(_NTSCPage);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var HomePage = _View.View.extend({
-
-	ui: {
-		logo: '.js-home-logo',
-		peek: '.js-home-peek'
-	},
-
-	components: {
-
-		backgroundVideo: { selector: '.js-home-video', type: _BackgroundVideo2.default },
-
-		ntscPage: { selector: '.js-page-ntsc', type: _NTSCPage2.default }
-
-	},
-
-	_initialize: function _initialize(options) {
-
-		if (options.scrollToNTSC) {
-			this._scrollToNTSC = true;
-		}
-
-		this.listenTo(_Scroll2.default, 'scroll', this._scrollHandler);
-	},
-
-	_onInitialized: function _onInitialized() {
-		this._createLogoTimeline();
-		this._scrollHandler();
-	},
-
-	transitionIn: function transitionIn() {
-		_gsap.TweenLite.to(this.ui.logo, 0.7, { opacity: 1 }, 0.2);
-	},
-
-	_createLogoTimeline: function _createLogoTimeline() {
-		this._logoTimeline = new TimelineLite({ paused: true });
-		this._logoTimeline.to(this.ui.logo, 0.5, { color: 'black' }, 0.5);
-	},
-
-	_scrollHandler: function _scrollHandler() {
-
-		var progress = Math.min(Math.max(_Scroll2.default.scrollY() / _Size2.default.innerHeight(), 0), 1);
-
-		this.components.backgroundVideo.progress(progress);
-		this._logoTimeline.progress(progress);
-	}
-});
-
-exports.default = HomePage;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _backbone = __webpack_require__(3);
-
-var _underscore = __webpack_require__(1);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Scroll = function () {
-	function Scroll() {
-		_classCallCheck(this, Scroll);
-
-		(0, _underscore.extend)(this, _backbone.Events);
-
-		(0, _underscore.bindAll)(this, '_scrollHandler');
-
-		this._setScroll();
-
-		window.addEventListener('scroll', this._scrollHandler, { passive: true });
-	}
-
-	_createClass(Scroll, [{
-		key: 'scrollY',
-		value: function scrollY() {
-			return this._scrollY;
-		}
-	}, {
-		key: 'scrollX',
-		value: function scrollX() {
-			return this._scrollX;
-		}
-	}, {
-		key: '_setScroll',
-		value: function _setScroll() {
-			this._scrollY = window.scrollY;
-			this._scrollX = window.scrollX;
-		}
-	}, {
-		key: '_scrollHandler',
-		value: function _scrollHandler(e) {
-			this._setScroll();
-			this.trigger('scroll', { x: this._scrollX, y: this._scrollY });
-		}
-	}]);
-
-	return Scroll;
-}();
-
-exports.default = new Scroll();
-
-/***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27123,15 +27151,231 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _Component = __webpack_require__(8);
+var _View = __webpack_require__(6);
+
+var _gsap = __webpack_require__(2);
+
+var _Carousel = __webpack_require__(17);
+
+var _Carousel2 = _interopRequireDefault(_Carousel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NTSCPage = _View.View.extend({
+
+	components: {
+
+		carousel: { selector: '.js-ntsc-carousel', type: _Carousel2.default }
+
+	},
+
+	_onInitialized: function _onInitialized() {}
+});
+
+exports.default = NTSCPage;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _Component = __webpack_require__(9);
 
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _Size = __webpack_require__(6);
+var _Size = __webpack_require__(5);
 
 var _Size2 = _interopRequireDefault(_Size);
+
+var _gsap = __webpack_require__(2);
+
+var _underscore = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Carousel = _Component.Component.extend({
+
+	ui: {
+		slidePanel: '.js-carousel-slides',
+		slides: '.js-carousel-slide',
+
+		buttonPrev: '.js-carousel-prev',
+		buttonNext: '.js-carousel-next'
+	},
+
+	events: {
+		'click .js-carousel-prev': '_buttonPrevClickHandler',
+		'mouseenter .js-carousel-prev': '_buttonPrevMouseEnterHandler',
+		'mouseleave .js-carousel-prev': '_buttonPrevMouseLeaveHandler',
+
+		'click .js-carousel-next': '_buttonNextClickHandler',
+		'mouseenter .js-carousel-next': '_buttonNextMouseEnterHandler',
+		'mouseleave .js-carousel-next': '_buttonNextMouseLeaveHandler'
+	},
+
+	_onInitialized: function _onInitialized() {
+		this._listen();
+		this._setSizes();
+
+		this._currentIndex = 0;
+		this._setPosition();
+	},
+
+	_listen: function _listen() {
+		this.listenTo(_Size2.default, 'resize:complete', this._resizeCompleteHandler);
+	},
+
+	_setSizes: function _setSizes() {
+		this._slideWidth = this.ui.slides[0].offsetWidth;
+		_gsap.TweenLite.set(this.ui.slidePanel, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
+	},
+
+	next: function next() {
+		if (this._currentIndex === this.ui.slides.length - 1) return;
+
+		++this._currentIndex;
+		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
+		this._setPosition();
+	},
+
+	prev: function prev() {
+		if (this._currentIndex === 0) return;
+
+		--this._currentIndex;
+		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
+		this._setPosition();
+	},
+
+	_setPosition: function _setPosition() {
+		if (this._currentIndex === 0) {
+			_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 0, autoAlpha: 0 });
+		} else {
+			if (!this._isMouseOverButtonPrev) {
+				_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 1, autoAlpha: 0.5 });
+			}
+		}
+
+		if (this._currentIndex === this.ui.slides.length - 1) {
+			_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 0, autoAlpha: 0 });
+		} else {
+			if (!this._isMouseOverButtonNext) {
+				_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 1, autoAlpha: 0.5 });
+			}
+		}
+	},
+
+	_resizeCompleteHandler: function _resizeCompleteHandler() {
+		this._setSizes();
+	},
+
+	_buttonNextClickHandler: function _buttonNextClickHandler() {
+		this.next();
+	},
+
+	_buttonPrevClickHandler: function _buttonPrevClickHandler() {
+		this.prev();
+	},
+
+	_buttonPrevMouseEnterHandler: function _buttonPrevMouseEnterHandler() {
+		this._isMouseOverButtonPrev = true;
+		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1.3, opacity: 1 });
+	},
+
+	_buttonPrevMouseLeaveHandler: function _buttonPrevMouseLeaveHandler() {
+		this._isMouseOverButtonPrev = false;
+		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1, opacity: 0.5 });
+	},
+
+	_buttonNextMouseEnterHandler: function _buttonNextMouseEnterHandler() {
+		this._isMouseOverButtonNext = true;
+		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1.3, opacity: 1 });
+	},
+
+	_buttonNextMouseLeaveHandler: function _buttonNextMouseLeaveHandler() {
+		this._isMouseOverButtonNext = false;
+		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1, opacity: 0.5 });
+	}
+});
+
+exports.default = Carousel;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _View = __webpack_require__(6);
+
+var _Background = __webpack_require__(19);
+
+var _Background2 = _interopRequireDefault(_Background);
+
+var _Intro = __webpack_require__(20);
+
+var _Intro2 = _interopRequireDefault(_Intro);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApplicationView = _View.View.extend({
+
+	components: {
+		background: { selector: '.js-background', type: _Background2.default },
+		intro: { selector: '.js-intro', type: _Intro2.default }
+	},
+
+	_onInitialized: function _onInitialized() {
+		this.transitionIn();
+	},
+
+	transitionIn: function transitionIn() {
+		this.components.intro.transitionIn();
+	}
+});
+
+exports.default = ApplicationView;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _Component = __webpack_require__(9);
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _Size = __webpack_require__(5);
+
+var _Size2 = _interopRequireDefault(_Size);
+
+var _Scroll = __webpack_require__(10);
+
+var _Scroll2 = _interopRequireDefault(_Scroll);
 
 var _gsap = __webpack_require__(2);
 
@@ -27142,10 +27386,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var BackgroundVideo = _Component.Component.extend({
 
 	ui: {
-		canvas: '.js-video-canvas',
-		poster: '.js-video-poster',
-		video: '.js-video-element'
-		// masks: '.js-video-mask'
+		canvas: '.js-canvas',
+		video: '.js-video'
 	},
 
 	events: {
@@ -27163,6 +27405,7 @@ var BackgroundVideo = _Component.Component.extend({
 		};
 
 		this._skippedTicks = 0;
+		this._listen();
 	},
 
 	_onInitialized: function _onInitialized() {
@@ -27173,7 +27416,6 @@ var BackgroundVideo = _Component.Component.extend({
 		this._ctx = this.ui.canvas[0].getContext('2d');
 		this.ui.video[0].play();
 
-		this._listen();
 		this._setSizes();
 
 		var maskTimeline = this._obtainMaskTimeline();
@@ -27182,6 +27424,7 @@ var BackgroundVideo = _Component.Component.extend({
 	_listen: function _listen() {
 		_gsap.TweenLite.ticker.addEventListener('tick', this._tickHandler);
 		this.listenTo(_Size2.default, 'resize:complete', this._resizeCompleteHandler);
+		this.listenTo(_Scroll2.default, 'scroll', this._scrollHandler);
 	},
 
 	_setSizes: function _setSizes() {
@@ -27215,7 +27458,7 @@ var BackgroundVideo = _Component.Component.extend({
 
 	progress: function progress(value) {
 		console.log('[Set Progress: ]', value);
-		TweenMax.set(this._maskTimeline, { progress: value });
+		_gsap.TweenLite.set(this._maskTimeline, { progress: value });
 	},
 
 	_getCurrentMaskFrame: function _getCurrentMaskFrame() {
@@ -27280,13 +27523,18 @@ var BackgroundVideo = _Component.Component.extend({
 
 	_resizeCompleteHandler: function _resizeCompleteHandler() {
 		this._setSizes();
+	},
+
+	_scrollHandler: function _scrollHandler(e) {
+		var progress = Math.min(Math.max(e.viewports, 0), 1);
+		this.progress(progress);
 	}
 });
 
 exports.default = BackgroundVideo;
 
 /***/ }),
-/* 17 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27296,189 +27544,55 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _View = __webpack_require__(5);
-
-var _gsap = __webpack_require__(2);
-
-var _Carousel = __webpack_require__(18);
-
-var _Carousel2 = _interopRequireDefault(_Carousel);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NTSCPage = _View.View.extend({
-
-	components: {
-
-		carousel: { selector: '.js-ntsc-carousel', type: _Carousel2.default }
-
-	},
-
-	_onInitialized: function _onInitialized() {}
-});
-
-exports.default = NTSCPage;
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _Component = __webpack_require__(8);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _Size = __webpack_require__(6);
-
-var _Size2 = _interopRequireDefault(_Size);
-
-var _gsap = __webpack_require__(2);
+var _View = __webpack_require__(6);
 
 var _underscore = __webpack_require__(1);
 
+var _gsap = __webpack_require__(2);
+
+var _Scroll = __webpack_require__(10);
+
+var _Scroll2 = _interopRequireDefault(_Scroll);
+
+var _Size = __webpack_require__(5);
+
+var _Size2 = _interopRequireDefault(_Size);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Carousel = _Component.Component.extend({
+var Intro = _View.View.extend({
 
 	ui: {
-		slidePanel: '.js-carousel-slides',
-		slides: '.js-carousel-slide',
-
-		buttonPrev: '.js-carousel-prev',
-		buttonNext: '.js-carousel-next'
+		logo: '.js-logo'
 	},
 
-	events: {
-		'click .js-carousel-prev': '_buttonPrevClickHandler',
-		'mouseenter .js-carousel-prev': '_buttonPrevMouseEnterHandler',
-		'mouseleave .js-carousel-prev': '_buttonPrevMouseLeaveHandler',
-
-		'click .js-carousel-next': '_buttonNextClickHandler',
-		'mouseenter .js-carousel-next': '_buttonNextMouseEnterHandler',
-		'mouseleave .js-carousel-next': '_buttonNextMouseLeaveHandler'
+	_initialize: function _initialize(options) {
+		(0, _underscore.bindAll)(this, '_scrollHandler');
 	},
 
 	_onInitialized: function _onInitialized() {
-		this._listen();
-		this._setSizes();
 
-		this._currentIndex = 0;
-		this._setPosition();
+		this._createLogoTimeline();
+		this.listenTo(_Scroll2.default, 'scroll', this._scrollHandler);
 	},
 
-	_listen: function _listen() {
-		this.listenTo(_Size2.default, 'resize:complete', this._resizeCompleteHandler);
+	transitionIn: function transitionIn() {
+		_gsap.TweenLite.to(this.ui.logo, 0.7, { opacity: 1 }, 0.2);
 	},
 
-	_setSizes: function _setSizes() {
-		this._slideWidth = this.ui.slides[0].offsetWidth;
-		_gsap.TweenLite.set(this.ui.slidePanel, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
+	_createLogoTimeline: function _createLogoTimeline() {
+		this._logoTimeline = new TimelineLite({ paused: true });
+		this._logoTimeline.to(this.ui.logo, 0.5, { color: 'black' }, 0.5);
 	},
 
-	next: function next() {
-		if (this._currentIndex === this.ui.slides.length - 1) return;
+	_scrollHandler: function _scrollHandler(e) {
 
-		++this._currentIndex;
-		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
-		this._setPosition();
-	},
-
-	prev: function prev() {
-		if (this._currentIndex === 0) return;
-
-		--this._currentIndex;
-		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
-		this._setPosition();
-	},
-
-	_setPosition: function _setPosition() {
-
-		if (this._currentIndex === 0) {
-			_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 0, autoAlpha: 0 });
-		} else {
-			if (!this._isMouseOverButtonPrev) {
-				_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 1, autoAlpha: 0.5 });
-			}
-		}
-
-		if (this._currentIndex === this.ui.slides.length - 1) {
-			_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 0, autoAlpha: 0 });
-		} else {
-			if (!this._isMouseOverButtonNext) {
-				_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 1, autoAlpha: 0.5 });
-			}
-		}
-	},
-
-	_resizeCompleteHandler: function _resizeCompleteHandler() {
-		this._setSizes();
-	},
-
-	_buttonNextClickHandler: function _buttonNextClickHandler() {
-		this.next();
-	},
-
-	_buttonPrevClickHandler: function _buttonPrevClickHandler() {
-		this.prev();
-	},
-
-	_buttonPrevMouseEnterHandler: function _buttonPrevMouseEnterHandler() {
-		this._isMouseOverButtonPrev = true;
-		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1.3, opacity: 1 });
-	},
-
-	_buttonPrevMouseLeaveHandler: function _buttonPrevMouseLeaveHandler() {
-		this._isMouseOverButtonPrev = false;
-		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1, opacity: 0.5 });
-	},
-
-	_buttonNextMouseEnterHandler: function _buttonNextMouseEnterHandler() {
-		this._isMouseOverButtonNext = true;
-		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1.3, opacity: 1 });
-	},
-
-	_buttonNextMouseLeaveHandler: function _buttonNextMouseLeaveHandler() {
-		this._isMouseOverButtonNext = false;
-		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1, opacity: 0.5 });
+		var progress = Math.min(Math.max(e.viewports, 0), 1);
+		this._logoTimeline.progress(progress);
 	}
 });
 
-exports.default = Carousel;
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _View = __webpack_require__(5);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApplicationView = _View.View.extend({
-	_initialize: function _initialize() {},
-
-	transitionIn: function transitionIn() {}
-});
-
-exports.default = ApplicationView;
+exports.default = Intro;
 
 /***/ })
 /******/ ]);

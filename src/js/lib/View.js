@@ -33,9 +33,9 @@ const _initComponents = function (parentElement, component) {
 
 const View = {
 	extend: function(child) {
-		var view = BackboneView.extend(child);
-		view.prototype.initialize = _viewInitialize;
-		return view;
+		var ViewClass = BackboneView.extend(child);
+		ViewClass.prototype.initialize = _viewInitialize;
+		return ViewClass;
 	}
 }
 

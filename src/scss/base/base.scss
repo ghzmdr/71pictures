@@ -1,4 +1,4 @@
-html, body, #seventyonepictures, #main {
+html, body, #seventyonepictures, #main-region {
 	margin: 0;
 	height: 100%;
 	width: 100%;
@@ -13,4 +13,8 @@ html, body, #seventyonepictures, #main {
 	border: none;
 	cursor: hand;
 	cursor: pointer;
+}
+
+#main-region {
+	position: relative;
 }

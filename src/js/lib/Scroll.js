@@ -1,5 +1,6 @@
 import { Events } from 'backbone';
 import { extend, bindAll } from 'underscore';
+import Size from '../lib/Size';
 
 class Scroll {
 	constructor() {
@@ -7,9 +8,10 @@ class Scroll {
 
 		bindAll(this, '_scrollHandler');
 
-		this._setScroll();
+		this._setAndTrigger();
 
 		window.addEventListener('scroll', this._scrollHandler, {passive: true});
+		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
 	}
 
 	scrollY() {
@@ -25,9 +27,18 @@ class Scroll {
 		this._scrollX = window.scrollX;
 	}
 
-	_scrollHandler(e) {
+	_setAndTrigger() {
 		this._setScroll();
-		this.trigger('scroll', {x: this._scrollX, y: this._scrollY});
+		const viewports = this._scrollY / Size.innerHeight();
+		this.trigger('scroll', {x: this._scrollX, y: this._scrollY, viewports });
+	}
+
+	_scrollHandler(e) {
+		this._setAndTrigger();
+	}
+
+	_resizeCompleteHandler() {
+		this._setAndTrigger();
 	}
 }
 

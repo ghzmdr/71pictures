@@ -1,23 +1,21 @@
 import { Router } from 'backbone';
 import $ from 'jquery';
 import Regions from './regions.js';
+import TemplateManager from './lib/TemplateManager.js';
 
-import HomePage from './views/pages/HomePage.js'
+import NTSCPage from './views/pages/NTSCPage.js';
 
 const ApplicationRouter = Router.extend({
 
 	routes: {	
 		'': 	'_home',
-		'home': '_home',
-		'ntsc': '_ntsc'
+		'home': 	'_home',
+		'ntsc': '_home'
 	},
 
 	_home: function () {
-		this._activeMainView = Regions.main.show(HomePage, {el: $('.js-page-home')});
-	},
-
-	_ntsc: function () {
-		this._activeMainView =  Regions.main.show(HomePage, {el: $('.js-page-home'), scrollToNTSC: true});
+		TemplateManager.get('')
+			.then((node) => Regions.main.show(NTSCPage, {el: node}));
 	}
 })
 
