@@ -31,6 +31,10 @@ const BackgroundVideo = Component.extend({
 		this._listen();
 	},
 
+	transitionIn() {
+		TweenLite.set(this.ui.canvas, {opacity: 1});
+	},
+
 	_onInitialized: function () {
 
 		this.ui.underwaterCanvas = document.createElement('canvas');
@@ -152,6 +156,12 @@ const BackgroundVideo = Component.extend({
 	},
 
 	_scrollHandler: function (e) {
+		
+		if (!this._shown) {
+			this.transitionIn();
+			this._shown = true;
+		}
+
 		var progress = Math.min(Math.max(e.viewports, 0), 1);
 		this.progress(progress);
 	}

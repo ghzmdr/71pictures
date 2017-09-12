@@ -7,10 +7,10 @@
 
 	$galleryImages = array(get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'));
 ?>
-<div class="page page-ntsc js-page">
+<article class="page page-ntsc js-page">
 
 	<div class="ntsc-block--title">
-		<h2 class="page-main-project__title page-ntsc__title"><?php echo $post->post_title; ?></h2>
+		<h2 class="page-main-project__title page-ntsc__title" id="ntsc"><?php echo $post->post_title; ?></h2>
 	</div>
 
 	<div class="ntsc-block page-ntsc__intro-block">
@@ -65,6 +65,6 @@
 
 		</div>
 	</div>
-</div>
+</article>
 
 <?php get_footer();

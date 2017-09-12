@@ -23872,8 +23872,8 @@ var TemplateManager = function () {
 	_createClass(TemplateManager, [{
 		key: 'add',
 		value: function add(slug, element) {
-			if (slug[slug.length] === '/') slug = slug.substr(0, slug.length - 2);
-			return this._pages[slug];
+			if (slug[slug.length - 1] === '/') slug = slug.substr(0, slug.length - 2);
+			return this._pages[slug] = element;
 		}
 	}, {
 		key: 'get',
@@ -27408,6 +27408,11 @@ var BackgroundVideo = _Component.Component.extend({
 		this._listen();
 	},
 
+	transitionIn: function transitionIn() {
+		_gsap.TweenLite.set(this.ui.canvas, { opacity: 1 });
+	},
+
+
 	_onInitialized: function _onInitialized() {
 
 		this.ui.underwaterCanvas = document.createElement('canvas');
@@ -27526,6 +27531,12 @@ var BackgroundVideo = _Component.Component.extend({
 	},
 
 	_scrollHandler: function _scrollHandler(e) {
+
+		if (!this._shown) {
+			this.transitionIn();
+			this._shown = true;
+		}
+
 		var progress = Math.min(Math.max(e.viewports, 0), 1);
 		this.progress(progress);
 	}

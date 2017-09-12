@@ -13,8 +13,8 @@ class TemplateManager {
 	}
 
 	add(slug, element) {
-		if (slug[slug.length] === '/') slug = slug.substr(0, slug.length-2);
-		return this._pages[slug];
+		if (slug[slug.length-1] === '/') slug = slug.substr(0, slug.length-2);
+		return this._pages[slug] = element;
 	}
 
 	get(slug) {
