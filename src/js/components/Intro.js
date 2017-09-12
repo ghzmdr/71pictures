@@ -22,7 +22,7 @@ const Intro = View.extend({
 	},
 
 	transitionIn: function () {
-		TweenLite.to(this.ui.logo, 0.7, {opacity: 1}, 0.2);
+		TweenLite.to(this.ui.logo, 0.7, {opacity: 1});
 	},
 
 	_createLogoTimeline: function () {

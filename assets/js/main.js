@@ -27577,7 +27577,7 @@ var Intro = _View.View.extend({
 	},
 
 	transitionIn: function transitionIn() {
-		_gsap.TweenLite.to(this.ui.logo, 0.7, { opacity: 1 }, 0.2);
+		_gsap.TweenLite.to(this.ui.logo, 0.7, { opacity: 1 });
 	},
 
 	_createLogoTimeline: function _createLogoTimeline() {
