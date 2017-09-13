@@ -11,6 +11,7 @@ class Size {
 		window.addEventListener('resize', debounce(this._resizeDebounceHandler, 100), {passive: true});
 
 		this._setSizes();
+		this.trigger('resize')
 	}
 
 	_setSizes() {

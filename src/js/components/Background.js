@@ -1,11 +1,11 @@
-import { Component } from '../lib/Component';
+import { View } from '../lib/View';
 import $ from 'jquery';
 import Size from '../lib/Size';
 import Scroll from '../lib/Scroll';
 import { TweenLite, TimelineLite } from 'gsap';
 import { bindAll } from 'underscore';
 
-const BackgroundVideo = Component.extend({
+const BackgroundVideo = View.extend({
 
 	ui: {
 		canvas: '.js-canvas',
@@ -16,9 +16,8 @@ const BackgroundVideo = Component.extend({
 		'canplay .js-video-element': '_videoCanPlayHandler'
 	},
 
-	_initialize: function () {
+	initialize: function () {
 		bindAll(this, '_tickHandler');
-
 
 		this._maskTweenObj = {
 			rx: 0, ry: 0, 
@@ -28,14 +27,13 @@ const BackgroundVideo = Component.extend({
 		};
 
 		this._skippedTicks = 0;
-		this._listen();
 	},
 
 	transitionIn() {
 		TweenLite.set(this.ui.canvas, {opacity: 1});
 	},
 
-	_onInitialized: function () {
+	onInitialized: function () {
 
 		this.ui.underwaterCanvas = document.createElement('canvas');
 		this._underwaterCtx = this.ui.underwaterCanvas.getContext('2d');
@@ -44,8 +42,10 @@ const BackgroundVideo = Component.extend({
 		this.ui.video[0].play();
 
 		this._setSizes();
-
 		const maskTimeline = this._obtainMaskTimeline();
+		
+		this._listen();
+		this._setProgressFromScroll();
 	},
 
 	_listen: function () {
@@ -86,8 +86,9 @@ const BackgroundVideo = Component.extend({
 	},
 
 	progress: function(value) {
-		console.log('[Set Progress: ]', value)
+
 		TweenLite.set(this._maskTimeline, {progress: value});
+		
 	},
 
 	_getCurrentMaskFrame: function () {
@@ -155,15 +156,20 @@ const BackgroundVideo = Component.extend({
 		this._setSizes();
 	},
 
-	_scrollHandler: function (e) {
-		
+	_setProgressFromScroll: function () {
+
 		if (!this._shown) {
 			this.transitionIn();
 			this._shown = true;
 		}
 
-		var progress = Math.min(Math.max(e.viewports, 0), 1);
+		var progress = Math.min(Math.max(Scroll.scrollY() / Size.innerHeight(), 0), 1);
 		this.progress(progress);
+
+	},
+
+	_scrollHandler: function (e) {
+		this._setProgressFromScroll();
 	}
 });
 

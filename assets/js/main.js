@@ -19814,6 +19814,117 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.View = undefined;
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _backbone = __webpack_require__(5);
+
+var _underscore = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _viewInitialize = function _viewInitialize() {
+	var _this = this;
+
+	if (this.ui) {
+
+		var ui = Object.assign({}, this.ui);
+		Object.keys(ui).forEach(function (key) {
+			return ui[key] = _this.$el.find(ui[key]);
+		});
+		this.ui = ui;
+	}
+
+	if (this.components) {
+
+		var components = Object.assign({}, this.components);
+		Object.keys(components).forEach(function (key) {
+			return components[key] = _initComponents(_this.$el, components[key]);
+		});
+		this.components = components;
+	}
+
+	if ((0, _underscore.isFunction)(this.onInitialized)) this.onInitialized();
+};
+
+var _initComponents = function _initComponents($parentElement, component) {
+	var components = [];
+
+	$parentElement.find(component.selector).each(function (index, element) {
+		var options = Object.assign({ el: (0, _jquery2.default)(element) }, component.options || {});
+		components.push(new component.type(options));
+	});
+
+	return components.length < 2 ? components[0] : components;
+};
+
+var View = {
+	extend: function extend(child) {
+		var ViewClass = _backbone.View.extend(child);
+		var originalInitialize = ViewClass.prototype.initialize;
+
+		ViewClass.prototype.initialize = function () {
+			var _this2 = this;
+
+			originalInitialize.apply(this, arguments);
+			this.listenToOnce(this, 'attached', function () {
+
+				_viewInitialize.apply(_this2);
+				if (_this2.components) Object.keys(_this2.components).forEach(function (key) {
+
+					if ((0, _underscore.isArray)(_this2.components[key])) _this2.components[key].forEach(function (c) {
+						return c.trigger('attached');
+					});else _this2.components[key].trigger('attached');
+				});
+			});
+		};
+
+		return ViewClass;
+	}
+};
+
+exports.View = View;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Backbone.js 1.3.3
 
 //     (c) 2010-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -21739,34 +21850,7 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21780,7 +21864,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _underscore = __webpack_require__(1);
 
-var _backbone = __webpack_require__(3);
+var _backbone = __webpack_require__(5);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21796,6 +21880,7 @@ var Size = function () {
 		window.addEventListener('resize', (0, _underscore.debounce)(this._resizeDebounceHandler, 100), { passive: true });
 
 		this._setSizes();
+		this.trigger('resize');
 	}
 
 	_createClass(Size, [{
@@ -21834,7 +21919,7 @@ var Size = function () {
 exports.default = new Size();
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21843,63 +21928,131 @@ exports.default = new Size();
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.View = undefined;
+
+var _View = __webpack_require__(3);
 
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _backbone = __webpack_require__(3);
+var _Size = __webpack_require__(6);
+
+var _Size2 = _interopRequireDefault(_Size);
+
+var _gsap = __webpack_require__(2);
 
 var _underscore = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _viewInitialize = function _viewInitialize(options) {
-	if ((0, _underscore.isFunction)(this._initialize)) this._initialize(options || {});
+var Carousel = _View.View.extend({
 
-	if (this.ui) {
-		var ui = Object.assign({}, this.ui);
-		Object.keys(ui).forEach(function (key) {
-			ui[key] = (0, _jquery2.default)(options.el).find(ui[key]);
-		});
-		this.ui = ui;
+	ui: {
+		slidePanel: '.js-carousel-slides',
+		slides: '.js-carousel-slide',
+
+		buttonPrev: '.js-carousel-prev',
+		buttonNext: '.js-carousel-next'
+	},
+
+	events: {
+		'click .js-carousel-prev': '_buttonPrevClickHandler',
+		'mouseenter .js-carousel-prev': '_buttonPrevMouseEnterHandler',
+		'mouseleave .js-carousel-prev': '_buttonPrevMouseLeaveHandler',
+
+		'click .js-carousel-next': '_buttonNextClickHandler',
+		'mouseenter .js-carousel-next': '_buttonNextMouseEnterHandler',
+		'mouseleave .js-carousel-next': '_buttonNextMouseLeaveHandler'
+	},
+
+	onInitialized: function onInitialized() {
+		this._listen();
+		this._setSizes();
+
+		this._currentIndex = 0;
+		this._setPosition();
+	},
+
+	_listen: function _listen() {
+		this.listenTo(_Size2.default, 'resize:complete', this._resizeCompleteHandler);
+	},
+
+	_setSizes: function _setSizes() {
+		this._slideWidth = this.ui.slides[0].offsetWidth;
+		_gsap.TweenLite.set(this.ui.slidePanel, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
+	},
+
+	next: function next() {
+		if (this._currentIndex === this.ui.slides.length - 1) return;
+
+		++this._currentIndex;
+		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
+		this._setPosition();
+	},
+
+	prev: function prev() {
+		if (this._currentIndex === 0) return;
+
+		--this._currentIndex;
+		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
+		this._setPosition();
+	},
+
+	_setPosition: function _setPosition() {
+		if (this._currentIndex === 0) {
+			_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 0, autoAlpha: 0 });
+		} else {
+			if (!this._isMouseOverButtonPrev) {
+				_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 1, autoAlpha: 0.5 });
+			}
+		}
+
+		if (this._currentIndex === this.ui.slides.length - 1) {
+			_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 0, autoAlpha: 0 });
+		} else {
+			if (!this._isMouseOverButtonNext) {
+				_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 1, autoAlpha: 0.5 });
+			}
+		}
+	},
+
+	_resizeCompleteHandler: function _resizeCompleteHandler() {
+		this._setSizes();
+	},
+
+	_buttonNextClickHandler: function _buttonNextClickHandler() {
+		this.next();
+	},
+
+	_buttonPrevClickHandler: function _buttonPrevClickHandler() {
+		this.prev();
+	},
+
+	_buttonPrevMouseEnterHandler: function _buttonPrevMouseEnterHandler() {
+		this._isMouseOverButtonPrev = true;
+		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1.3, opacity: 1 });
+	},
+
+	_buttonPrevMouseLeaveHandler: function _buttonPrevMouseLeaveHandler() {
+		this._isMouseOverButtonPrev = false;
+		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1, opacity: 0.5 });
+	},
+
+	_buttonNextMouseEnterHandler: function _buttonNextMouseEnterHandler() {
+		this._isMouseOverButtonNext = true;
+		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1.3, opacity: 1 });
+	},
+
+	_buttonNextMouseLeaveHandler: function _buttonNextMouseLeaveHandler() {
+		this._isMouseOverButtonNext = false;
+		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1, opacity: 0.5 });
 	}
+});
 
-	if (this.components) {
-		var components = Object.assign({}, this.components);
-		Object.keys(components).forEach(function (key) {
-			components[key] = _initComponents(options.el, components[key]);
-		});
-		this.components = components;
-	}
-
-	if ((0, _underscore.isFunction)(this._onInitialized)) this._onInitialized();
-};
-
-var _initComponents = function _initComponents(parentElement, component) {
-	var components = [];
-
-	(0, _jquery2.default)(parentElement).find(component.selector).each(function (index, element) {
-		var options = Object.assign({ el: (0, _jquery2.default)(element) }, component.options || {});
-		components.push(new component.type(options));
-	});
-
-	return components.length < 2 ? components[0] : components;
-};
-
-var View = {
-	extend: function extend(child) {
-		var ViewClass = _backbone.View.extend(child);
-		ViewClass.prototype.initialize = _viewInitialize;
-		return ViewClass;
-	}
-};
-
-exports.View = View;
+exports.default = Carousel;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -23836,7 +23989,7 @@ exports.View = View;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23861,12 +24014,6 @@ var TemplateManager = function () {
 		_classCallCheck(this, TemplateManager);
 
 		this._pages = {};
-
-		this._treatSame = {
-			'home': ['', 'ntsc'],
-			'ntsc': ['', 'home'],
-			'': ['ntsc', 'home']
-		};
 	}
 
 	_createClass(TemplateManager, [{
@@ -23886,29 +24033,20 @@ var TemplateManager = function () {
 			var _this = this;
 
 			return new Promise(function (res, rej) {
-				var page = _this._pages[slug] || _this._getSamePage(slug);
+				var page = _this._pages[slug];
 
-				if (page) res(page);else _this._fetchPage(slug).then(function (page) {
-					return res((0, _jquery2.default)(page).find('.js-page'));
+				if (page) res(page);else _this._fetchPage(slug).then(function (pageContent) {
+					var node = (0, _jquery2.default)(pageContent).find('.js-page')[0];
+					_this._pages[slug] = node.cloneNode(true);
+					res(node);
 				}).catch(rej);
 			});
-		}
-	}, {
-		key: '_getSamePage',
-		value: function _getSamePage(slug) {
-			var _this2 = this;
-
-			if (this._treatSame[slug]) {
-				this._treatSame[slug].forEach(function (alias) {
-					if (_this2._pages[alias]) return alias;
-				});
-			}
 		}
 	}, {
 		key: '_fetchPage',
 		value: function _fetchPage(pathname) {
 			return new Promise(function (res, rej) {
-				return fetch(pathname).then(function (response) {
+				return fetch('/' + pathname).then(function (response) {
 					return response.text();
 				}).then(res).catch(rej);
 			});
@@ -23919,52 +24057,6 @@ var TemplateManager = function () {
 }();
 
 exports.default = new TemplateManager();
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.Component = undefined;
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _backbone = __webpack_require__(3);
-
-var _underscore = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _componentInitialize = function _componentInitialize(options) {
-	if ((0, _underscore.isFunction)(this._initialize)) this._initialize(options || {});
-
-	if (this.ui) {
-		var ui = Object.assign({}, this.ui);
-		Object.keys(ui).forEach(function (key) {
-			ui[key] = (0, _jquery2.default)(options.el).find(ui[key]);
-		});
-		this.ui = ui;
-	}
-
-	if ((0, _underscore.isFunction)(this._onInitialized)) this._onInitialized();
-};
-
-var Component = {
-	extend: function extend(child) {
-		var view = _backbone.View.extend(child);
-		view.prototype.initialize = _componentInitialize;
-		return view;
-	}
-};
-
-exports.Component = Component;
 
 /***/ }),
 /* 10 */
@@ -23979,11 +24071,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _backbone = __webpack_require__(3);
+var _backbone = __webpack_require__(5);
 
 var _underscore = __webpack_require__(1);
 
-var _Size = __webpack_require__(5);
+var _Size = __webpack_require__(6);
 
 var _Size2 = _interopRequireDefault(_Size);
 
@@ -24066,11 +24158,11 @@ var _ApplicationRouter = __webpack_require__(13);
 
 var _ApplicationRouter2 = _interopRequireDefault(_ApplicationRouter);
 
-var _ApplicationView = __webpack_require__(18);
+var _ApplicationView = __webpack_require__(19);
 
 var _ApplicationView2 = _interopRequireDefault(_ApplicationView);
 
-var _TemplateManager = __webpack_require__(8);
+var _TemplateManager = __webpack_require__(9);
 
 var _TemplateManager2 = _interopRequireDefault(_TemplateManager);
 
@@ -24084,6 +24176,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 		}
 	};
 
+	window.seventyonepictures.application.view.trigger('attached');
 	_TemplateManager2.default.add(window.location.pathname, (0, _jquery2.default)('.js-page'));
 	Backbone.history.start({ pushState: true });
 });
@@ -26997,10 +27090,10 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 		return (_gsScope.GreenSockGlobals || _gsScope)[name];
 	};
 	if (typeof(module) !== "undefined" && module.exports) { //node
-		__webpack_require__(7);
+		__webpack_require__(8);
 		module.exports = getGlobal();
 	} else if (true) { //AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (getGlobal),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8)], __WEBPACK_AMD_DEFINE_FACTORY__ = (getGlobal),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -27020,7 +27113,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _backbone = __webpack_require__(3);
+var _backbone = __webpack_require__(5);
 
 var _jquery = __webpack_require__(0);
 
@@ -27030,7 +27123,7 @@ var _regions = __webpack_require__(14);
 
 var _regions2 = _interopRequireDefault(_regions);
 
-var _TemplateManager = __webpack_require__(8);
+var _TemplateManager = __webpack_require__(9);
 
 var _TemplateManager2 = _interopRequireDefault(_TemplateManager);
 
@@ -27038,19 +27131,56 @@ var _NTSCPage = __webpack_require__(16);
 
 var _NTSCPage2 = _interopRequireDefault(_NTSCPage);
 
+var _CompanyPage = __webpack_require__(17);
+
+var _CompanyPage2 = _interopRequireDefault(_CompanyPage);
+
+var _ArtistsPage = __webpack_require__(18);
+
+var _ArtistsPage2 = _interopRequireDefault(_ArtistsPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ApplicationRouter = _backbone.Router.extend({
 
 	routes: {
-		'': '_home',
-		'home': '_home',
-		'ntsc': '_home'
+		'': '_ntsc',
+		'ntsc': '_ntsc',
+		'company': '_company',
+		'artists': '_artists'
 	},
 
-	_home: function _home() {
-		_TemplateManager2.default.get('').then(function (node) {
-			return _regions2.default.main.show(_NTSCPage2.default, { el: node });
+	_ntsc: function _ntsc() {
+		this._getElementFromRoute('ntsc').then(function (el) {
+			return _regions2.default.main.show(_NTSCPage2.default, { el: el });
+		});
+	},
+
+	_company: function _company() {
+		this._getElementFromRoute('company').then(function (el) {
+			return _regions2.default.main.show(_CompanyPage2.default, { el: el });
+		});
+	},
+
+	_artists: function _artists() {
+		this._getElementFromRoute('artists').then(function (el) {
+			return _regions2.default.main.show(_ArtistsPage2.default, { el: el });
+		});
+	},
+
+	_getElementFromRoute: function _getElementFromRoute(slug) {
+		var _this = this;
+
+		return new Promise(function (res, rej) {
+			if (!_this._previousPage) {
+				_this._previousPage = slug;
+
+				var page = document.querySelector('.page');
+				_TemplateManager2.default.add(slug, page.cloneNode(true));
+				res(page);
+			} else {
+				_TemplateManager2.default.get(slug).then(res).catch(rej);
+			}
 		});
 	}
 });
@@ -27107,31 +27237,33 @@ var Region = function () {
 		value: function show(NextView, options) {
 			var _this = this;
 
-			if (this._currentView) {
-				if (this._currentView.constructor === NextView) return;
-			}
-
-			var nextView = new NextView(options);
-
-			var hasTransitionedIn = false;
+			if (this._currentView && this._currentView.constructor === NextView) return;
 
 			var swapView = function swapView() {
-				if (_this._currentView && (0, _underscore.isFunction)(_this._currentView.close)) _this._currentView.close();
-				_this._currentView = nextView;
-				if (!hasTransitionedIn && _this._currentView.transitionIn) _this._currentView.transitionIn();
+				if (_this._currentView) {
+					if ((0, _underscore.isFunction)(_this._currentView.close)) _this._currentView.close();
+					_this.el.removeChild(_this._currentView.el);
+
+					_this.el.appendChild(options.el);
+					_this._currentView = new NextView(options);
+					_this._currentView.trigger('attached');
+
+					if (_this._currentView.transitionIn) _this._currentView.transitionIn();
+				}
 			};
 
-			if (nextView.immediateTransitionIn) {
-				nextView.immediateTransitionIn();
-			}
-
 			if (this._currentView) {
-				this._currentView.transitionOut(swapView);
+				if (this._currentView.transitionOut) {
+					this._currentView.transitionOut(swapView);
+				} else {
+					swapView();
+				}
 			} else {
-				swapView();
+				var nextView = new NextView(options);
+				this._currentView = nextView;
+				this._currentView.trigger('attached');
+				if (this._currentView.transitionIn) this._currentView.transitionIn();
 			}
-
-			return this._currentView;
 		}
 	}]);
 
@@ -27151,11 +27283,11 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _View = __webpack_require__(6);
+var _View = __webpack_require__(3);
 
 var _gsap = __webpack_require__(2);
 
-var _Carousel = __webpack_require__(17);
+var _Carousel = __webpack_require__(7);
 
 var _Carousel2 = _interopRequireDefault(_Carousel);
 
@@ -27165,11 +27297,11 @@ var NTSCPage = _View.View.extend({
 
 	components: {
 
-		carousel: { selector: '.js-ntsc-carousel', type: _Carousel2.default }
+		carousel: { selector: '.js-carousel', type: _Carousel2.default }
 
 	},
 
-	_onInitialized: function _onInitialized() {}
+	onInitialized: function onInitialized() {}
 });
 
 exports.default = NTSCPage;
@@ -27185,127 +27317,28 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _Component = __webpack_require__(9);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _Size = __webpack_require__(5);
-
-var _Size2 = _interopRequireDefault(_Size);
+var _View = __webpack_require__(3);
 
 var _gsap = __webpack_require__(2);
 
-var _underscore = __webpack_require__(1);
+var _Carousel = __webpack_require__(7);
+
+var _Carousel2 = _interopRequireDefault(_Carousel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Carousel = _Component.Component.extend({
+var CompanyPage = _View.View.extend({
 
-	ui: {
-		slidePanel: '.js-carousel-slides',
-		slides: '.js-carousel-slide',
+	components: {
 
-		buttonPrev: '.js-carousel-prev',
-		buttonNext: '.js-carousel-next'
+		carousel: { selector: '.js-carousel', type: _Carousel2.default }
+
 	},
 
-	events: {
-		'click .js-carousel-prev': '_buttonPrevClickHandler',
-		'mouseenter .js-carousel-prev': '_buttonPrevMouseEnterHandler',
-		'mouseleave .js-carousel-prev': '_buttonPrevMouseLeaveHandler',
-
-		'click .js-carousel-next': '_buttonNextClickHandler',
-		'mouseenter .js-carousel-next': '_buttonNextMouseEnterHandler',
-		'mouseleave .js-carousel-next': '_buttonNextMouseLeaveHandler'
-	},
-
-	_onInitialized: function _onInitialized() {
-		this._listen();
-		this._setSizes();
-
-		this._currentIndex = 0;
-		this._setPosition();
-	},
-
-	_listen: function _listen() {
-		this.listenTo(_Size2.default, 'resize:complete', this._resizeCompleteHandler);
-	},
-
-	_setSizes: function _setSizes() {
-		this._slideWidth = this.ui.slides[0].offsetWidth;
-		_gsap.TweenLite.set(this.ui.slidePanel, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
-	},
-
-	next: function next() {
-		if (this._currentIndex === this.ui.slides.length - 1) return;
-
-		++this._currentIndex;
-		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
-		this._setPosition();
-	},
-
-	prev: function prev() {
-		if (this._currentIndex === 0) return;
-
-		--this._currentIndex;
-		_gsap.TweenLite.to(this.ui.slidePanel, 1.4, { x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true });
-		this._setPosition();
-	},
-
-	_setPosition: function _setPosition() {
-		if (this._currentIndex === 0) {
-			_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 0, autoAlpha: 0 });
-		} else {
-			if (!this._isMouseOverButtonPrev) {
-				_gsap.TweenLite.to(this.ui.buttonPrev, 0.3, { scaleX: 1, autoAlpha: 0.5 });
-			}
-		}
-
-		if (this._currentIndex === this.ui.slides.length - 1) {
-			_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 0, autoAlpha: 0 });
-		} else {
-			if (!this._isMouseOverButtonNext) {
-				_gsap.TweenLite.to(this.ui.buttonNext, 0.3, { scaleX: 1, autoAlpha: 0.5 });
-			}
-		}
-	},
-
-	_resizeCompleteHandler: function _resizeCompleteHandler() {
-		this._setSizes();
-	},
-
-	_buttonNextClickHandler: function _buttonNextClickHandler() {
-		this.next();
-	},
-
-	_buttonPrevClickHandler: function _buttonPrevClickHandler() {
-		this.prev();
-	},
-
-	_buttonPrevMouseEnterHandler: function _buttonPrevMouseEnterHandler() {
-		this._isMouseOverButtonPrev = true;
-		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1.3, opacity: 1 });
-	},
-
-	_buttonPrevMouseLeaveHandler: function _buttonPrevMouseLeaveHandler() {
-		this._isMouseOverButtonPrev = false;
-		_gsap.TweenLite.to(this.ui.buttonPrev, 0.4, { scaleX: 1, opacity: 0.5 });
-	},
-
-	_buttonNextMouseEnterHandler: function _buttonNextMouseEnterHandler() {
-		this._isMouseOverButtonNext = true;
-		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1.3, opacity: 1 });
-	},
-
-	_buttonNextMouseLeaveHandler: function _buttonNextMouseLeaveHandler() {
-		this._isMouseOverButtonNext = false;
-		_gsap.TweenLite.to(this.ui.buttonNext, 0.4, { scaleX: 1, opacity: 0.5 });
-	}
+	onInitialized: function onInitialized() {}
 });
 
-exports.default = Carousel;
+exports.default = CompanyPage;
 
 /***/ }),
 /* 18 */
@@ -27318,39 +27351,28 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _jquery = __webpack_require__(0);
+var _View = __webpack_require__(3);
 
-var _jquery2 = _interopRequireDefault(_jquery);
+var _gsap = __webpack_require__(2);
 
-var _View = __webpack_require__(6);
+var _Carousel = __webpack_require__(7);
 
-var _Background = __webpack_require__(19);
-
-var _Background2 = _interopRequireDefault(_Background);
-
-var _Intro = __webpack_require__(20);
-
-var _Intro2 = _interopRequireDefault(_Intro);
+var _Carousel2 = _interopRequireDefault(_Carousel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ApplicationView = _View.View.extend({
+var ArtistsPage = _View.View.extend({
 
 	components: {
-		background: { selector: '.js-background', type: _Background2.default },
-		intro: { selector: '.js-intro', type: _Intro2.default }
+
+		carousel: { selector: '.js-carousel', type: _Carousel2.default }
+
 	},
 
-	_onInitialized: function _onInitialized() {
-		this.transitionIn();
-	},
-
-	transitionIn: function transitionIn() {
-		this.components.intro.transitionIn();
-	}
+	onInitialized: function onInitialized() {}
 });
 
-exports.default = ApplicationView;
+exports.default = ArtistsPage;
 
 /***/ }),
 /* 19 */
@@ -27363,13 +27385,67 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _Component = __webpack_require__(9);
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _View = __webpack_require__(3);
+
+var _Background = __webpack_require__(20);
+
+var _Background2 = _interopRequireDefault(_Background);
+
+var _Intro = __webpack_require__(21);
+
+var _Intro2 = _interopRequireDefault(_Intro);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApplicationView = _View.View.extend({
+
+	components: {
+		background: { selector: '.js-background', type: _Background2.default },
+		intro: { selector: '.js-intro', type: _Intro2.default }
+	},
+
+	events: {
+		'click [href^="/"]': '_routeClickHandler'
+	},
+
+	onInitialized: function onInitialized() {
+		this.transitionIn();
+	},
+
+	transitionIn: function transitionIn() {
+		this.components.intro.transitionIn();
+	},
+
+	_routeClickHandler: function _routeClickHandler(e) {
+		e.preventDefault();
+		Backbone.history.navigate(e.currentTarget.pathname, { trigger: true });
+	}
+});
+
+exports.default = ApplicationView;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _View = __webpack_require__(3);
 
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _Size = __webpack_require__(5);
+var _Size = __webpack_require__(6);
 
 var _Size2 = _interopRequireDefault(_Size);
 
@@ -27383,7 +27459,7 @@ var _underscore = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BackgroundVideo = _Component.Component.extend({
+var BackgroundVideo = _View.View.extend({
 
 	ui: {
 		canvas: '.js-canvas',
@@ -27394,7 +27470,7 @@ var BackgroundVideo = _Component.Component.extend({
 		'canplay .js-video-element': '_videoCanPlayHandler'
 	},
 
-	_initialize: function _initialize() {
+	initialize: function initialize() {
 		(0, _underscore.bindAll)(this, '_tickHandler');
 
 		this._maskTweenObj = {
@@ -27405,7 +27481,6 @@ var BackgroundVideo = _Component.Component.extend({
 		};
 
 		this._skippedTicks = 0;
-		this._listen();
 	},
 
 	transitionIn: function transitionIn() {
@@ -27413,7 +27488,7 @@ var BackgroundVideo = _Component.Component.extend({
 	},
 
 
-	_onInitialized: function _onInitialized() {
+	onInitialized: function onInitialized() {
 
 		this.ui.underwaterCanvas = document.createElement('canvas');
 		this._underwaterCtx = this.ui.underwaterCanvas.getContext('2d');
@@ -27422,8 +27497,10 @@ var BackgroundVideo = _Component.Component.extend({
 		this.ui.video[0].play();
 
 		this._setSizes();
-
 		var maskTimeline = this._obtainMaskTimeline();
+
+		this._listen();
+		this._setProgressFromScroll();
 	},
 
 	_listen: function _listen() {
@@ -27462,7 +27539,7 @@ var BackgroundVideo = _Component.Component.extend({
 	},
 
 	progress: function progress(value) {
-		console.log('[Set Progress: ]', value);
+
 		_gsap.TweenLite.set(this._maskTimeline, { progress: value });
 	},
 
@@ -27530,22 +27607,26 @@ var BackgroundVideo = _Component.Component.extend({
 		this._setSizes();
 	},
 
-	_scrollHandler: function _scrollHandler(e) {
+	_setProgressFromScroll: function _setProgressFromScroll() {
 
 		if (!this._shown) {
 			this.transitionIn();
 			this._shown = true;
 		}
 
-		var progress = Math.min(Math.max(e.viewports, 0), 1);
+		var progress = Math.min(Math.max(_Scroll2.default.scrollY() / _Size2.default.innerHeight(), 0), 1);
 		this.progress(progress);
+	},
+
+	_scrollHandler: function _scrollHandler(e) {
+		this._setProgressFromScroll();
 	}
 });
 
 exports.default = BackgroundVideo;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27555,7 +27636,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _View = __webpack_require__(6);
+var _View = __webpack_require__(3);
 
 var _underscore = __webpack_require__(1);
 
@@ -27565,7 +27646,7 @@ var _Scroll = __webpack_require__(10);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _Size = __webpack_require__(5);
+var _Size = __webpack_require__(6);
 
 var _Size2 = _interopRequireDefault(_Size);
 
@@ -27577,14 +27658,15 @@ var Intro = _View.View.extend({
 		logo: '.js-logo'
 	},
 
-	_initialize: function _initialize(options) {
+	initialize: function initialize(options) {
 		(0, _underscore.bindAll)(this, '_scrollHandler');
 	},
 
-	_onInitialized: function _onInitialized() {
+	onInitialized: function onInitialized() {
 
 		this._createLogoTimeline();
 		this.listenTo(_Scroll2.default, 'scroll', this._scrollHandler);
+		this._setProgressFromScroll();
 	},
 
 	transitionIn: function transitionIn() {
@@ -27596,10 +27678,14 @@ var Intro = _View.View.extend({
 		this._logoTimeline.to(this.ui.logo, 0.5, { color: 'black' }, 0.5);
 	},
 
-	_scrollHandler: function _scrollHandler(e) {
+	_setProgressFromScroll: function _setProgressFromScroll() {
 
-		var progress = Math.min(Math.max(e.viewports, 0), 1);
+		var progress = Math.min(Math.max(_Scroll2.default.scrollY() / _Size2.default.innerHeight(), 0), 1);
 		this._logoTimeline.progress(progress);
+	},
+
+	_scrollHandler: function _scrollHandler(e) {
+		this._setProgressFromScroll();
 	}
 });
 

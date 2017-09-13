@@ -6,30 +6,32 @@ export default class Region {
 	}
 
 	show(NextView, options) {
-		if (this._currentView) {
-			if (this._currentView.constructor === NextView) return;
-		}
-
-		var nextView = new NextView(options);
-
-		var hasTransitionedIn = false;
+		if (this._currentView && this._currentView.constructor === NextView) return;
 
 		const swapView = () => {
-			if (this._currentView && isFunction(this._currentView.close)) this._currentView.close();
-			this._currentView = nextView;
-			if (!hasTransitionedIn && this._currentView.transitionIn) this._currentView.transitionIn();
-		}
+			if (this._currentView) {
+			 	if (isFunction(this._currentView.close)) this._currentView.close();
+				this.el.removeChild(this._currentView.el);
 
-		if (nextView.immediateTransitionIn) {
-			nextView.immediateTransitionIn();
+				this.el.appendChild(options.el);
+				this._currentView = new NextView(options);
+				this._currentView.trigger('attached');
+
+				if (this._currentView.transitionIn) this._currentView.transitionIn();
+			}
 		}
 
 		if (this._currentView) {
-			this._currentView.transitionOut(swapView);
+			if (this._currentView.transitionOut) {
+				this._currentView.transitionOut(swapView);
+			} else {
+				swapView();
+			}
 		} else {
-			swapView();
+			var nextView = new NextView(options);
+			this._currentView = nextView;
+			this._currentView.trigger('attached');
+			if (this._currentView.transitionIn) this._currentView.transitionIn();
 		}
-
-		return this._currentView;
 	}
 }

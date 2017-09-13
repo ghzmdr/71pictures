@@ -18,6 +18,14 @@
 		<header class="intro js-intro">	
 			<div class="logo intro__logo js-logo">71 Pictures</div>
 		</header>
-		<nav></nav>
+		<nav style="
+				position: fixed;
+			    top: 0;
+			    right: 0;
+			">
+			<a href="/">NTSC</a>
+			<a href="/artists">Artists</a>
+			<a href="/company">Company</a>
+		</nav>
 		<main id="main-region">
 			

@@ -4,12 +4,6 @@ class TemplateManager {
 
 	constructor() {
 		this._pages = {};
-
-		this._treatSame = {
-			'home': ['', 'ntsc'],
-			'ntsc': ['', 'home'],
-			'': ['ntsc', 'home']
-		}
 	}
 
 	add(slug, element) {
@@ -24,26 +18,22 @@ class TemplateManager {
 	_obtainPageBySlug(slug) {
 
 		return new Promise((res, rej) => {
-			const page = this._pages[slug] || this._getSamePage(slug) 
-			
+			const page = this._pages[slug];
+		
 			if (page) res(page);
 			else this._fetchPage(slug)
-					.then(page => res($(page).find('.js-page')))
-					.catch(rej);
+					.then(pageContent => {
+						const node = $(pageContent).find('.js-page')[0];
+						this._pages[slug] = node.cloneNode(true);
+						res(node);
+					})
+					.catch(rej)
 		})
-	}
-
-	_getSamePage(slug) {
-		if (this._treatSame[slug]) {
-			this._treatSame[slug].forEach((alias) => {
-				if (this._pages[alias]) return alias;
-			})
-		}
 	}
 
 	_fetchPage(pathname) {
 		return new Promise((res, rej) => 
-			fetch(pathname)
+			fetch(`/${pathname}`)
 				.then(response => response.text())
 				.then(res)
 				.catch(rej)

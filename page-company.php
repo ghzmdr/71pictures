@@ -3,21 +3,22 @@
 <?php 
 	$poster = get_field('poster');
 	$intro = $post->post_content;
+	
 	$galleryImages = array(get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'));
 ?>
-<article class="page page-ntsc js-page">
+<article class="page page-company js-page">
 
-	<div class="ntsc-block--title">
-		<h2 class="page-main-project__title page-ntsc__title" id="ntsc"><?php echo $post->post_title; ?></h2>
+	<div class="company-block--title">
+		<h2 class="page-main-project__title page-company__title" id="company"><?php echo $post->post_title; ?></h2>
 	</div>
 
-	<div class="ntsc-block page-ntsc__intro-block">
-		<img class="page-main-project__poster page-ntsc__poster" src="<?php echo $poster; ?>">
-		<div class="text page-main-project__intro page-ntsc__intro"><?php echo $intro; ?></div>
+	<div class="company-block page-company__intro-block">
+		<img class="page-main-project__poster page-company__poster" src="<?php echo $poster; ?>">
+		<div class="text page-main-project__intro page-company__intro"><?php echo $intro; ?></div>
 	</div>
 
-	<div class="ntsc-block--wide">
-		<div class="carousel carousel--wide page-ntsc__carousel js-carousel">
+	<div class="company-block--wide">
+		<div class="carousel carousel--wide page-company__carousel js-carousel">
 			<h4 class="block-title carousel__title">Landscapes</h4>
 
 			<div class="carousel__slides-wrapper">
@@ -25,7 +26,7 @@
 				<div class="carousel__slides js-carousel-slides">
 					<?php foreach ($galleryImages as $key => $imgURL) { ?>
 
-						<div class="carousel__slide page-ntsc__carousel-slide js-carousel-slide">
+						<div class="carousel__slide page-company__carousel-slide js-carousel-slide">
 							<img src="<?php echo $imgURL ?>" alt="">
 						</div>
 						
@@ -40,8 +41,8 @@
 		</div>
 	</div>
 
-	<div class="ntsc-block--wide">
-		<div class="carousel carousel--wide page-ntsc__carousel js-carousel">
+	<div class="company-block--wide">
+		<div class="carousel carousel--wide page-company__carousel js-carousel">
 			<h4 class="block-title carousel__title">The City</h4>
 
 			<div class="carousel__slides-wrapper">
@@ -49,7 +50,7 @@
 				<div class="carousel__slides js-carousel-slides">
 					<?php foreach ($galleryImages as $key => $imgURL) { ?>
 
-						<div class="carousel__slide page-ntsc__carousel-slide js-carousel-slide">
+						<div class="carousel__slide page-company__carousel-slide js-carousel-slide">
 							<img src="<?php echo $imgURL ?>" alt="">
 						</div>
 						

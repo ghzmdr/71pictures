@@ -13,6 +13,7 @@ $(function() {
 		} 
 	};
 
+	window.seventyonepictures.application.view.trigger('attached');
 	TemplateManager.add(window.location.pathname, $('.js-page'));
 	Backbone.history.start({ pushState: true });
 })

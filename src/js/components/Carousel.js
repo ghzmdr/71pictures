@@ -1,10 +1,10 @@
-import { Component } from '../lib/Component';
+import { View } from '../lib/View';
 import $ from 'jquery';
 import Size from '../lib/Size';
 import { TweenLite, TimelineLite } from 'gsap';
 import { bindAll } from 'underscore';
 
-const Carousel = Component.extend({
+const Carousel = View.extend({
 
 	ui: {
 		slidePanel: '.js-carousel-slides',
@@ -24,7 +24,7 @@ const Carousel = Component.extend({
 		'mouseleave .js-carousel-next': '_buttonNextMouseLeaveHandler'	
 	},
 
-	_onInitialized: function () {
+	onInitialized: function () {
 		this._listen();
 		this._setSizes();
 

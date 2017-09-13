@@ -10,15 +10,15 @@ const Intro = View.extend({
 		logo: '.js-logo'
 	},
 
-	_initialize: function (options) {
+	initialize: function (options) {
 		bindAll(this, '_scrollHandler');
 	},
 
-	_onInitialized: function () {
+	onInitialized: function () {
 
 		this._createLogoTimeline();	
 		this.listenTo(Scroll, 'scroll', this._scrollHandler);	
-
+		this._setProgressFromScroll();
 	},
 
 	transitionIn: function () {
@@ -30,11 +30,15 @@ const Intro = View.extend({
 		this._logoTimeline.to(this.ui.logo, 0.5, {color: 'black'}, 0.5);
 	},
 
-	_scrollHandler: function (e) {
+	_setProgressFromScroll: function () {
 
-		var progress = Math.min(Math.max(e.viewports, 0), 1);
+		var progress = Math.min(Math.max(Scroll.scrollY() / Size.innerHeight(), 0), 1);
 		this._logoTimeline.progress(progress);
-		
+
+	},
+
+	_scrollHandler: function (e) {
+		this._setProgressFromScroll();
 	}
 })
 

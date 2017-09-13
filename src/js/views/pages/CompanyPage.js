@@ -2,7 +2,7 @@ import { View } from '../../lib/View';
 import { TweenLite } from 'gsap';
 import Carousel from '../../components/Carousel';
 
-const NTSCPage = View.extend({
+const CompanyPage = View.extend({
 
 	components: {
 
@@ -11,8 +11,7 @@ const NTSCPage = View.extend({
 	},
 
 	onInitialized: function () {
-		
 	}
 })
 
-export default NTSCPage;
+export default CompanyPage;
