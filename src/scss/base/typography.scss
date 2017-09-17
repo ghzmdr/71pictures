@@ -1,6 +1,5 @@
 .text {
 	@include font-primary();
-	@include text-rendering();
 }
 
 p {
@@ -14,7 +13,6 @@ p {
 
 .block-title {
 	@include font-title();
-	@include text-rendering();
 
 	font-size: 1.8rem;
 	letter-spacing: 0.1em;

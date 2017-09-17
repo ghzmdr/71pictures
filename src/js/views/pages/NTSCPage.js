@@ -1,6 +1,6 @@
 import { View } from '../../lib/View';
 import { TweenLite } from 'gsap';
-import Carousel from '../../components/Carousel';
+import Carousel from '../components/Carousel';
 
 const NTSCPage = View.extend({
 

@@ -1,0 +1,14 @@
+.navigation {
+	position: fixed;
+	top: 2rem;
+	right: 2rem;
+	padding: 0.4rem;
+	background-color: #dedede;
+	border-radius: 3px;
+}
+
+.navigation__item {
+	margin: 0 0.4rem;
+	color: #232323;
+	text-decoration: none;
+}

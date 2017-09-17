@@ -19,3 +19,10 @@ html, body, #seventyonepictures, #main-region {
 #main-region {
 	position: relative;
 }
+
+#seventyonepictures {
+	@include font-primary();
+	@include text-rendering();
+	
+	line-height: initial;
+}

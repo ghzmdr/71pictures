@@ -1,6 +1,6 @@
-import { View } from '../lib/View';
+import { View } from '../../lib/View';
 import $ from 'jquery';
-import Size from '../lib/Size';
+import Size from '../../lib/Size';
 import { TweenLite, TimelineLite } from 'gsap';
 import { bindAll } from 'underscore';
 

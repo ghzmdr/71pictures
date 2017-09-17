@@ -1,14 +1,14 @@
 import $ from 'jquery';
 import {TweenLite} from 'gsap';
 import CSSPlugin from 'gsap/CSSPlugin';
-import ApplicationRouter from './ApplicationRouter';
-import ApplicationView from './ApplicationView';
+import Router from './Router';
+import ApplicationView from './views/ApplicationView';
 import TemplateManager from './lib/TemplateManager.js';
 
 $(function() {	
 	window.seventyonepictures = {
 		application: {
-			router: new ApplicationRouter(),
+			router: new Router(),
 			view: new ApplicationView({ el: $('#seventyonepictures')})
 		} 
 	};

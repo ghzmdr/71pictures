@@ -12,6 +12,9 @@ var webpackDevConfig = {
 		path: path.join(__dirname, "assets/js/"),
 		filename: "[name].js"
 	},
+
+	devtool: '#inline-source-map',
+
 	module: {
 		rules: [
 			{

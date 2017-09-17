@@ -1,8 +1,8 @@
-import { View } from '../lib/View';
+import { View } from '../../lib/View';
 import { bindAll } from 'underscore';
 import { TweenLite } from 'gsap';
-import Scroll from '../lib/Scroll';
-import Size from '../lib/Size';
+import Scroll from '../../lib/Scroll';
+import Size from '../../lib/Size';
 
 const Intro = View.extend({
 
