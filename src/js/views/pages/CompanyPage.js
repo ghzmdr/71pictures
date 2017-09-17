@@ -11,6 +11,14 @@ const CompanyPage = View.extend({
 	},
 
 	onInitialized: function () {
+	},
+
+	transitionIn() {
+		TweenLite.fromTo(this.el, 1, {opacity: 0}, {opacity: 1})
+	},
+
+	transitionOut(callback) {
+		TweenLite.to(this.el, 1, {opacity: 0, onComplete: callback})
 	}
 })
 
