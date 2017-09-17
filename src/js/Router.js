@@ -4,15 +4,15 @@ import Regions from './regions.js';
 import TemplateManager from './lib/TemplateManager.js';
 
 import NTSCPage from './views/pages/NTSCPage.js';
-import CompanyPage from './views/pages/CompanyPage.js';
-import ArtistsPage from './views/pages/ArtistsPage.js';
+import AboutPage from './views/pages/AboutPage.js';
+import ArticlesPage from './views/pages/ArticlesPage.js';
 
 const ApplicationRouter = Router.extend({
 
 	routes: {	
 		'': 	'_ntsc',
 		'ntsc': '_ntsc',
-		'company': '_company',
+		'about': '_about',
 		'artists': '_artists'
 	},
 
@@ -21,14 +21,14 @@ const ApplicationRouter = Router.extend({
 			.then(el => Regions.main.show(NTSCPage, {el}));
 	},
 
-	_company: function () {
-		this._getElementFromRoute('company')
-			.then(el => Regions.main.show(CompanyPage, {el}));	
+	_about: function () {
+		this._getElementFromRoute('about')
+			.then(el => Regions.main.show(AboutPage, {el}));	
 	},
 
 	_artists: function () {
 		this._getElementFromRoute('artists')
-			.then(el => Regions.main.show(ArtistsPage, {el}));	
+			.then(el => Regions.main.show(ArticlesPage, {el}));	
 	},
 
 	_getElementFromRoute: function(slug) {
