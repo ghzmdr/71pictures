@@ -1,6 +1,14 @@
 .carousel {
+	position: relative
+	overflow: hidden;
+	perspective: 1px;
+	backface-visibility: hidden;
+
 	.carousel__slides {
 		position: relative;
+		display: inline-block;
+		backface-visibility: hidden;
+
 		width: 100%;
 		white-space: nowrap;
 	}
@@ -8,6 +16,7 @@
 	.carousel__slide {
 		width: 100%;
 		display: inline-block;
+		backface-visibility: hidden;
 
 		img {
 			width: 100%;
