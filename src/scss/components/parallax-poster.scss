@@ -1,15 +1,16 @@
-.tilt-parallax {
+.parallax-poster {
 	position: relative;
 	overflow: hidden;
 	perspective: 500px;
 }
 
-.tilt-parallax__items {
+.parallax-poster__items {
 	position: relative;
 	margin: 0 auto;
+	padding-bottom: 142.8625%;
 }
 
-.tilt-parallax__item {
+.parallax-poster__item {
 	backface-visibility: hidden;
 	position: absolute;
 	top: 0;

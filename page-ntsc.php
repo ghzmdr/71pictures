@@ -11,10 +11,10 @@
 		<?php $poster = get_field('poster'); ?>
 
 		<?php if($poster['with_parallax']) { ?>
-		<div class="tilt-parallax page-ntsc__poster js-tilt-parallax">
-			<div class="tilt-parallax__items">
+		<div class="parallax-poster page-ntsc__poster js-parallax-poster">
+			<div class="parallax-poster__items js-parallax-poster-container">
 				<?php foreach ($poster['poster_layers'] as $posterLayer) {?>
-				<img class="tilt-parallax__item" src="<?php echo $posterLayer['url']; ?>"/>
+				<img class="parallax-poster__item js-parallax-poster-item" src="<?php echo $posterLayer['image']['url']; ?>"/>
 				<?php } ?>
 			</div>
 		</div>

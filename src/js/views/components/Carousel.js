@@ -25,14 +25,14 @@ const Carousel = View.extend({
 	},
 
 	onInitialized: function () {
-		this._listen();
+		this._setListeners();
 		this._setSizes();
 
 		this._currentIndex = 0;
 		this._setPosition();
 	},
 
-	_listen: function () {
+	_setListeners: function () {
 		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
 	},
 

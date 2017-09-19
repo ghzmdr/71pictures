@@ -7,7 +7,7 @@ const _viewInitialize = function () {
 	if (this.ui) {
 
 		var ui = Object.assign({}, this.ui);
-		Object.keys(ui).forEach(key => ui[key] = this.$el.find(ui[key]) );
+		Object.keys(ui).forEach(key => ui[key] = this.$(ui[key]) );
 		this.ui = ui;
 
 	}

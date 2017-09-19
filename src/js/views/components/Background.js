@@ -44,11 +44,11 @@ const BackgroundVideo = View.extend({
 		this._setSizes();
 		const maskTimeline = this._obtainMaskTimeline();
 		
-		this._listen();
+		this._setListeners();
 		this._setProgressFromScroll();
 	},
 
-	_listen: function () {
+	_setListeners: function () {
 		TweenLite.ticker.addEventListener('tick', this._tickHandler); 
 		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);	
 		this.listenTo(Scroll, 'scroll', this._scrollHandler);
