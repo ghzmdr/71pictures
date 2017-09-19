@@ -25,8 +25,7 @@ export default class Region {
 
 		const transitionOutCallback = () => {
 
-		 	if (isFunction(this._currentView.close)) this._currentView.close();
-			this.el.removeChild(this._currentView.el);
+		 	this._currentView.remove();
 
 			attach();
 			transitionIn();

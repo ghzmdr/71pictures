@@ -33,6 +33,10 @@ const BackgroundVideo = View.extend({
 		TweenLite.set(this.ui.canvas, {opacity: 1});
 	},
 
+	onClose: function () {
+		TweenLite.ticker.removeEventListener('tick', this._tickHandler); 
+	},
+
 	onInitialized: function () {
 
 		this.ui.underwaterCanvas = document.createElement('canvas');

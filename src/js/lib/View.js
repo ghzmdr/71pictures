@@ -53,7 +53,20 @@ const View = {
 						this.components[key].trigger('attached')
 
 				});
-			})
+			});
+
+			this.listenToOnce(this, 'removed', () => {
+				if (isFunction(this.onClose)) this.onClose();
+			});
+		}
+
+		var originalRemove = ViewClass.prototype.remove;
+
+		ViewClass.prototype.remove = function() {
+
+			this.trigger('removed');
+			originalRemove.apply(this, arguments);
+			
 		}
 
 		return ViewClass;
