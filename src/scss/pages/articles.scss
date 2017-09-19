@@ -1,10 +1,10 @@
-.page-company {
+.page-articles {
 	padding: 16rem 0 10rem;
 	font-size: 0;
 	margin-top: 83vh;
 }
 
-.page-company__title {
+.page-articles__title {
 	@include font-title();
 	color: white;
 	font-size: 7rem;
@@ -14,18 +14,18 @@
     margin: 0;
 }
 
-.page-company__intro-block {
+.page-articles__intro-block {
 	padding-top: 2rem;
 }
 
-.page-company__poster {
+.page-articles__poster {
 	display: inline-block;
 	max-height: 90vh;
 	max-width: 100%;
 	margin-right: 2rem;
 }
 
-.page-company__intro {
+.page-articles__intro {
 	width: 100%;
 	margin: 4rem 0;
 	border-radius: 1px;
@@ -41,7 +41,7 @@
 	vertical-align: top;
 }
 
-.page-company__carousel {
+.page-articles__carousel {
 	color: white;
 	
 	.block-title {
@@ -54,42 +54,42 @@
 }
 
 @media (min-width: 1280px) {
-	.page-company__intro-block {
+	.page-articles__intro-block {
 		display: flex;
 		justify-content: space-around;
     	align-items: flex-start;
     	padding-top: 0;
 	}
 
-	.page-company__poster {
+	.page-articles__poster {
 		width: 40%;
 		margin-top: -7rem;
 		order: 2;
 	}
 
-	.page-company__title {
+	.page-articles__title {
 		font-size: 12rem;
 	}
 
-	.page-company__intro {
+	.page-articles__intro {
 		width: 40%;
 		order: 1;
 		padding: 2.7rem 3.5rem;
 	}
 }
 
-.company-block,
-.company-block--title {
+.articles-block,
+.articles-block--title {
 	padding-left: 2rem;
 	padding-right: 2rem;
 	padding-top: 1rem;
 }
 
-.company-block {
+.articles-block {
 	margin-bottom: 3rem;
 }
 
-.company-block--wide {
+.articles-block--wide {
 	margin-bottom: 3rem;
 
 	.block-title {
@@ -100,16 +100,16 @@
 
 @media (min-width: 1280px) {
 
-	.company-block,
-	.company-block--title {
+	.articles-block,
+	.articles-block--title {
 		padding-left: 6rem;
 		padding-right: 6rem;
 	}
-	.company-block {
+	.articles-block {
 		margin-bottom: 6rem;
 	}
 
-	.company-block--wide {
+	.articles-block--wide {
 		margin-bottom: 3rem;
 
 		.block-title {

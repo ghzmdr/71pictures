@@ -2,7 +2,7 @@ import { View } from '../../lib/View';
 import { TweenLite } from 'gsap';
 import Carousel from '../components/Carousel';
 
-const ArtistsPage = View.extend({
+const AboutPage = View.extend({
 
 	components: {
 
@@ -22,4 +22,4 @@ const ArtistsPage = View.extend({
 	}
 })
 
-export default ArtistsPage;
+export default AboutPage;

@@ -13,7 +13,7 @@ const ApplicationRouter = Router.extend({
 		'': 	'_ntsc',
 		'ntsc': '_ntsc',
 		'about': '_about',
-		'artists': '_artists'
+		'articles': '_articles'
 	},
 
 	_ntsc: function () {
@@ -26,8 +26,8 @@ const ApplicationRouter = Router.extend({
 			.then(el => Regions.main.show(AboutPage, {el}));	
 	},
 
-	_artists: function () {
-		this._getElementFromRoute('artists')
+	_articles: function () {
+		this._getElementFromRoute('articles')
 			.then(el => Regions.main.show(ArticlesPage, {el}));	
 	},
 
