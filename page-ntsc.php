@@ -1,10 +1,5 @@
 <?php get_header(); ?>
 
-<?php 
-	$poster = get_field('poster');
-	$intro = $post->post_content;
-	$galleryImages = array(get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'));
-?>
 <article class="page page-ntsc js-page">
 
 	<div class="ntsc-block--title">
@@ -12,49 +7,43 @@
 	</div>
 
 	<div class="ntsc-block page-ntsc__intro-block">
-		<img class="page-main-project__poster page-ntsc__poster" src="<?php echo $poster; ?>">
-		<div class="text page-main-project__intro page-ntsc__intro"><?php echo $intro; ?></div>
-	</div>
+		
+		<?php $poster = get_field('poster'); ?>
 
-	<div class="ntsc-block--wide">
-		<div class="carousel carousel--wide page-ntsc__carousel js-carousel">
-			<h4 class="block-title carousel__title">Landscapes</h4>
-
-			<div class="carousel__slides-wrapper">
-				
-				<div class="carousel__slides js-carousel-slides">
-					<?php foreach ($galleryImages as $key => $imgURL) { ?>
-
-						<div class="carousel__slide page-ntsc__carousel-slide js-carousel-slide">
-							<img src="<?php echo $imgURL ?>" alt="">
-						</div>
-						
-					<?php } ?>
-				</div>
-
-				<button class="button carousel__prev js-carousel-prev"></button>
-				<button class="button carousel__next js-carousel-next"></button>
-
+		<?php if($poster['with_parallax']) { ?>
+		<div class="tilt-parallax page-ntsc__poster js-tilt-parallax">
+			<div class="tilt-parallax__items">
+				<?php foreach ($poster['poster_layers'] as $posterLayer) {?>
+				<img class="tilt-parallax__item" src="<?php echo $posterLayer['url']; ?>"/>
+				<?php } ?>
 			</div>
-
 		</div>
+		<?php } else { ?>
+		<img class="page-main-project__poster page-ntsc__poster" src="<?php echo $poster['poster_image']; ?>">
+		<?php } ?>
+		
+		<?php $intro = get_field('intro'); ?>
+		<div class="text page-main-project__intro page-ntsc__intro"><?php echo $intro; ?></div>
+
 	</div>
 
+	<?php $mainGallery = get_field('main_gallery'); ?>
 	<div class="ntsc-block--wide">
-		<div class="carousel carousel--wide page-ntsc__carousel js-carousel">
-			<h4 class="block-title carousel__title">The City</h4>
+		<div class="carousel carousel--wide <?php if ($main_gallery['title']) { ?> carousel--with-title <?php } ?>page-ntsc__carousel js-carousel">
+
+			<?php if ($main_gallery['title']) { ?>
+			<h4 class="block-title carousel__title"><?php echo $mainGallery['title']; ?></h4>					
+			<?php } ?>
 
 			<div class="carousel__slides-wrapper">
 				
-				<div class="carousel__slides js-carousel-slides">
-					<?php foreach ($galleryImages as $key => $imgURL) { ?>
-
-						<div class="carousel__slide page-ntsc__carousel-slide js-carousel-slide">
-							<img src="<?php echo $imgURL ?>" alt="">
-						</div>
-						
+				<ul class="carousel__slides js-carousel-slides">
+					<?php foreach ($mainGallery['images'] as $image) { ?>
+					<li class="carousel__slide page-ntsc__carousel-slide js-carousel-slide">
+						<?php echo wp_get_attachment_image( $image['ID'], 'full' ); ?>
+					</li>
 					<?php } ?>
-				</div>
+				</ul>
 
 				<button class="button carousel__prev js-carousel-prev"></button>
 				<button class="button carousel__next js-carousel-next"></button>

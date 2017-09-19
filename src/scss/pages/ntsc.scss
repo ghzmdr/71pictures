@@ -20,9 +20,16 @@
 
 .page-ntsc__poster {
 	display: inline-block;
-	max-height: 90vh;
 	max-width: 100%;
 	margin-right: 2rem;
+}
+
+.page-ntsc__poster .tilt-parallax__items {
+	padding-bottom: 142.8625%;
+}
+
+.page-ntsc__poster .tilt-parallax__item {
+
 }
 
 .page-ntsc__intro {
@@ -49,6 +56,10 @@
 	}
 
 	.carousel__slide {
+		height: 100vh;
+	}
+
+	.carousel--with-title .carousel__slide {
 		height: calc(100vh - 4.625rem);
 	}
 }
