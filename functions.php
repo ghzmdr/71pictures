@@ -36,9 +36,29 @@ function seventyone_pictures_setup() {
 	 */
 	add_theme_support( 'title-tag' );
 
+	acf_add_options_page(array(
+		'page_title' 	=> 'Site Options',
+		'menu_title'	=> 'Site Options',
+		'menu_slug' 	=> 'site-options',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+	
 
 }
 add_action( 'after_setup_theme', 'seventyone_pictures_setup' );
+
+/*
+ * seventyonepictures theme init hook
+ */
+function seventyone_pictures_init() {
+	
+	/*
+	 * Remove WYSIWYG editor from pages
+	 */
+	remove_post_type_support( 'page', 'editor' );
+}
+add_action( 'init', 'seventyone_pictures_init' );
 
 /**
  * Register custom fonts.
