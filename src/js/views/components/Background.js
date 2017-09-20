@@ -12,10 +12,6 @@ const BackgroundVideo = View.extend({
 		video: '.js-video'
 	},
 
-	events: {
-		'canplay .js-video-element': '_videoCanPlayHandler'
-	},
-
 	initialize: function () {
 		bindAll(this, '_tickHandler');
 
@@ -43,11 +39,12 @@ const BackgroundVideo = View.extend({
 		this._underwaterCtx = this.ui.underwaterCanvas.getContext('2d');
 
 		this._ctx = this.ui.canvas[0].getContext('2d');
-		this.ui.video[0].play();
 
 		this._setSizes();
 		const maskTimeline = this._obtainMaskTimeline();
-		
+
+		this.ui.video[0].play();
+
 		this._setListeners();
 		this._setProgressFromScroll();
 	},
@@ -67,8 +64,9 @@ const BackgroundVideo = View.extend({
 		this.ui.canvas[0].height = this.ui.underwaterCanvas.height = this._height;
 
 		this._frameHeight = this._height;
-		var factor = Math.max(this.ui.video[0].offsetHeight, this._height) / Math.min(this.ui.video[0].offsetHeight, this._height);
-		this._frameWidth = this.ui.video[0].offsetWidth * factor;
+
+		var factor = Math.max(this.ui.video[0].videoHeight, this._height) / Math.min(this.ui.video[0].videoHeight, this._height);
+		this._frameWidth = this.ui.video[0].videoWidth * factor;
 		this._frameXShift = -1 * Math.floor((this._frameWidth - this._width)/2);
 
 	},
@@ -76,7 +74,7 @@ const BackgroundVideo = View.extend({
 	_tick: function () {
 
 		if (this._currentMaskProgress === 1) return;
-		if (this.ui.video[0].paused) return;
+
 
 		// this._ctx.globalCompositeOperation = 'source-over';
 		this._ctx.clearRect(0, 0, this._width, this._height);
@@ -86,7 +84,6 @@ const BackgroundVideo = View.extend({
 		if (currentMaskFrame) {
 			this._ctx.drawImage(currentMaskFrame, 0, 0, this._width, this._height);
 		}
-
 	},
 
 	progress: function(value) {
@@ -144,16 +141,11 @@ const BackgroundVideo = View.extend({
 	},
 
 	_tickHandler: function () {
-		if (this._skippedTicks % 3 === 0) {
-			this._tick();
-			this._skippedTicks = 0;
-		}
-
-		++this._skippedTicks;
+		this._tick();
 	},
 
 	_videoCanPlayHandler: function () {
-		this.ui.video[0].play();
+		// this.ui.video[0].play();
 	},
 
 	_resizeCompleteHandler: function () {
