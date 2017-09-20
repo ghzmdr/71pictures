@@ -5,13 +5,12 @@ class ParallaxItem {
 		this.index = options.index || 0;
 	
 	}
-	
+
 	reposition(xOffset, yOffset, tweenTime /*Dirty*/) {
-		TweenMax.to(this.el, tweenTime, {
-			x: ~~xOffset, 
-			y: ~~yOffset, 
-			rotationX: -~~xOffset/6, 
-			rotationY: -~~yOffset/6, 
+		
+		TweenMax.to(this.el, 0.4, {
+			rotationX: xOffset, 
+			rotationY: yOffset, 
 			force3D: true
 		});
 	}
