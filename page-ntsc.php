@@ -14,9 +14,13 @@
 		<div class="parallax-poster page-ntsc__poster js-parallax-poster">
 			<div class="parallax-poster__items js-parallax-poster-container">
 				<?php foreach ($poster['poster_layers'] as $posterLayer) {?>
-				<img class="parallax-poster__item js-parallax-poster-item" src="<?php echo $posterLayer['image']['url']; ?>"/>
+				<img class="parallax-poster__item js-parallax-poster-item" 
+					src="<?php echo $posterLayer['layer_image']; ?>"
+					data-depth="<?php echo $posterLayer['layer_depth']; ?>"
+				/>
 				<?php } ?>
 			</div>
+
 		</div>
 		<?php } else { ?>
 		<img class="page-main-project__poster page-ntsc__poster" src="<?php echo $poster['poster_image']; ?>">

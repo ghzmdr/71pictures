@@ -1,7 +1,12 @@
 import { extend, bindAll } from 'underscore';
 import { TweenLite } from 'gsap';
 import Size from '../lib/Size';
+import Scroll from '../lib/Scroll';
 import { Events } from 'backbone';
+
+/**
+ * TODO: Ignore scroll and resize if mouse isn't over.
+ */
 
 class ParallaxContainer {
 	constructor(el) {
@@ -32,14 +37,18 @@ class ParallaxContainer {
 	}
 
 	_setSizes() {
-		this._width = this.el.offsetWidth;
-		this._height = this.el.offsetHeight;
-		this._top = this.el.offsetTop;
-		this._left = this.el.offsetLeft;
+		var boundingRect = this.el.getBoundingClientRect();
+
+		this._width = Math.round(boundingRect.width);
+		this._height = Math.round(boundingRect.height);
+		this._top = Math.round(boundingRect.top);
+		this._left = Math.round(boundingRect.left);
+
 	}
 
 	_setListeners() {
 		this.listenTo(Size, 'resize', this._resizeHandler);
+		this.listenTo(Scroll, 'scroll', this._scrollHandler);
 		this.el.addEventListener('mousemove', this._mouseMoveHandler);
 		this.el.addEventListener('mouseleave', this._mouseLeaveHandler);
 		TweenLite.ticker.addEventListener('tick', this._tickHandler);
@@ -63,9 +72,8 @@ class ParallaxContainer {
 		Object.keys(this._items).forEach((k) => {
 			item = this._items[k];
 		
-			let xOffset = -1 * (this._width/2 - this._mouse.x) / (this._width/2);
-			
-			let yOffset = -1 * (this._height/2 - this._mouse.y) / (this._height/2);
+			let xOffset = (this._width/2 - this._mouse.x) / (this._width/2);
+			let yOffset = (this._height/2 - this._mouse.y) / (this._height/2);
 			
 			const tiltAmount = item.depth / this.MAX_DEPTH;
 			xOffset *= tiltAmount * this._maxParallax;
@@ -84,6 +92,12 @@ class ParallaxContainer {
 	
 	_resizeHandler() {
 		this._setSizes();
+		this.reposition();
+	}
+
+	_scrollHandler() {
+		this._setSizes();
+		this.reposition();
 	}
 	
 	_tickHandler() {
@@ -102,8 +116,8 @@ class ParallaxContainer {
 	
 	_mouseMoveHandler(e) {
 		this._mouse = {x: e.clientX - this._left, y: e.clientY - this._top};
-	
-// 		console.log(`[ParallaxContainer] - Mouse: X${this._mouse.x} Y${this._mouse.y}`);
+		
+		// console.log(`[ParallaxContainer] - Mouse: X${this._mouse.x} Y${this._mouse.y}`);
 
 		if (!this._isMouseOver) {
 			this._timeObj = {secondsIntro: 0.3}
