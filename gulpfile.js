@@ -112,9 +112,10 @@ gulp.task('release', ['webpack:prod', 'sass:prod'], function () {
 	var dateRegex = /^([A-z]+\s)+(.*)(\sGMT.+)$/;
 	var dateString = dateRegex.exec(date)[2];
 	var dateString = dateString.replace(/\s|:/g, '_');
-	console.log(dateString);
+	
+	console.log(`\n\n   Making release: || ${dateString} ||\n\n`);
 
-	gulp.src(['./assets/**/*', './inc/**/*', './*.php', './style.css'])
+	gulp.src(['assets/**/*', 'inc/**/*', '*.php', 'style.css'], { base: './' })
 		.pipe(zip('71pictures_' + dateString + '.zip'))
 		.pipe(gulp.dest('./releases'))
 })
