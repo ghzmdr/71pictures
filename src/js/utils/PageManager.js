@@ -1,6 +1,4 @@
-import $ from 'jquery';
-
-class TemplateManager {
+class PageManager {
 
 	constructor() {
 		this._pages = {};
@@ -29,13 +27,22 @@ class TemplateManager {
 			} else {
 				this._fetchPage(slug)
 					.then(pageContent => {
-						const node = $(pageContent).find('.js-page')[0];
+						const node = this._findPageNode(pageContent, '.js-page');
 						this._pages[slug] = node.cloneNode(true);
 						res(node);
 					})
 					.catch(rej)
 			}
 		})
+	
+	}
+
+	_findPageNode(page, selector) {
+		
+		var doc = document.implementation.createHTMLDocument('page');
+		doc.documentElement.innerHTML = page;
+		return doc.querySelector(selector);
+	
 	}
 
 	_fetchPage(pathname) {
@@ -49,4 +56,4 @@ class TemplateManager {
 	}
 }
 
-export default new TemplateManager();
+export default new PageManager();

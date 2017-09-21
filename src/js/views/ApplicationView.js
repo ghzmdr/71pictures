@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { View } from '../lib/View';
 import Background from './components/Background';
 import Intro from './components/Intro';

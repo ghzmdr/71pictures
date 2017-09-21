@@ -22,7 +22,6 @@ class ParallaxContainer {
 		
 		this.el = el;
 		
-		this._elements = [];
 		this._items = {};
 
 		this.setParallaxMult(5);
@@ -55,7 +54,6 @@ class ParallaxContainer {
 	
 	add(key, item) {
 		this._items[key] = item;
-		this._elements.push(item.el); //dirty
 	}
 	
 	setParallaxMult(amount) {
@@ -74,14 +72,14 @@ class ParallaxContainer {
 
 			let itemX = xRotation * itemFactor;
 			let itemY = yRotation * itemFactor;
-			TweenLite.to(item.el, 0.4, {rotationX: itemX, rotationY: itemY, force3D: true});
 
+			TweenLite.to(item.el, 0.4, {rotationX: itemX, rotationY: itemY, force3D: true});
 		}
 	}
 	
 	_end() {
 		this._endTween = TweenLite.to(
-			this._elements,
+			Object.keys(this._items).map(k => this._items[k].el),
 			0.4, 
 			{rotationX: 0, rotationY: 0, force3D: true}
 		);

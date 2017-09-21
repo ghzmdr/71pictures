@@ -1,6 +1,5 @@
 import { View } from '../../lib/View';
-import ParallaxItem from '../../utils/ParallaxItem';
-import ParallaxContainer from '../../utils/ParallaxContainer';
+import ParallaxContainer from '../../helpers/ParallaxContainer';
 
 export default View.extend({
 
@@ -12,10 +11,10 @@ export default View.extend({
 	onInitialized: function() {
 		this._parallaxContainer = new ParallaxContainer(this.ui.container[0]);
 
-		this.ui.items.each((index, item) => this._parallaxContainer.add(
+		this.ui.items.each((index, el) => this._parallaxContainer.add(
 			`layer_${index}`,
-			new ParallaxItem(item, {depth: item.dataset.depth || 1})
-		));
+			{el, depth: item.dataset.depth || 1})
+		);
 	}
 
 });

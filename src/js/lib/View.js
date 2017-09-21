@@ -1,13 +1,24 @@
-import $ from 'jquery';
-import { View as BackboneView } from 'backbone';
-import { isFunction, isArray } from 'underscore';
+import NativeView from 'backbone.nativeview'
+import { isFunction, isArray, castArray } from 'underscore';
 
-const _viewInitialize = function () {
+
+const _oneOrArray = function(arrayLike) {
+	return arrayLike.length === 1 ? arrayLike[0] : Array.from(arrayLike);
+}
+
+const _initializeView = function () {
 	
 	if (this.ui) {
 
 		var ui = Object.assign({}, this.ui);
-		Object.keys(ui).forEach(key => ui[key] = this.$(ui[key]) );
+
+		for (var k in this.ui) {
+
+			var elements = this.el.querySelectorAll(ui[key]);
+			ui[key] = elements.length === 1 ? elements[0] : elements;
+
+		}
+
 		this.ui = ui;
 
 	}
@@ -15,7 +26,11 @@ const _viewInitialize = function () {
 	if (this.components) {
 
 		var components = Object.assign({}, this.components);
-		Object.keys(components).forEach((key) => components[key] = _initComponents(this.$el, components[key]));
+
+		for (var k in this.components) {
+			components[key] = _initializeComponents.call(this, components[key]);
+		}
+
 		this.components = components;
 
 	}
@@ -23,49 +38,78 @@ const _viewInitialize = function () {
 	if (isFunction(this.onInitialized)) this.onInitialized();
 }
 
-const _initComponents = function ($parentElement, component) {
+const _initializeComponents = function (component) {
 	var components = [];
-
-	$parentElement.find(component.selector).each((index, element) => {
-		var options = Object.assign({el: $(element)}, component.options || {});
+	var elements = this.el.querySelectorAll(component.selector);
+	
+	for (var i = 0; i < elements.length; ++i) {
+	
+		var options = Object.assign({el: elements[i]}, component.options || {});
 		components.push(new component.type(options));
-	})
+	
+	}
 
 	return components.length < 2 ? components[0] : components;
 }
 
+const _attachComponents = function() {
+
+	if (this.components){	
+		for (var k in this.components) {
+			if (isArray(components[k])) {
+				for (var i = 0; i < components[k].length; ++i) {
+					components[k][i].trigger('attached');
+				}
+			} else {
+				components[k].trigger('attached');		
+			}
+		}
+	}
+
+}
+
+
+
 const View = {
 	extend: function(child) {
-		var ViewClass = BackboneView.extend(child);
+		var ViewClass = NativeView.extend(child);
+
 		var originalInitialize = ViewClass.prototype.initialize;
+		var originalRemove = ViewClass.prototype.remove;
 		
 		ViewClass.prototype.initialize = function() {
 
 			originalInitialize.apply(this, arguments);
-			this.listenToOnce(this, 'attached', () => {
+
+			this.listenToOnce(this, 'attached', function() {
 				
-				_viewInitialize.apply(this);
-				if (this.components) Object.keys(this.components).forEach((key) => {
-					
-					if (isArray(this.components[key])) 
-						this.components[key].forEach(c => c.trigger('attached'));
-					else 
-						this.components[key].trigger('attached')
+				_initializeView.apply(this);
+				_attachComponents.apply(this);
 
-				});
 			});
-
-			this.listenToOnce(this, 'removed', () => {
-				if (isFunction(this.onClose)) this.onClose();
-			});
+			
 		}
 
-		var originalRemove = ViewClass.prototype.remove;
 
 		ViewClass.prototype.remove = function() {
 
-			this.trigger('removed');
+			if(isFunction(this.onClose)) this.onClose();
+			
+			if(this.components) {
+				var components;
+				for (var k in this.components) {
+					if (isArray(components[k])) {
+						for (var i = 0; i < components[k].length; ++i) {
+							components[k][i].remove();
+						}
+					} else {
+						components[k].remove();
+					}
+				}
+			}
+			
 			originalRemove.apply(this, arguments);
+			this.trigger('removed');
 			
 		}
 

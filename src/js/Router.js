@@ -1,7 +1,6 @@
 import { Router } from 'backbone';
-import $ from 'jquery';
 import Regions from './regions.js';
-import TemplateManager from './lib/TemplateManager.js';
+import PageManager from './utils/PageManager.js';
 
 import NTSCPage from './views/pages/NTSCPage.js';
 import AboutPage from './views/pages/AboutPage.js';
@@ -34,16 +33,20 @@ const ApplicationRouter = Router.extend({
 	_getElementFromRoute: function(slug) {
 		
 		return new Promise((res, rej) => {
+			
 			if (!this._previousPage) {
 				this._previousPage = slug;
 
-				const page = document.querySelector('.page');
-				TemplateManager.add(slug, page.cloneNode(true));
+				const page = document.querySelector('.js-page');
+				PageManager.add(slug, page.cloneNode(true));
 				res(page);
+
 			} else {
-				TemplateManager.get(slug)
+				
+				PageManager.get(slug)
 					.then(res)
 					.catch(rej)
+			
 			}
 
 		})

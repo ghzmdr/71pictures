@@ -1,19 +1,18 @@
-import $ from 'jquery';
 import {TweenLite} from 'gsap';
 import CSSPlugin from 'gsap/CSSPlugin';
 import Router from './Router';
 import ApplicationView from './views/ApplicationView';
-import TemplateManager from './lib/TemplateManager.js';
+import PageManager from './utils/PageManager.js';
 
-$(function() {	
+document.addEventListener('DOMContentLoaded', function () {
 	window.seventyonepictures = {
 		application: {
 			router: new Router(),
-			view: new ApplicationView({ el: $('#seventyonepictures')})
+			view: new ApplicationView({ el: document.querySelector('#seventyonepictures')})
 		} 
 	};
 
 	window.seventyonepictures.application.view.trigger('attached');
-	TemplateManager.add(window.location.pathname, $('.js-page'));
+	PageManager.add(window.location.pathname, document.querySelector('.js-page'));
 	Backbone.history.start({ pushState: true });
-})
+});
