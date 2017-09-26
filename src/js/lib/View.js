@@ -61,7 +61,7 @@ const _attachComponents = function() {
 					this.components[k][i].trigger('attached');
 				}
 			} else {
-				this.components[k].trigger('attached');		
+				if (this.components[k]) this.components[k].trigger('attached');		
 			}
 		}
 	}
@@ -102,7 +102,7 @@ const View = {
 							this.components[k][i].remove();
 						}
 					} else {
-						this.components[k].remove();
+						if (this.components[k]) this.components[k].remove();
 					}
 				}
 			}
