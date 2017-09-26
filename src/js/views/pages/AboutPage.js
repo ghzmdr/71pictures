@@ -1,4 +1,5 @@
 import { View } from '../../lib/View';
+import Scroll from '../../lib/Scroll';
 import { TweenLite } from 'gsap';
 import Carousel from '../components/Carousel';
 
@@ -11,6 +12,12 @@ const AboutPage = View.extend({
 	},
 
 	onInitialized: function () {
+		var e = this.el, top = 0;
+		while(e = e.offsetParent) {top += e.offsetTop;}
+
+		if (window.scrollY < top) {
+			Scroll.scrollToElement(this.el, 0.5);
+		}
 	},
 
 	transitionIn() {

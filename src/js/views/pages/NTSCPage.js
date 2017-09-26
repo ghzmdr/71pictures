@@ -1,4 +1,5 @@
 import { View } from '../../lib/View';
+import Scroll from '../../lib/Scroll';
 import { TweenLite } from 'gsap';
 import Carousel from '../components/Carousel';
 import ParallaxPoster from '../components/ParallaxPoster';
@@ -12,8 +13,19 @@ const NTSCPage = View.extend({
 
 	},
 
+	initialize: function (options) {
+		this._scrollToPage = options.scrollToPage;	
+	},
+
 	onInitialized: function () {
-		
+		if (this._scrollToPage) {
+			var e = this.el, top = 0;
+			while(e = e.offsetParent) {top += e.offsetTop;}
+
+			if (window.scrollY < top) {
+				Scroll.scrollToElement(this.el, 0.5);
+			}
+		}
 	},
 
 	transitionIn() {

@@ -1,4 +1,5 @@
 import { Events } from 'backbone';
+import { TweenLite } from 'gsap';
 import { extend, bindAll } from 'underscore';
 import Size from '../lib/Size';
 
@@ -20,6 +21,19 @@ class Scroll {
 
 	scrollX() {
 		return this._scrollX;
+	}
+
+	scrollToElement(element, time) {
+
+		var e = element, top = element.offsetTop;
+		while(e = e.offsetParent) {top += e.offsetTop;}
+		
+		this.scrollTo(top, time);
+	}
+
+	scrollTo(y, time) {
+		var scroll = {y:window.scrollY};
+		TweenLite.to(scroll, time, {y, onUpdate: () => window.scrollTo(0,scroll.y)});
 	}
 
 	_setScroll() {
