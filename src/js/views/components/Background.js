@@ -37,12 +37,12 @@ const BackgroundVideo = View.extend({
 		this.ui.underwaterCanvas = document.createElement('canvas');
 		this._underwaterCtx = this.ui.underwaterCanvas.getContext('2d');
 
-		this._ctx = this.ui.canvas[0].getContext('2d');
+		this._ctx = this.ui.canvas.getContext('2d');
 
 		this._setSizes();
 		const maskTimeline = this._obtainMaskTimeline();
 
-		this.ui.video[0].play();
+		this.ui.video.play();
 
 		this._setListeners();
 		this._setProgressFromScroll();
@@ -59,13 +59,13 @@ const BackgroundVideo = View.extend({
 		this._width = Size.innerWidth();
 		this._height = Size.innerHeight();
 
-		this.ui.canvas[0].width = this.ui.underwaterCanvas.width = this._width;
-		this.ui.canvas[0].height = this.ui.underwaterCanvas.height = this._height;
+		this.ui.canvas.width = this.ui.underwaterCanvas.width = this._width;
+		this.ui.canvas.height = this.ui.underwaterCanvas.height = this._height;
 
 		this._frameHeight = this._height;
 
-		var factor = Math.max(this.ui.video[0].videoHeight, this._height) / Math.min(this.ui.video[0].videoHeight, this._height);
-		this._frameWidth = this.ui.video[0].videoWidth * factor;
+		var factor = Math.max(this.ui.video.videoHeight, this._height) / Math.min(this.ui.video.videoHeight, this._height);
+		this._frameWidth = this.ui.video.videoWidth * factor;
 		this._frameXShift = -1 * Math.floor((this._frameWidth - this._width)/2);
 
 	},
@@ -77,7 +77,7 @@ const BackgroundVideo = View.extend({
 
 		// this._ctx.globalCompositeOperation = 'source-over';
 		this._ctx.clearRect(0, 0, this._width, this._height);
-		this._ctx.drawImage(this.ui.video[0], this._frameXShift, 0, this._frameWidth, this._frameHeight);
+		this._ctx.drawImage(this.ui.video, this._frameXShift, 0, this._frameWidth, this._frameHeight);
 
 		const currentMaskFrame = this._getCurrentMaskFrame();
 		if (currentMaskFrame) {
@@ -144,7 +144,7 @@ const BackgroundVideo = View.extend({
 	},
 
 	_videoCanPlayHandler: function () {
-		// this.ui.video[0].play();
+		// this.ui.video.play();
 	},
 
 	_resizeCompleteHandler: function () {

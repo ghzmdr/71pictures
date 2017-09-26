@@ -9,15 +9,20 @@ import ArticlesPage from './views/pages/ArticlesPage.js';
 const ApplicationRouter = Router.extend({
 
 	routes: {	
-		'': 	'_ntsc',
+		'': 	'_home',
 		'ntsc': '_ntsc',
 		'about': '_about',
 		'articles': '_articles'
 	},
 
+	_home:function () {
+		this._getElementFromRoute('ntsc')
+			.then(el => Regions.main.show(NTSCPage, {el}));	
+	},
+
 	_ntsc: function () {
 		this._getElementFromRoute('ntsc')
-			.then(el => Regions.main.show(NTSCPage, {el}));
+			.then(el => Regions.main.show(NTSCPage, {el,scrollToSection: true}));
 	},
 
 	_about: function () {

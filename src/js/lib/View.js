@@ -14,8 +14,8 @@ const _initializeView = function () {
 
 		for (var k in this.ui) {
 
-			var elements = this.el.querySelectorAll(ui[key]);
-			ui[key] = elements.length === 1 ? elements[0] : elements;
+			var elements = Array.from(this.el.querySelectorAll(ui[k]));
+			ui[k] = elements.length === 1 ? elements[0] : elements;
 
 		}
 
@@ -28,7 +28,7 @@ const _initializeView = function () {
 		var components = Object.assign({}, this.components);
 
 		for (var k in this.components) {
-			components[key] = _initializeComponents.call(this, components[key]);
+			components[k] = _initializeComponents.call(this, components[k]);
 		}
 
 		this.components = components;
@@ -56,12 +56,12 @@ const _attachComponents = function() {
 
 	if (this.components){	
 		for (var k in this.components) {
-			if (isArray(components[k])) {
-				for (var i = 0; i < components[k].length; ++i) {
-					components[k][i].trigger('attached');
+			if (isArray(this.components[k])) {
+				for (var i = 0; i < this.components[k].length; ++i) {
+					this.components[k][i].trigger('attached');
 				}
 			} else {
-				components[k].trigger('attached');		
+				this.components[k].trigger('attached');		
 			}
 		}
 	}
@@ -96,14 +96,13 @@ const View = {
 			if(isFunction(this.onClose)) this.onClose();
 			
 			if(this.components) {
-				var components;
 				for (var k in this.components) {
-					if (isArray(components[k])) {
-						for (var i = 0; i < components[k].length; ++i) {
-							components[k][i].remove();
+					if (isArray(this.components[k])) {
+						for (var i = 0; i < this.components[k].length; ++i) {
+							this.components[k][i].remove();
 						}
 					} else {
-						components[k].remove();
+						this.components[k].remove();
 					}
 				}
 			}

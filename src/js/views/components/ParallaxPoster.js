@@ -9,11 +9,11 @@ export default View.extend({
 	},
 
 	onInitialized: function() {
-		this._parallaxContainer = new ParallaxContainer(this.ui.container[0]);
+		this._parallaxContainer = new ParallaxContainer(this.ui.container);
 
-		this.ui.items.each((index, el) => this._parallaxContainer.add(
+		this.ui.items.forEach((el,index) => this._parallaxContainer.add(
 			`layer_${index}`,
-			{el, depth: item.dataset.depth || 1})
+			{el, depth: el.dataset.depth || 1})
 		);
 	}
 
