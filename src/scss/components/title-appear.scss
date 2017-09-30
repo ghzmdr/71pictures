@@ -1,0 +1,10 @@
+.title-appear {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+
+	&__content {
+		position: relative;
+		display: inline-block;
+	}
+}

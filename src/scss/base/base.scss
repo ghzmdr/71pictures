@@ -26,3 +26,18 @@ html, body, #seventyonepictures, #main-region {
 	
 	line-height: initial;
 }
+
+.section {
+	max-width: 1280px;
+	margin: 0 auto;
+	margin-bottom: 10vh;
+
+	&--wide {
+		max-width: none;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+}

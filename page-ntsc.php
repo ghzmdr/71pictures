@@ -2,14 +2,16 @@
 
 <article class="page page-ntsc js-page">
 
-	<div class="ntsc-block--title">
-		<h2 class="page-main-project__title page-ntsc__title" id="ntsc"><?php echo $post->post_title; ?></h2>
+	<div class="section">
+		<h2 class="title-appear page__title page-ntsc__title js-page-title"><span class="title-appear__content js-title-content"><?php echo $post->post_title; ?></span></h2>
 	</div>
 
-	<div class="ntsc-block page-ntsc__intro-block">
+	<section class="section page-ntsc__intro-block">
 		
-		<?php $poster = get_field('poster'); ?>
+		<?php $intro = get_field('intro'); ?>
+		<div class="text page-ntsc__intro js-ntsc-intro"><?php echo $intro; ?></div>
 
+		<?php $poster = get_field('poster'); ?>
 		<?php if($poster['with_parallax']) { ?>
 		<div class="parallax-poster page-ntsc__poster js-parallax-poster">
 			<div class="parallax-poster__items js-parallax-poster-container">
@@ -23,20 +25,17 @@
 
 		</div>
 		<?php } else { ?>
-		<img class="page-main-project__poster page-ntsc__poster" src="<?php echo $poster['poster_image']; ?>">
+		<img class="page-ntsc__poster" src="<?php echo $poster['poster_image']; ?>">
 		<?php } ?>
 		
-		<?php $intro = get_field('intro'); ?>
-		<div class="text page-main-project__intro page-ntsc__intro"><?php echo $intro; ?></div>
 
-	</div>
+	</section>
 
 	<?php $mainGallery = get_field('main_gallery'); ?>
-	<div class="ntsc-block--wide">
-		<div class="carousel carousel--wide <?php if ($main_gallery['title']) { ?> carousel--with-title <?php } ?>page-ntsc__carousel js-carousel">
+		<section class="section section--wide carousel carousel--wide <?php if ($main_gallery['title']) { ?> carousel--with-title <?php } ?>page-ntsc__carousel js-carousel">
 
 			<?php if ($main_gallery['title']) { ?>
-			<h4 class="block-title carousel__title"><?php echo $mainGallery['title']; ?></h4>					
+			<h4 class="title carousel__title"><?php echo $mainGallery['title']; ?></h4>					
 			<?php } ?>
 
 			<div class="carousel__slides-wrapper">
@@ -54,8 +53,15 @@
 
 			</div>
 
-		</div>
+		</section>
 	</div>
+	<footer class="page__footer page-ntsc__footer">
+		<ul class="page-ntsc-footer">
+			<li>ASDSAD</li>
+			<li>ASDSAD</li>
+		</ul>
+	</footer>
 </article>
+
 
 <?php get_footer();

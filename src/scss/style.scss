@@ -1,9 +1,12 @@
+@import 'base/colors.scss';
 @import 'base/mixins.scss';
 @import 'base/fonts.scss';
 @import 'base/base.scss';
+@import 'base/breakpoints.scss';
 @import 'base/typography.scss';
 
 @import 'components/carousel.scss';
+@import 'components/title-appear.scss';
 @import 'components/background.scss';
 @import 'components/navigation.scss';
 @import 'components/intro.scss';
@@ -11,6 +14,7 @@
 
 @import 'components/parallax-poster.scss';
 
+@import 'pages/page.scss';
 @import 'pages/ntsc.scss';
 @import 'pages/about.scss';
 @import 'pages/articles.scss';

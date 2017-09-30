@@ -36,6 +36,7 @@ const _initializeView = function () {
 	}
 
 	if (isFunction(this.onInitialized)) this.onInitialized();
+	this.trigger('initialized');
 }
 
 const _initializeComponents = function (component) {

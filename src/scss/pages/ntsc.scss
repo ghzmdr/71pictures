@@ -1,42 +1,41 @@
-.page-ntsc {
-	padding: 16rem 0 10rem;
+.page-ntsc__intro-block {
 	font-size: 0;
-	margin-top: 83vh;
 }
 
 .page-ntsc__title {
-	@include font-title();
-	color: white;
-	font-size: 7rem;
-
-	letter-spacing: 0.3rem;
-   
-    margin: 0;
+	position: relative;
+	
+	//defaults:
+	opacity: 0;
 }
 
-.page-ntsc__intro-block {
-	padding-top: 2rem;
-}
 
 .page-ntsc__poster {
-	display: block;
-	max-width: 100%;
+	max-width: 60%;
+	width: 60%;
+	display: inline-block;
+
+	//defaults:
+	opacity: 0;
 }
 
 .page-ntsc__intro {
-	width: 100%;
 	margin: 4rem 0;
 	border-radius: 1px;
 
-	max-width: 36rem;
+	max-width: 40rem;
 	min-width: 10rem;
 	padding: 2.7rem 2.5rem;
 
+	color: $color-white;
+	line-height: 1.6em;
 	font-size: 1rem;
-	background-color: #F36034;
-
+	letter-spacing: 0.03em;
 	display: inline-block;
 	vertical-align: top;
+
+	//defaults:
+	opacity: 0;
 }
 
 .page-ntsc__carousel {
@@ -55,68 +54,22 @@
 	}
 }
 
-@media (min-width: 1280px) {
+@include break-wide {
 	.page-ntsc__intro-block {
-		display: flex;
-		justify-content: space-around;
-    	align-items: flex-start;
-    	padding-top: 0;
+		@include v-align;
 	}
 
 	.page-ntsc__poster {
 		width: 40%;
+		margin-left: 5%;
 		margin-top: -7rem;
-		order: 2;
-	}
-
-	.page-ntsc__title {
-		font-size: 12rem;
+		vertical-align: middle;
 	}
 
 	.page-ntsc__intro {
-		width: 40%;
-		order: 1;
-		padding: 2.7rem 3.5rem;
-	}
-}
-
-.ntsc-block,
-.ntsc-block--title {
-	padding-left: 2rem;
-	padding-right: 2rem;
-	padding-top: 1rem;
-}
-
-.ntsc-block {
-	margin-bottom: 3rem;
-}
-
-.ntsc-block--wide {
-	margin-bottom: 3rem;
-
-	.block-title {
-		padding-left: 2rem;
-		margin-bottom: 1rem;
-	}
-}
-
-@media (min-width: 1280px) {
-
-	.ntsc-block,
-	.ntsc-block--title {
-		padding-left: 6rem;
-		padding-right: 6rem;
-	}
-	.ntsc-block {
-		margin-bottom: 6rem;
-	}
-
-	.ntsc-block--wide {
-		margin-bottom: 3rem;
-
-		.block-title {
-			padding-left: 6rem;
-			margin-bottom: 2rem;
-		}
+		width: 50%;
+		padding: 2.7rem 6%;
+		margin-top: 3rem;
+		vertical-align: middle;
 	}
 }
