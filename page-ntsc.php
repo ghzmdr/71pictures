@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<article class="page page-ntsc js-page">
+<article class="page page-ntsc js-page"  id="#ntsc">
 
 	<div class="section">
 		<h2 class="title-appear page__title page-ntsc__title js-page-title"><span class="title-appear__content js-title-content"><?php echo $post->post_title; ?></span></h2>

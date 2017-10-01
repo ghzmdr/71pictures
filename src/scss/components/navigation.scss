@@ -1,15 +1,19 @@
 .navigation {
 	position: fixed;
 	z-index: 1;
-	top: 2rem;
-	right: 2rem;
-	padding: 0.4rem;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 3rem;
 	background-color: #dedede;
-	border-radius: 3px;
+	@include v-align;
 }
 
 .navigation__item {
+	display: inline-block;
 	margin: 0 0.4rem;
 	color: #232323;
 	text-decoration: none;
+	font-size: 1rem;
 }

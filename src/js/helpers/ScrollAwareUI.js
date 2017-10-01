@@ -2,6 +2,7 @@ import Scroll from '../lib/Scroll';
 import Size from '../lib/Size';
 import { Events } from 'backbone';
 import { isFunction } from 'underscore';
+import { offsetTop } from '../utils/DOM';
 
 export default {
 	initScrollUI: function() {
@@ -17,7 +18,7 @@ export default {
 		this.__uiRects = {};
 		for (var k in this.__uiKeys) {
 			var key = this.__uiKeys[k];
-			this.__uiRects[`${key}Top`] = this._offsetTop(this.ui[key]);
+			this.__uiRects[`${key}Top`] = offsetTop(this.ui[key]);
 		}
 	},
 
@@ -26,26 +27,18 @@ export default {
 		return Scroll.scrollY() + targetScreenY > this.__uiRects[`${elementKey}Top`];
 	},
 
-	_offsetTop: function (el) {
-		var top = 0;
-		do { top += el.offsetTop } 
-		while (el = el.offsetParent)
-
-		return top;
-	},
 
 	__initializedHandler: function () {
 		this.__setUiRects();
 	},
 
 	__resizeHandler: function () {
-		this._setUiRects();
+		this.__setUiRects();
 	},
 
 	__scrollHandler: function () {
 		for (var k in this.__uiKeys) {
 			var key = this.__uiKeys[k];
-			console.log(this._isElementIn(key), !this.__triggeredElements[key])
 			if (this._isElementIn(key) && !(this.__triggeredElements[key])) {
 				if (isFunction(this[`${key}Visible`])) this[`${key}Visible`]();
 				this.__triggeredElements[key] = true;

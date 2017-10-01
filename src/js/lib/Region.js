@@ -6,7 +6,12 @@ export default class Region {
 	}
 
 	show(NextView, options) {
-		if (this._currentView && this._currentView.constructor === NextView) return;
+		if (this._currentView && this._currentView.constructor === NextView) {
+			if (isFunction(this._currentView.updateData)) {
+				this._currentView.updateData(options);
+			}
+			return this._currentView;
+		}
 
 		var nextView = new NextView(options);
 		var prevView = this._currentView;
@@ -49,5 +54,7 @@ export default class Region {
 		} else {			
 			transitionIn();
 		}
+
+		return this._currentView;
 	}
 }

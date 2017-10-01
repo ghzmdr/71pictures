@@ -17,12 +17,12 @@ const ApplicationRouter = Router.extend({
 
 	_home:function () {
 		this._getElementFromRoute('ntsc')
-			.then(el => Regions.main.show(NTSCPage, {el}));	
+			.then(el => Regions.main.show(NTSCPage, {el, scrollToSection: '.intro'}));	
 	},
 
 	_ntsc: function () {
 		this._getElementFromRoute('ntsc')
-			.then(el => Regions.main.show(NTSCPage, {el,scrollToSection: true}));
+			.then(el => Regions.main.show(NTSCPage, {el, scrollToSection: '.page-ntsc'}));
 	},
 
 	_about: function () {

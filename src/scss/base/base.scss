@@ -41,3 +41,19 @@ html, body, #seventyonepictures, #main-region {
 	}
 
 }
+
+.list, .list-item { 
+
+	appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-mz-appearance: none;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	
+}
+
+.list--horizontal .list-item {
+	display: inline-block;
+}

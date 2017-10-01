@@ -11,10 +11,11 @@
 
 
 .page-ntsc__poster {
+	display: block;
+	width: 100%;
 	max-width: 60%;
 	width: 60%;
-	display: inline-block;
-
+	margin: 0 auto;
 	//defaults:
 	opacity: 0;
 }
@@ -22,7 +23,9 @@
 .page-ntsc__intro {
 	margin: 4rem 0;
 	border-radius: 1px;
-
+	
+	display: block;
+	margin: 0 auto;
 	max-width: 40rem;
 	min-width: 10rem;
 	padding: 2.7rem 2.5rem;
@@ -31,7 +34,6 @@
 	line-height: 1.6em;
 	font-size: 1rem;
 	letter-spacing: 0.03em;
-	display: inline-block;
 	vertical-align: top;
 
 	//defaults:
@@ -54,12 +56,13 @@
 	}
 }
 
-@include break-wide {
+@include break-narrow {
 	.page-ntsc__intro-block {
 		@include v-align;
 	}
 
 	.page-ntsc__poster {
+		display: inline-block;
 		width: 40%;
 		margin-left: 5%;
 		margin-top: -7rem;
@@ -67,9 +70,10 @@
 	}
 
 	.page-ntsc__intro {
+		display: inline-block;
 		width: 50%;
-		padding: 2.7rem 6%;
-		margin-top: 3rem;
+		padding: 2.7rem 5%;
+		margin-top: -1rem;
 		vertical-align: middle;
 	}
 }

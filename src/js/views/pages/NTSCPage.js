@@ -2,6 +2,7 @@ import { View } from '../../lib/View';
 import ScrollAwareUI from '../../helpers/ScrollAwareUI';
 import Scroll from '../../lib/Scroll';
 import Size from '../../lib/Size';
+import { offsetTop } from '../../utils/DOM';
 import { TweenLite } from 'gsap';
 import Carousel from '../components/Carousel';
 import ParallaxPoster from '../components/ParallaxPoster';
@@ -26,7 +27,7 @@ const NTSCPage = View.extend({
 		Object.assign(this, ScrollAwareUI);
 		this.initScrollUI();
 
-		this._scrollToPage = options.scrollToPage;
+		this.listenToOnce(this, 'initialized', () => this._scrollToSection(options.scrollToSection));
 	},
 
 	onInitialized: function () {
@@ -39,10 +40,17 @@ const NTSCPage = View.extend({
 		}
 	},
 
+	updateData: function(options) {
+		this._scrollToSection(options.scrollToSection);
+	},
+
+	_scrollToSection: function (section) {
+		Scroll.scrollToElement(document.querySelector(section), 0.6);
+	},
+
 	titleVisible: function () {
-		TweenLite.fromTo(this.ui.titleContent, 0.6, {x: '70%'}, {x: '0%', delay: 0.1, ease: Power3.easeOut});
 		TweenLite.to(this.ui.title, 0.6, {opacity: 1, delay: 0.2});
-		TweenLite.from(this.ui.title, 0.6, {y: '30%', delay: 0.15, ease: Circ.easeOut});
+		TweenLite.from(this.ui.title, 0.6, {y: '20%', delay: 0.15, ease: Circ.easeOut});
 
 	},
 
