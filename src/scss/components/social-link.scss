@@ -1,0 +1,15 @@
+.social-link {
+	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid $color-white;
+	color: $color-white;
+	text-align: center;
+	text-decoration: none;
+	@include v-align;
+}
+
+.social-link__icon {
+	font-size: 1rem;
+	vertical-align: middle;
+}
