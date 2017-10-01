@@ -1,0 +1,16 @@
+.button-trailer {
+	height: 2rem;
+	line-height: 2rem;
+	padding: 0 0.5rem;
+	border: 1px solid white;
+	color: white;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.main-button-trailer {
+	position: absolute;
+	left: $navbar-spacing;
+	bottom: $navbar-spacing;
+	right: auto;
+}

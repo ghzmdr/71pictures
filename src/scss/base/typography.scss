@@ -12,7 +12,7 @@ p {
 }
 
 .title {
-	@include font-title();
+	@include font-secondary();
 
 	font-size: 1.8rem;
 	letter-spacing: 0.1em;

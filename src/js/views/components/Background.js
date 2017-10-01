@@ -137,7 +137,7 @@ const BackgroundVideo = View.extend({
 			this._shown = true;
 		}
 
-		var progress = Math.min(Math.max(Scroll.scrollY() / Size.innerHeight(), 0), 1);
+		var progress = Math.min(Math.max(Scroll.Y() / Size.innerHeight(), 0), 1);
 		this.progress(progress);
 
 	},

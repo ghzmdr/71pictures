@@ -1,4 +1,4 @@
-<nav class="main-navigation">
+<nav class="main-navigation js-main-navigation">
 	<a class="main-navigation__logo" href="/">
 		<img src="<?php echo get_template_directory_uri() . '/assets/img/logo.png' ?>" alt="71 Pictures">
 	</a>

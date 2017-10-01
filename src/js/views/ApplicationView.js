@@ -1,10 +1,14 @@
 import { View } from '../lib/View';
 import Cover from './components/Cover';
+import MainNavigation from './components/MainNavigation';
+import ActionBar from './components/ActionBar';
 
 const ApplicationView = View.extend({
 
 	components: {
-		cover: {selector: '.js-cover', type: Cover}
+		mainNavigation: {selector: '.js-main-navigation', type: MainNavigation},
+		actionBar: {selector: '.js-action-bar', type: ActionBar},
+		cover: {selector: '.js-cover', type: Cover},
 	},
 
 	events: {

@@ -2,9 +2,14 @@
 
 <article class="page page-ntsc js-page"  id="#ntsc">
 
-	<div class="section">
-		<h2 class="title-appear page__title page-ntsc__title js-page-title"><span class="title-appear__content js-title-content"><?php echo $post->post_title; ?></span></h2>
-	</div>
+	<header class="page__header">
+		<h2 class="page__title js-page-title">
+			<?php echo $post->post_title; ?>
+		</h2>
+		<h5 class="page__subtitle js-page-subtitle">
+			<?php the_field('subtitle'); ?>
+		</h5>
+	</header>
 
 	<section class="section page-ntsc__intro-block">
 		

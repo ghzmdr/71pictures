@@ -14,7 +14,10 @@
 
 		<div class="relative-wrapper">			
 			<?php include_once "cover.php" ?>
-			<?php include_once "action-bar.php" ?>			
+			<?php include_once "action-bar.php" ?>
+			<a class="button-trailer main-button-trailer" href="/ntsc/trailer">
+				Watch the trailer
+			</a>	
 		</div>
 		
 		<main id="main-region">

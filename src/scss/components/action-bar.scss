@@ -3,25 +3,46 @@
 
 	right: 0;
 	bottom: 0;
-	left: 0;
 
-	height: 3rem;
-	margin: $navbar-spacing;
+	height: $navbar-height;
+	padding: $navbar-spacing;
 	
 	display: flex;
 	align-items: center;
 }
 
-.action-bar__socials {
-	margin-left: auto;
+.action-bar__button-trailer {
+	transition: opacity 0.3s ease-out;
+	opacity: 0;
+	visibility: hidden;
 }
 
-.button-watch-trailer {
+.action-bar.is-fixed {
+	position: fixed;
+	top: 0;
+	bottom: auto;
+	z-index: 1;
+	
+	.action-bar__button-trailer {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+.action-bar__button-trailer {
+	position: static;
+
+	margin-right: 1.25rem;
+	border-radius: 50%;
+	width: 2rem;
 	height: 2rem;
 	line-height: 2rem;
-	padding: 0 0.5rem;
-	border: 1px solid white;
-	color: white;
-	text-decoration: none;
-	display: inline-block;
+	text-align: center;
+}
+
+
+.action-bar.is-fixed {
+	.button-watch-trailer {
+		display: none;
+	}
 }

@@ -1,5 +1,5 @@
 import { View } from '../../lib/View';
-import ScrollAwareUI from '../../helpers/ScrollAwareUI';
+import ScrollAwareView from '../../helpers/ScrollAwareView';
 import Scroll from '../../lib/Scroll';
 import Size from '../../lib/Size';
 import { offsetTop } from '../../utils/DOM';
@@ -11,9 +11,11 @@ const NTSCPage = View.extend({
 
 	ui: {
 		title: '.js-page-title',
+		subtitle: '.js-page-subtitle',
 		titleContent: '.js-title-content',
 		intro: '.js-ntsc-intro',
-		poster: '.js-parallax-poster'
+		poster: '.js-parallax-poster',
+		carousel: '.js-carousel'
 	},
 
 	components: {
@@ -24,7 +26,7 @@ const NTSCPage = View.extend({
 	},	
 
 	initialize: function (options) {
-		Object.assign(this, ScrollAwareUI);
+		Object.assign(this, ScrollAwareView);
 		this.initScrollUI();
 
 		this.listenToOnce(this, 'initialized', () => this._scrollToSection(options.scrollToSection));
@@ -45,22 +47,30 @@ const NTSCPage = View.extend({
 	},
 
 	_scrollToSection: function (section) {
-		Scroll.scrollToElement(document.querySelector(section), 0.6);
+		Scroll.scrollToElement(document.querySelector(section));
 	},
 
 	titleVisible: function () {
 		TweenLite.to(this.ui.title, 0.6, {opacity: 1, delay: 0.2});
 		TweenLite.from(this.ui.title, 0.6, {y: '20%', delay: 0.15, ease: Circ.easeOut});
-
+		TweenLite.to(this.ui.subtitle, 0.8, {opacity: 1, delay: 0.8});
 	},
 
 	introVisible: function () {
-		TweenLite.to(this.ui.intro, 0.8, {opacity: 1, delay: 0.2});
+		var delay = 0.8;
+		Array.from(this.ui.intro.children).forEach((item, index) => {
+			delay += index * 0.2;
+			TweenLite.to(item, 0.8, {opacity: 1, delay});
+		})
 	},
 
 	posterVisible: function () {
 		TweenLite.to(this.ui.poster, 1, {opacity: 1, delay: 0.3});
 		TweenLite.from(this.ui.poster, 1, {y: '30%', delay: 0.25, ease: Circ.easeOut});
+	},
+
+	carouselVisible: function(carousel) {
+		TweenLite.to(carousel, 0.8, {opacity: 1, delay: 0.3});
 	},
 
 	transitionIn() {

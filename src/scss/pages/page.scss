@@ -1,25 +1,54 @@
 .page {
-	padding: 3rem 0 10rem;
+	padding: 13rem 0 20rem;
 	margin: 0 auto;
 	font-size: 0;
+	background-color: black;
+	box-shadow: 0 0 2rem 0.5rem black;
 }
 
 .page__title {
 	@extend .title; 
 
-	padding-left: 2rem;
-	padding-right: 2rem;
-	padding-top: 1rem;
-   
 	font-size: 7rem;
 	font-weight: bold;
 	letter-spacing: 0.3rem;
+	line-height: 1em;
+
+	//defaults
+	opacity: 0;
+}
+
+.page__subtitle {
+	@extend .title;
+	@include font-secondary();
+	margin-top: 1rem;
+	margin-left: 3rem;
+	
+	//defaults
+	opacity: 0;
+}
+
+.page__header {
+	padding-left: 2rem;
+	padding-right: 2rem;
+	padding-top: 1rem;
+	max-width: 1280px;
+	margin: 0 auto;
 }
 
 @include break-wide {
-	
+	.page {
+		padding: 10vh 0;
+		// max-width: 1280px;
+		// margin: 0 auto;
+	}
+
 	.page__title {
 		font-size: 12rem;
+	}
+
+	.page__header {
+		margin-bottom: 3rem;
 	}
 
 }

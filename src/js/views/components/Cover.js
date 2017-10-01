@@ -37,7 +37,7 @@ const Cover = View.extend({
 
 	_setProgressFromScroll: function () {
 
-		var progress = Math.min(Math.max(Scroll.scrollY() / Size.innerHeight(), 0), 1);
+		var progress = Math.min(Math.max(Scroll.Y / Size.innerHeight(), 0), 1);
 		this._logoTimeline.progress(progress);
 
 	},

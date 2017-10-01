@@ -14,6 +14,7 @@ html, body, #seventyonepictures, #main-region {
 	border: none;
 	cursor: hand;
 	cursor: pointer;
+	background: none;
 }
 
 #main-region {
@@ -64,4 +65,6 @@ html, body, #seventyonepictures, #main-region {
 
 .relative-wrapper {
 	position: relative;
+	width: 100%;
+	height: 100%;
 }
