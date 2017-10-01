@@ -3,11 +3,16 @@ import { bindAll } from 'underscore';
 import { TweenLite } from 'gsap';
 import Scroll from '../../lib/Scroll';
 import Size from '../../lib/Size';
+import Background from './Background';
 
-const Intro = View.extend({
+const Cover = View.extend({
 
 	ui: {
 		logo: '.js-logo'
+	},
+
+	components: {
+		background: {selector: '.js-background', type: Background},
 	},
 
 	initialize: function (options) {
@@ -42,4 +47,4 @@ const Intro = View.extend({
 	}
 })
 
-export default Intro;
+export default Cover;

@@ -1,12 +1,10 @@
 import { View } from '../lib/View';
-import Background from './components/Background';
-import Intro from './components/Intro';
+import Cover from './components/Cover';
 
 const ApplicationView = View.extend({
 
 	components: {
-		background: {selector: '.js-background', type: Background},
-		intro: {selector: '.js-intro', type: Intro}
+		cover: {selector: '.js-cover', type: Cover}
 	},
 
 	events: {
@@ -18,7 +16,7 @@ const ApplicationView = View.extend({
 	},
 
 	transitionIn: function () {
-		this.components.intro.transitionIn();
+		this.components.cover.transitionIn();
 	},
 
 	_routeClickHandler: function (e) {

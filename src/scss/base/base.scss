@@ -42,6 +42,10 @@ html, body, #seventyonepictures, #main-region {
 
 }
 
+.list {
+	font-size: 0;
+}
+
 .list, .list-item { 
 
 	appearance: none;
@@ -56,4 +60,8 @@ html, body, #seventyonepictures, #main-region {
 
 .list--horizontal .list-item {
 	display: inline-block;
+}
+
+.relative-wrapper {
+	position: relative;
 }

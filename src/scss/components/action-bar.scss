@@ -1,0 +1,27 @@
+.action-bar {
+	position: absolute;
+
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	height: 3rem;
+	margin: $navbar-spacing;
+	
+	display: flex;
+	align-items: center;
+}
+
+.action-bar__socials {
+	margin-left: auto;
+}
+
+.button-watch-trailer {
+	height: 2rem;
+	line-height: 2rem;
+	padding: 0 0.5rem;
+	border: 1px solid white;
+	color: white;
+	text-decoration: none;
+	display: inline-block;
+}
