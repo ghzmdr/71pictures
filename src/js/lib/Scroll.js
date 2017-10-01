@@ -50,7 +50,8 @@ class Scroll {
 		let deltaY = Math.abs(this.Y - y);
 		let vh = Size.innerHeight();
 		let screens = deltaY / vh;
-		return Math.min(Math.max(1 / this._screensPerSecond * screens, 1.5), 0.25);
+
+		return Math.max(Math.min(1 / this._screensPerSecond * screens, 1.5), 0.25);
 	}
 
 	_killScrollToTween() {

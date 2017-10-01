@@ -22,7 +22,7 @@ export default {
 	},
 
 	_isElementIn: function (elementKey, elementIndex) {
-		var targetScreenY = Size.innerHeight() / 1.8;
+		var targetScreenY = Size.innerHeight() / 1.7;
 		return Scroll.Y + targetScreenY > this.__uiRects[`${elementKey}${elementIndex !== undefined ? elementIndex : ''}Top`];
 	},
 

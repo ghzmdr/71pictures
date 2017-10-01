@@ -5,6 +5,11 @@ import { offsetTop } from '../../utils/DOM';
 
 const MainNavigation = View.extend({
 
+	events: {
+		'click a[href="/"]': '_homeClickHandler', //TODO: temp!
+		'click a[href="/ntsc"]': '_ntscClickHandler' //TODO: temp!
+	},
+
 	onInitialized: function () {
 		this._setListeners();
 		this._computeTop();
@@ -37,7 +42,18 @@ const MainNavigation = View.extend({
 
 	_resizeHandler: function () {
 		this._computeTop();
+	},
+
+	_homeClickHandler: function () {
+		Scroll.scrollTo(0);
+		console.log('asd')
+	},
+
+	_ntscClickHandler: function() {
+		Scroll.scrollToElement(document.querySelector('.js-page'));
 	}
+
+
 })
 
 
