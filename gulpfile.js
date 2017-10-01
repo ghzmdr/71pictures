@@ -109,8 +109,8 @@ gulp.task('develop', ['webpack:dev', 'sass:dev'], function () {
 gulp.task('release', ['webpack:prod', 'sass:prod'], function () {
 	
 	var date = new Date().toString();
-	var dateRegex = /^([A-z]+\s)+(.*)(\sGMT.+)$/;
-	var dateString = dateRegex.exec(date)[2];
+	var dateRegex = /^[A-z]+\s(.*)(\sGMT.+)$/;
+	var dateString = dateRegex.exec(date)[1];
 	var dateString = dateString.replace(/\s|:/g, '_');
 	
 	console.log(`\n\n   Making release: || ${dateString} ||\n\n`);

@@ -2,23 +2,28 @@
 	height: 2rem;
 	line-height: 2rem;
 	padding: 0 0.5rem;
-	border: 1px solid white;
-	color: white;
+	border: 1.7px solid $color-text-light;
+	color: $color-text-light;
 	text-decoration: none;
 	display: inline-block;
+}
+
+.button-trailer--small {
+	width: 2rem;
+	height: 2rem;
+	padding: 0;
+	@include v-align;
+}
+
+.button-trailer .icon-play {
+	fill: $color-text-light;
+	display: inline-block;
+	font-size: 0.8rem;	
 }
 
 .main-button-trailer {
 	position: absolute;
 	bottom: $navbar-spacing;
 	left: $navbar-spacing;
-}
-
-@include break-narrow {
-	.main-button-trailer {
-		right: $navbar-spacing;
-		top: $navbar-spacing;
-		left: auto;
-		bottom: auto;
-	}
+	z-index: 1;
 }

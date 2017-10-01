@@ -42,9 +42,11 @@ const NTSCPage = View.extend({
 		})
 	},
 
-	posterVisible: function () {
+	posterVisible: function (poster) {
+
 		TweenLite.to(this.ui.poster, 1, {opacity: 1, delay: 0.3});
 		TweenLite.from(this.ui.poster, 1, {y: '30%', delay: 0.25, ease: Circ.easeOut});
+
 	},
 
 	carouselVisible: function(carousel) {

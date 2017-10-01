@@ -2,8 +2,8 @@
 	display: inline-block;
 	width: 2rem;
 	height: 2rem;
-	border: 1px solid $color-white;
-	color: $color-white;
+	border: 1px solid $color-text-light;
+	color: $color-text-light;
 	text-align: center;
 	text-decoration: none;
 	@include v-align;
@@ -12,6 +12,7 @@
 }
 
 .social-link__icon {
-	font-size: 1rem;
 	vertical-align: middle;
+	fill: white;
+	width: 1rem;
 }

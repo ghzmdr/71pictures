@@ -9,6 +9,7 @@
 	
 	display: flex;
 	align-items: center;
+	z-index: 3;
 }
 
 .action-bar__button-trailer {
@@ -21,7 +22,6 @@
 	position: fixed;
 	top: 0;
 	bottom: auto;
-	z-index: 1;
 	
 	.action-bar__button-trailer {
 		opacity: 1;

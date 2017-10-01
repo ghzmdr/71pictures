@@ -6,6 +6,8 @@
 @import 'base/breakpoints.scss';
 @import 'base/typography.scss';
 
+@import 'icons/play.scss';
+
 @import 'components/main-navigation.scss';
 @import 'components/action-bar.scss';
 
@@ -22,3 +24,5 @@
 @import 'pages/ntsc.scss';
 @import 'pages/about.scss';
 @import 'pages/articles.scss';
+
+@import 'base/adapt.scss';

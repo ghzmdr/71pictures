@@ -47,8 +47,9 @@ const Cover = View.extend({
 	_createParallaxTimeline: function () {
 		if (this._parallaxTimeline) this._killParallaxTimeline();
 		this._parallaxTimeline = new TimelineLite({paused: true});
-		this._parallaxTimeline.to(this.ui.logo, 1, {y: Size.innerHeight(0) * -0.2}, 0);
-		this._parallaxTimeline.to(this.ui.image, 1, {y: Size.innerHeight() * -0.1}, 0);
+		this._parallaxTimeline.fromTo(this.ui.logo, 1, {y: 0}, {y: Size.innerHeight(0) * -0.2}, 0);
+		this._parallaxTimeline.fromTo(this.ui.logo, 0.6, {opacity: 1}, {opacity: 0}, 0.3);
+		this._parallaxTimeline.fromTo(this.ui.image, 1, {y: 0}, {y: Size.innerHeight() * -0.1}, 0);
 	},
 
 	_setProgressFromScroll: function () {
@@ -59,7 +60,8 @@ const Cover = View.extend({
 	},
 
 	_killParallaxTimeline: function () {
-		this._parallaxTimeline.kill();	
+		this._parallaxTimeline.stop();
+		this._parallaxTimeline.kill();
 		this._parallaxTimeline = null;	
 	},
 

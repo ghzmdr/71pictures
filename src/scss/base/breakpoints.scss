@@ -11,7 +11,7 @@
 }
 
 @mixin break-tall {
-	@media (min-height: 800px) {
+	@media (min-height: 840px) {
 		@content;
 	}
 }

@@ -9,7 +9,7 @@
 	left: 0;
 	right: 0;
 
-	z-index: 1;
+	z-index: 2;
 
 	@include v-align;
 	transition: background 0.2s ease-out;
@@ -22,7 +22,7 @@
 	svg {
 		height: 100%;
 		width: auto;
-		fill: white;
+		fill: $color-text-light;
 	}
 }
 
@@ -31,13 +31,11 @@
 
 .main-navigation__item {
 	margin: 0 0.45rem;
-	color: #232323;
-	text-decoration: none;
-	font-size: 1rem;
 }
 
 .main-navigation__link {
-	color: $color-white;
+	color: $color-text-light;
+	font-size: 1rem;
 	text-decoration: none;
 }
 

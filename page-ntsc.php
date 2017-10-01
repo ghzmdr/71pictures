@@ -2,6 +2,13 @@
 
 <article class="page page-ntsc js-page"  id="#ntsc">
 
+	<?php $poster = get_field('poster'); ?>
+	<div class="page-ntsc__poster-wrapper narrow-only">
+		<img class="page-ntsc__poster" src="<?php echo $poster['poster_mobile_image']; ?>">
+		<div class="page-ntsc__poster-shadow-top"></div>
+		<div class="page-ntsc__poster-shadow-bottom"></div>
+	</div>
+
 	<header class="page__header">
 		<h2 class="page__title js-page-title">
 			<?php echo $post->post_title; ?>
@@ -16,9 +23,8 @@
 		<?php $intro = get_field('intro'); ?>
 		<div class="text page-ntsc__intro js-ntsc-intro"><?php echo $intro; ?></div>
 
-		<?php $poster = get_field('poster'); ?>
 		<?php if($poster['with_parallax']) { ?>
-		<div class="parallax-poster page-ntsc__poster js-parallax-poster">
+		<div class="parallax-poster page-ntsc__poster wide-only js-parallax-poster">
 			<div class="parallax-poster__items js-parallax-poster-container">
 				<?php foreach ($poster['poster_layers'] as $posterLayer) {?>
 				<img class="parallax-poster__item js-parallax-poster-item" 
@@ -30,7 +36,7 @@
 
 		</div>
 		<?php } else { ?>
-		<img class="page-ntsc__poster" src="<?php echo $poster['poster_image']; ?>">
+		<img class="page-ntsc__poster desktop-only" src="<?php echo $poster['poster_image']; ?>">
 		<?php } ?>
 		
 
