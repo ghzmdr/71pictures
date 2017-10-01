@@ -8,7 +8,14 @@
 ?>
 <article class="page page-about js-page">
 	
-	<h2 class="title page-about__title"><?php echo $post->post_title; ?></h2>
+	<header class="page__header">
+		<h2 class="page__title js-page-title">
+			<?php echo $post->post_title; ?>
+		</h2>
+		<h5 class="page__subtitle js-page-subtitle">
+			<?php the_field('subtitle'); ?>
+		</h5>
+	</header>
 
 </article>
 

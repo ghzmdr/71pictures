@@ -87,22 +87,30 @@ const Carousel = View.extend({
 	},
 
 	_buttonPrevMouseEnterHandler: function () {
+		debugger
 		this._isMouseOverButtonPrev = true;
+		debugger
 		TweenLite.to(this.ui.buttonPrev, 0.4, {scaleX: 1.3, opacity: 1});
 	},
 
 	_buttonPrevMouseLeaveHandler: function () {
+		debugger
 		this._isMouseOverButtonPrev = false;
+		debugger
 		TweenLite.to(this.ui.buttonPrev, 0.4, {scaleX: 1, opacity: 0.5});
 	},
 
 	_buttonNextMouseEnterHandler: function () {
+		debugger
 		this._isMouseOverButtonNext = true;
+		debugger
 		TweenLite.to(this.ui.buttonNext, 0.4, {scaleX: 1.3, opacity: 1});
 	},
 
 	_buttonNextMouseLeaveHandler: function () {
+		debugger
 		this._isMouseOverButtonNext = false;
+		debugger
 		TweenLite.to(this.ui.buttonNext, 0.4, {scaleX: 1, opacity: 0.5});
 	}
 });

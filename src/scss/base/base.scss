@@ -14,10 +14,13 @@ html, body, #seventyonepictures, #main-region {
 	border: none;
 	cursor: hand;
 	cursor: pointer;
+	background: none;
 }
 
 #main-region {
 	position: relative;
+	width: 100%;
+	box-shadow: 0 0 2rem 0.5rem black;
 }
 
 #seventyonepictures {
@@ -42,6 +45,10 @@ html, body, #seventyonepictures, #main-region {
 
 }
 
+.list {
+	font-size: 0;
+}
+
 .list, .list-item { 
 
 	appearance: none;
@@ -56,4 +63,10 @@ html, body, #seventyonepictures, #main-region {
 
 .list--horizontal .list-item {
 	display: inline-block;
+}
+
+.relative-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
 }

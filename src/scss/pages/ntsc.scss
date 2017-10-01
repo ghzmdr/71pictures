@@ -2,19 +2,9 @@
 	font-size: 0;
 }
 
-.page-ntsc__title {
-	position: relative;
-	
-	//defaults:
-	opacity: 0;
-}
-
-
 .page-ntsc__poster {
 	display: block;
 	width: 100%;
-	max-width: 60%;
-	width: 60%;
 	margin: 0 auto;
 	//defaults:
 	opacity: 0;
@@ -26,7 +16,6 @@
 	
 	display: block;
 	margin: 0 auto;
-	max-width: 40rem;
 	min-width: 10rem;
 	padding: 2.7rem 2.5rem;
 
@@ -35,9 +24,11 @@
 	font-size: 1rem;
 	letter-spacing: 0.03em;
 	vertical-align: top;
-
+	
 	//defaults:
-	opacity: 0;
+	& > * {
+		opacity: 0;
+	}
 }
 
 .page-ntsc__carousel {
@@ -54,13 +45,17 @@
 	.carousel--with-title .carousel__slide {
 		height: calc(100vh - 4.625rem);
 	}
+
+	//defaults
+	opacity: 0;
 }
 
-@include break-narrow {
+@include break-wide {
 	.page-ntsc__intro-block {
 		@include v-align;
+		margin-bottom: 10rem;
 	}
-
+	
 	.page-ntsc__poster {
 		display: inline-block;
 		width: 40%;

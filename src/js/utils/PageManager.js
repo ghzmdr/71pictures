@@ -23,13 +23,13 @@ class PageManager {
 			const page = this._pages[slug];
 		
 			if (page) {
-				res(page);
+				res(page.cloneNode(true));
 			} else {
 				this._fetchPage(slug)
 					.then(pageContent => {
 						const node = this._findPageNode(pageContent, '.js-page');
 						this._pages[slug] = node.cloneNode(true);
-						res(node);
+						res(node.cloneNode(true));
 					})
 					.catch(rej)
 			}

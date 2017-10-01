@@ -2,6 +2,7 @@ import { Events } from 'backbone';
 import { TweenLite } from 'gsap';
 import { extend, bindAll } from 'underscore';
 import Size from '../lib/Size';
+import { offsetTop } from '../utils/DOM';
 
 class Scroll {
 	constructor() {
@@ -9,50 +10,67 @@ class Scroll {
 
 		bindAll(this, '_scrollHandler');
 
-		this._setAndTrigger();
+		this._trigger();
 
 		window.addEventListener('scroll', this._scrollHandler, {passive: true});
 		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
 	}
 
-	scrollY() {
-		return this._scrollY;
+	get _screensPerSecond() {
+		return 2;
 	}
 
-	scrollX() {
-		return this._scrollX;
+	get Y() {
+		return window.scrollY;
+	}
+
+	set Y(val) {
+		window.scrollTo(0, val); 
 	}
 
 	scrollToElement(element, time) {
 
-		var e = element, top = element.offsetTop;
-		while(e = e.offsetParent) {top += e.offsetTop;}
-		
+		var top = offsetTop(element);
 		this.scrollTo(top, time);
 	}
 
 	scrollTo(y, time) {
-		var scroll = {y:window.scrollY};
-		TweenLite.to(scroll, time, {y, onUpdate: () => window.scrollTo(0,scroll.y)});
+
+		if (time === undefined) {
+			time = this._computeScrollTime(y);
+		}
+
+		this._killScrollToTween();
+		var tweenData = {y: this.Y};
+		this._scrollToTween = TweenLite.to(tweenData, time, {y, onUpdate: () => this.Y = tweenData.y});
 	}
 
-	_setScroll() {
-		this._scrollY = window.scrollY;
-		this._scrollX = window.scrollX;
+	_computeScrollTime(y) {
+		if (y === 0) y = 1;
+		let deltaY = Math.abs(this.Y - y);
+		let vh = Size.innerHeight();
+		let screens = deltaY / vh;
+		return Math.min(Math.max(1 / this._screensPerSecond * screens, 1.5), 0.25);
 	}
 
-	_setAndTrigger() {
-		this._setScroll();
-		const viewports = this._scrollY / Size.innerHeight();
-		this.trigger('scroll', {x: this._scrollX, y: this._scrollY, viewports });
+	_killScrollToTween() {
+		if (this._scrollToTween) {
+			this._scrollToTween.kill();
+			this._scrollToTween = null;
+		}
+	}
+
+	_trigger() {
+		const viewports = this.Y / Size.innerHeight();
+		this.trigger('scroll', {x: this._scrollX, y: this.Y, viewports });
 	}
 
 	_scrollHandler(e) {
-		this._setAndTrigger();
+		this._trigger();
 	}
 
 	_resizeCompleteHandler() {
-		this._setAndTrigger();
+		this._trigger();
 	}
 }
 

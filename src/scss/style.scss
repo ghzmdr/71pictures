@@ -1,3 +1,4 @@
+@import 'base/constants.scss';
 @import 'base/colors.scss';
 @import 'base/mixins.scss';
 @import 'base/fonts.scss';
@@ -5,13 +6,15 @@
 @import 'base/breakpoints.scss';
 @import 'base/typography.scss';
 
+@import 'components/main-navigation.scss';
+@import 'components/action-bar.scss';
+
 @import 'components/carousel.scss';
+@import 'components/button-trailer.scss';
 @import 'components/title-appear.scss';
 @import 'components/background.scss';
-@import 'components/navigation.scss';
-@import 'components/intro.scss';
+@import 'components/cover.scss';
 @import 'components/social-link.scss';
-@import 'components/logo.scss';
 
 @import 'components/parallax-poster.scss';
 
