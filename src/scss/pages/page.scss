@@ -3,7 +3,6 @@
 	margin: 0 auto;
 	font-size: 0;
 	background-color: black;
-	box-shadow: 0 0 2rem 0.5rem black;
 }
 
 .page__title {
@@ -32,6 +31,7 @@
 	padding-left: 2rem;
 	padding-right: 2rem;
 	padding-top: 1rem;
+	margin-bottom: 3rem;
 	max-width: 1280px;
 	margin: 0 auto;
 }
@@ -48,7 +48,6 @@
 	}
 
 	.page__header {
-		margin-bottom: 3rem;
 	}
 
 }

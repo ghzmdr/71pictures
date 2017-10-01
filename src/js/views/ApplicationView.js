@@ -15,14 +15,6 @@ const ApplicationView = View.extend({
 		'click [href^="/"]': '_routeClickHandler'
 	},
 
-	onInitialized: function() {
-		this.transitionIn();
-	},
-
-	transitionIn: function () {
-		this.components.cover.transitionIn();
-	},
-
 	_routeClickHandler: function (e) {
 		e.preventDefault();
 		Backbone.history.navigate(e.target.pathname, { trigger: true });

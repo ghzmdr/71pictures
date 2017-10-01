@@ -8,6 +8,7 @@ const ActionBar = View.extend({
 	onInitialized: function () {
 		this._setListeners();
 		this._computeTop();
+		this._scrollHandler();
 	},
 
 	_setListeners: function() {

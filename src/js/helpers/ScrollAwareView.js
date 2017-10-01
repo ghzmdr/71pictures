@@ -28,6 +28,7 @@ export default {
 
 	__initializedHandler: function () {
 		this.__setUiRects();
+		this.__scrollHandler();
 	},
 
 	__resizeHandler: function () {

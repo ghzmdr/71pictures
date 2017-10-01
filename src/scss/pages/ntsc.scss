@@ -5,8 +5,6 @@
 .page-ntsc__poster {
 	display: block;
 	width: 100%;
-	max-width: 60%;
-	width: 60%;
 	margin: 0 auto;
 	//defaults:
 	opacity: 0;
@@ -57,7 +55,7 @@
 		@include v-align;
 		margin-bottom: 10rem;
 	}
-
+	
 	.page-ntsc__poster {
 		display: inline-block;
 		width: 40%;
