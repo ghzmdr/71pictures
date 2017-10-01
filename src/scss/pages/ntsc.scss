@@ -50,7 +50,7 @@
 	opacity: 0;
 }
 
-@include break-narrow {
+@include break-wide {
 	.page-ntsc__intro-block {
 		@include v-align;
 		margin-bottom: 10rem;

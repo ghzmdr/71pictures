@@ -10,7 +10,15 @@
 
 .main-button-trailer {
 	position: absolute;
-	left: $navbar-spacing;
 	bottom: $navbar-spacing;
-	right: auto;
+	left: $navbar-spacing;
+}
+
+@include break-narrow {
+	.main-button-trailer {
+		right: $navbar-spacing;
+		top: $navbar-spacing;
+		left: auto;
+		bottom: auto;
+	}
 }
