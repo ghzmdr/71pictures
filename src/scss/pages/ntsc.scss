@@ -65,11 +65,11 @@
 	}
 
 	.carousel__slide {
-		height: 100vh;
+		height: calc(100vh - #{$navbar-height});
 	}
 
 	.carousel--with-title .carousel__slide {
-		height: calc(100vh - 4.625rem);
+		height: calc(100vh - #{$navbar-height + 4.625rem});
 	}
 
 	//defaults
@@ -110,7 +110,6 @@
 	.page-ntsc__intro {
 		display: inline-block;
 		width: 50%;
-		margin-top: -1rem;
 		vertical-align: middle;
 	}
 }
