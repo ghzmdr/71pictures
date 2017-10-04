@@ -28,7 +28,11 @@ var webpackDevConfig = {
 			    }
 			  }
 			}
-		]
+		],
+
+        plugins: [
+            new webpack.IgnorePlugin(/^jquery$/)
+        ]
 	}
 };
 
@@ -55,12 +59,13 @@ var webpackProdConfig = {
 	},
 
 	plugins: [
-		new webpack.optimize.UglifyJsPlugin()
+		new webpack.optimize.UglifyJsPlugin(),
+        new webpack.IgnorePlugin(/^jquery$/)
 	]
 };
 
 gulp.task("webpack:dev", function(callback) {
-    
+
     webpack(webpackDevConfig, function(err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
         gutil.log("[webpack]", stats.toString());
@@ -70,7 +75,7 @@ gulp.task("webpack:dev", function(callback) {
 });
 
 gulp.task("webpack:prod", function(callback) {
-    
+
     webpack(webpackProdConfig, function(err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
         gutil.log("[webpack]", stats.toString());
@@ -107,12 +112,12 @@ gulp.task('develop', ['webpack:dev', 'sass:dev'], function () {
 })
 
 gulp.task('release', ['webpack:prod', 'sass:prod'], function () {
-	
+
 	var date = new Date().toString();
 	var dateRegex = /^[A-z]+\s(.*)(\sGMT.+)$/;
 	var dateString = dateRegex.exec(date)[1];
 	var dateString = dateString.replace(/\s|:/g, '_');
-	
+
 	console.log(`\n\n   Making release: || ${dateString} ||\n\n`);
 
 	gulp.src(['assets/**/*', 'inc/**/*', '*.php', 'style.css'], { base: './' })
