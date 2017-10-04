@@ -1,4 +1,5 @@
 import {TweenLite} from 'gsap';
+import Backbone from 'backbone';
 import CSSPlugin from 'gsap/CSSPlugin';
 import Router from './Router';
 import ApplicationView from './views/ApplicationView';

@@ -1,3 +1,4 @@
+import Backbone from 'backbone';
 import { View } from '../lib/View';
 import Cover from './components/Cover';
 import MainNavigation from './components/MainNavigation';

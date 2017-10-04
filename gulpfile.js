@@ -17,7 +17,9 @@ var webpackDevConfig = {
 	devtool: '#inline-source-map',
 
 	module: {
+
 		rules: [
+			{ test: /backbone\.js$/, loader: 'imports-loader?define=>false' },
 			{
 			  test: /\.js$/,
 			  exclude: /(node_modules)/,
@@ -28,12 +30,12 @@ var webpackDevConfig = {
 			    }
 			  }
 			}
-		],
+		]
+	},
 
-        plugins: [
-            new webpack.IgnorePlugin(/^jquery$/)
-        ]
-	}
+    plugins: [
+        new webpack.IgnorePlugin(/^jquery$/)
+    ]
 };
 
 var webpackProdConfig = {
@@ -45,6 +47,7 @@ var webpackProdConfig = {
 
 	module: {
 		rules: [
+			{ test: /backbone\.js$/, loader: 'imports-loader?define=>false' },
 			{
 			  test: /\.js$/,
 			  exclude: /(node_modules)/,
