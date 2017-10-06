@@ -8,14 +8,15 @@
 				<canvas class="js-canvas"></canvas>
 			</div>
 		<?php } ?>
-		
+
 		<?php if (!$cover['video_enabled']) { ?>
 			<img class="cover__image js-image" src="<?php echo $cover['image']; ?>" alt="">
 		<?php } ?>
-		
+
 		<div class="cover__logo">
 			<?php include 'assets/img/logo-with-text.svg' ?>
 		</div>
 	</div>
 
 </section>
+
