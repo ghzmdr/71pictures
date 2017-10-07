@@ -1,0 +1,21 @@
+.article-selector__types {
+	display: block;
+	width: 100%;
+	border: 1px solid $color-white;
+}
+
+.article-selector__types {
+	width: 100%;
+	text-align: center;
+}
+
+.article-selector__type {
+	font-size: 1.2rem;
+	color: $color-white;
+	padding: 0.4rem 1.2rem;
+	border-right: 1px solid $color-white;
+
+	&:first-child {
+		border-left: 1px solid $color-white;
+	}
+}
