@@ -12,7 +12,8 @@ const ApplicationRouter = Router.extend({
 		'': 	'_home',
 		'ntsc': '_ntsc',
 		'about': '_about',
-		'articles': '_articles'
+		'articles/': '_articles',
+		'articles/:category/': '_articles'
 	},
 
 	_home:function () {
@@ -30,9 +31,9 @@ const ApplicationRouter = Router.extend({
 			.then(el => Regions.main.show(AboutPage, {el}));	
 	},
 
-	_articles: function () {
+	_articles: function (category) {
 		this._getElementFromRoute('articles')
-			.then(el => Regions.main.show(ArticlesPage, {el}));	
+			.then(el => Regions.main.show(ArticlesPage, {el, category}));	
 	},
 
 	_getElementFromRoute: function(slug) {

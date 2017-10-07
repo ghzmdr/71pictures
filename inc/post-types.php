@@ -7,11 +7,10 @@ function seventuonepictures_create_post_type() {
         'name' => __( 'Articles' ),
         'singular_name' => __( 'Article' )
       ),
-      'public' => true,
-      'has_archive' => false,
-      'supports' => array('title','author','thumbnail','excerpt', 'revisions', 'custom-fields'),
-      'taxonomies' => array( 'article_types'),
-      'rewrite'                    => array( 'slug' => 'articles' )
+      'public'        => true,
+      'has_archive'   => 'articles',
+      'supports'      => array('title','author','thumbnail','excerpt', 'revisions', 'custom-fields'),
+      'rewrite'       => array( 'slug' => 'articles/%article_types%', 'with_front' => false )
     )
   );
 }
@@ -24,9 +23,8 @@ function seventyone_custom_taxonomy() {
     'name'                       => 'Article Types',
     'singular_name'              => 'Article Type',
     'menu_name'                  => 'Article Types',
-    'parent_item'        => null,
-    'parent_item_column'     => null,
-    'show_in_rest'         => true,
+    'parent_item'                => null,
+    'parent_item_column'         => null,
     'all_items'                  => 'All Article Types',
     'new_item_name'              => 'New Article Type',
     'add_new_item'               => 'Add New Article Type',
@@ -43,8 +41,25 @@ function seventyone_custom_taxonomy() {
     'show_admin_column'          => true,
     'show_in_nav_menus'          => true,
     'show_tagcloud'              => true,
+    'rewrite'   => array( 
+      'slug' => 'articles', 
+      'with_front' => false 
+    )
   );
+
   register_taxonomy( 'article_types', array( 'article' ), $args );
 
 }
 add_action( 'init', 'seventyone_custom_taxonomy', 0 );
+
+function seventyone_show_permalinks( $post_link, $post ){
+    if ( is_object( $post ) && $post->post_type == 'article' ){
+        $terms = wp_get_object_terms( $post->ID, 'article_types' );
+        if( $terms ){
+            return str_replace( '%article_types%' , $terms[0]->slug , $post_link );
+        }
+    }
+    return $post_link;
+}
+add_filter( 'post_type_link', 'seventyone_show_permalinks', 1, 2 );
+

@@ -36,6 +36,7 @@ const _initializeView = function () {
 	}
 
 	if (isFunction(this.onInitialized)) this.onInitialized();
+	this.__isInitialized = true;
 	this.trigger('initialized');
 }
 
@@ -96,7 +97,7 @@ const View = {
 
 			if(isFunction(this.onClose)) this.onClose();
 			
-			if(this.components) {
+			if(this.__isInitialized && this.components) {
 				for (var k in this.components) {
 					if (isArray(this.components[k])) {
 						for (var i = 0; i < this.components[k].length; ++i) {

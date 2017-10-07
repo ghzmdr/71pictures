@@ -23,6 +23,15 @@ const ArticlesPage = View.extend({
 	initialize: function (options) {
 		Object.assign(this, ScrollAwareView);
 		this.initScrollUI();
+		this.setCategory(options.category);
+	},
+
+	updateData(data) {
+		this.setCategory(data.category);
+	},
+
+	setCategory(category) {
+		console.log('[ArticlesPage] Category: ', category || 'all')
 	},
 
 	titleVisible: function () {

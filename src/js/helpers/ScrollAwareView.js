@@ -9,8 +9,6 @@ export default {
 		this.__uiKeys = Object.keys(this.ui);
 		this.__triggeredElements = {};
 		this.listenToOnce(this, 'initialized', this.__initializedHandler);
-		this.listenTo(Size, 'resize', this.__resizeHandler);
-		this.listenTo(Scroll, 'scroll', this.__scrollHandler);
 	},
 
 	__setUiRects: function () {
@@ -27,6 +25,8 @@ export default {
 	},
 
 	__initializedHandler: function () {
+		this.listenTo(Size, 'resize', this.__resizeHandler);
+		this.listenTo(Scroll, 'scroll', this.__scrollHandler);
 		this.__setUiRects();
 		this.__scrollHandler();
 	},
