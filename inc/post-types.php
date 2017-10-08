@@ -10,7 +10,10 @@ function seventuonepictures_create_post_type() {
       'public'        => true,
       'has_archive'   => 'articles',
       'supports'      => array('title','author','thumbnail','excerpt', 'revisions', 'custom-fields'),
-      'rewrite'       => array( 'slug' => 'articles/%article_types%', 'with_front' => false )
+      'rewrite'       => array( 'slug' => 'articles/%article_types%', 'with_front' => false ),
+      'show_in_rest'       => true,
+      'rest_base'          => 'articles',
+      'rest_controller_class' => 'WP_REST_Posts_Controller',
     )
   );
 }
@@ -44,7 +47,10 @@ function seventyone_custom_taxonomy() {
     'rewrite'   => array( 
       'slug' => 'articles', 
       'with_front' => false 
-    )
+    ),
+    'show_in_rest'       => true,
+    'rest_base'          => 'article-types',
+    'rest_controller_class' => 'WP_REST_Terms_Controller',
   );
 
   register_taxonomy( 'article_types', array( 'article' ), $args );

@@ -18,7 +18,7 @@
 			<?php $article_types = get_terms( array('taxonomy'=>'article_types', 'hide_empty' => false )); 	
 			foreach ($article_types as $article_type) { ?>
 				<?php $article_type = get_object_vars($article_type); ?>
-				<li class="list-item article-selector__type" data-article-type="<?php echo $article_type['slug']; ?>">
+				<li class="list-item article-selector__type">
 					<a href="/articles/<?php echo $article_type['slug']; ?>/">
 						<?php echo $article_type['name']; ?>
 					</a>
