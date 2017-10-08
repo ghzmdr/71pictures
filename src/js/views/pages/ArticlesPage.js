@@ -1,10 +1,7 @@
 import { View } from '../../lib/View';
 import ScrollAwareView from '../../helpers/ScrollAwareView';
-import Size from '../../lib/Size';
-import { offsetTop } from '../../utils/DOM';
 import { TweenLite } from 'gsap';
-import Carousel from '../components/Carousel';
-import ParallaxPoster from '../components/ParallaxPoster';
+import Articles from '../components/Articles';
 
 const ArticlesPage = View.extend({
 
@@ -16,22 +13,23 @@ const ArticlesPage = View.extend({
 
 	components: {
 
-		carousel: {selector: '.js-carousel', type: Carousel}
+		articles: {selector: '.js-articles', type: Articles}
 
 	},	
 
 	initialize: function (options) {
 		Object.assign(this, ScrollAwareView);
 		this.initScrollUI();
-		this.setCategory(options.category);
+		this._initialCategory = options.category;
+	},
+
+	onInitialized: function() {
+		this.components.articles.update(this._initialCategory);
 	},
 
 	updateData(data) {
-		this.setCategory(data.category);
-	},
-
-	setCategory(category) {
-		console.log('[ArticlesPage] Category: ', category || 'all')
+		console.log('[ArticlesPage] Category: ', data.category || 'all')
+		this.components.articles.update(data.category);
 	},
 
 	titleVisible: function () {

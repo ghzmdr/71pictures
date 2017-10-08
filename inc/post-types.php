@@ -69,3 +69,10 @@ function seventyone_show_permalinks( $post_link, $post ){
 }
 add_filter( 'post_type_link', 'seventyone_show_permalinks', 1, 2 );
 
+
+function my_allow_meta_query( $valid_vars ) {
+  
+  $valid_vars = array_merge( $valid_vars, array( 'meta_key', 'meta_value' ) );
+  return $valid_vars;
+}
+add_filter( 'rest_query_vars', 'my_allow_meta_query' );

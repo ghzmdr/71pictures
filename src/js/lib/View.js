@@ -23,6 +23,21 @@ const _initializeView = function () {
 
 	}
 
+	if (this.templates) {
+
+		var templates = Object.assign({}, this.templates);
+
+		for (var k in this.templates) {
+
+			templates[k] = this.el.querySelector('[data-template=' + templates[k] + ']' ).innerHTML;
+
+		}
+		
+		this.templates = templates;
+
+	}
+
+
 	if (this.components) {
 
 		var components = Object.assign({}, this.components);

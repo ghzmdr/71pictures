@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<article class="page page-articles js-page">
+<div class="page page-articles js-page">
 	
 	<header class="page__header">
 		<h2 class="page__title js-page-title">
@@ -27,6 +27,14 @@
 		</ul>
 	</div>
 
+	<section class="articles js-articles">
+		<div class="articles__list js-articles-list">
+			
+		</div>
+		<script type="text/template" data-template="article">
+			<div class="article"><%= id %></div>
+		</script>
+	</section>
 
-</article>
+</div>
 <?php get_footer();

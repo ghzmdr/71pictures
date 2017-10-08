@@ -1,4 +1,3 @@
-<?php?>
 			
 		</main>  <!-- .page-container#main-region -->
 	</div > <!-- #seventyonepictures -->

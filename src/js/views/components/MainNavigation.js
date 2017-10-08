@@ -46,7 +46,6 @@ const MainNavigation = View.extend({
 
 	_homeClickHandler: function () {
 		Scroll.scrollTo(0);
-		console.log('asd')
 	},
 
 	_ntscClickHandler: function() {
