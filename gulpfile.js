@@ -145,7 +145,7 @@ gulp.task('release', ['webpack:prod', 'sass:prod'], function () {
 
     console.log(`\n\n   Making release: || ${dateString} ||\n\n`);
 
-    gulp.src(['assets/**/*', 'inc/**/*', '*.php', 'style.css'], { base: './' })
+    gulp.src(['assets/**/*', 'inc/**/*', 'parts/**/*', '*.php', 'style.css'], { base: './' })
         .pipe(zip('71pictures_' + dateString + '.zip'))
         .pipe(gulp.dest('./releases'))
 })
