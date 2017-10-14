@@ -6,7 +6,7 @@ const Article = View.extend({
 	
 	initialize: function (options) {
 		var compiledTemplate = template(options.template);
-		var html = compiledTemplate(options.model);
+		var html = compiledTemplate(options.model.attributes);
 		var element = document.createElement('div');
 		element.innerHTML = html;
 		this.setElement(element.firstElementChild);

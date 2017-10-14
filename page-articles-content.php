@@ -32,7 +32,13 @@
 			
 		</div>
 		<script type="text/template" data-template="article">
-			<div class="article"><%= id %></div>
+			<div class="article" data-id="<%= id %>">
+				<h3><%= title.rendered %></h3>
+				<p>
+					<%= excerpt.rendered %>
+				</p>
+				<a href="<%= link %>">Read more</a>
+			</div>
 		</script>
 	</section>
 

@@ -5,6 +5,7 @@ import PageManager from './utils/PageManager.js';
 import NTSCPage from './views/pages/NTSCPage.js';
 import AboutPage from './views/pages/AboutPage.js';
 import ArticlesPage from './views/pages/ArticlesPage.js';
+import ArticlePage from './views/pages/ArticlePage.js';
 
 const ApplicationRouter = Router.extend({
 
@@ -13,7 +14,8 @@ const ApplicationRouter = Router.extend({
 		'ntsc': '_ntsc',
 		'about': '_about',
 		'articles/': '_articles',
-		'articles/:category/': '_articles'
+		'articles/:category/': '_articles',
+		'articles/:category/:slug': '_article'
 	},
 
 	_home:function () {
@@ -32,12 +34,17 @@ const ApplicationRouter = Router.extend({
 	},
 
 	_articles: function (category) {
-		this._getElementFromRoute('articles')
+		this._getElementFromRoute('articles', {forceRefresh: true})
 			.then(el => Regions.main.show(ArticlesPage, {el, category}));	
 	},
 
-	_getElementFromRoute: function(slug) {
-		
+	_article: function (category, slug) {
+		this._getElementFromRoute('article')
+			.then(el => Regions.main.show(ArticlePage, {el}));	
+	},
+
+	_getElementFromRoute: function(slug, options) {
+		options = options || {};
 		return new Promise((res, rej) => {
 			
 			if (!this._previousPage) {
@@ -49,7 +56,7 @@ const ApplicationRouter = Router.extend({
 
 			} else {
 				
-				PageManager.get(slug)
+				PageManager.get(slug, options)
 					.then(res)
 					.catch(rej)
 			
