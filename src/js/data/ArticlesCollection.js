@@ -4,7 +4,7 @@ const ArticleModel = Model.extend({
 });
 
 const ArticlesCollection = Collection.extend({
-	url: '/wp-json/wp/v2/articles',
+	url: '/wp-json/wp/v2/articles/',
 	typesUrl: '/wp-json/wp/v2/article-types',
 	model: ArticleModel,
 

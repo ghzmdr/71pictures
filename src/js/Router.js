@@ -1,5 +1,6 @@
 import { Router } from 'backbone';
 import Regions from './regions.js';
+import Scroll from './lib/Scroll.js';
 import PageManager from './utils/PageManager.js';
 
 import NTSCPage from './views/pages/NTSCPage.js';
@@ -15,32 +16,37 @@ const ApplicationRouter = Router.extend({
 		'about': '_about',
 		'articles/': '_articles',
 		'articles/:category/': '_articles',
-		'articles/:category/:slug': '_article'
+		'articles/:category/:slug': '_article',
+		'articles/:category/:slug/': '_article',
 	},
 
 	_home:function () {
 		this._getElementFromRoute('ntsc')
-			.then(el => Regions.main.show(NTSCPage, {el, scrollToSection: '.js-cover'}));	
+			.then(el => Regions.main.show(NTSCPage, {el}), this._scrollToSection('.js-cover'));	
 	},
 
 	_ntsc: function () {
 		this._getElementFromRoute('ntsc')
-			.then(el => Regions.main.show(NTSCPage, {el, scrollToSection: '.js-page'}));
+			.then(el => Regions.main.show(NTSCPage, {el}), this._scrollToSection('.js-page'));
 	},
 
 	_about: function () {
 		this._getElementFromRoute('about')
-			.then(el => Regions.main.show(AboutPage, {el}));	
+			.then(el => Regions.main.show(AboutPage, {el}), this._scrollToSection('.js-page'));	
 	},
 
 	_articles: function (category) {
-		this._getElementFromRoute('articles', {forceRefresh: true})
-			.then(el => Regions.main.show(ArticlesPage, {el, category}));	
+		this._getElementFromRoute('articles')
+			.then(el => Regions.main.show(ArticlesPage, {el, category}), this._scrollToSection('.js-page'));
 	},
 
 	_article: function (category, slug) {
-		this._getElementFromRoute('article')
-			.then(el => Regions.main.show(ArticlePage, {el}));	
+		this._getElementFromRoute(`articles/${category}/${slug}`, {forceRefresh: true})
+			.then(el => Regions.main.show(ArticlePage, {el}), this._scrollToSection('.js-page'));
+	},
+
+	_scrollToSection: function(selector) {
+		Scroll.scrollToElement(document.querySelector(selector));
 	},
 
 	_getElementFromRoute: function(slug, options) {

@@ -13,10 +13,17 @@ const ApplicationView = View.extend({
 	},
 
 	events: {
-		'click [href^="/"]': '_routeClickHandler'
+		'click [href^="/"]': '_routeClickHandler',
+		'click [href^="http"]': '_routeClickHandler'
 	},
 
 	_routeClickHandler: function (e) {
+
+		const isDev = window.location.hostname.indexOf('localhost') == 0 && e.target.hostname.indexOf('71p') === 0;
+		
+		if (!isDev && e.target.hostname !== window.location.hostname)
+			return;
+
 		e.preventDefault();
 		Backbone.history.navigate(e.target.pathname, { trigger: true });
 	}
