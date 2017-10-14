@@ -6,7 +6,8 @@ export default class Region {
 	}
 
 	show(NextView, options) {
-		if (this._currentView && this._currentView.constructor === NextView) {
+		options = options || {};
+		if (!options.forceRefresh && this._currentView && this._currentView.constructor === NextView) {
 			if (isFunction(this._currentView.updateData)) {
 				this._currentView.updateData(options);
 			}

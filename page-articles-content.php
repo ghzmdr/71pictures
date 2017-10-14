@@ -10,7 +10,7 @@
 		</h5>
 	</header>
 
-	<div class="article-selector">
+	<div class="article-selector js-articles-selector">
 		<ul class="list list--horizontal article-selector__types">
 			<li class="list-item article-selector__type" data-article-type="all">
 				<a href="/articles/">All</a>

@@ -1,10 +1,11 @@
-import { View } from '../../lib/View';
+import { View, initializeComponents } from '../../lib/View';
 import ScrollAwareView from '../../helpers/ScrollAwareView';
 import Size from '../../lib/Size';
 import { offsetTop } from '../../utils/DOM';
 import { TweenLite } from 'gsap';
-import Carousel from '../components/Carousel';
-import ParallaxPoster from '../components/ParallaxPoster';
+
+import Project from '../articles/Project';
+import Blog from '../articles/Blog';
 
 const AboutPage = View.extend({
 
@@ -15,10 +16,9 @@ const AboutPage = View.extend({
 	},
 
 	components: {
-
-		carousel: {selector: '.js-carousel', type: Carousel}
-
-	},	
+		project: {selector: '.js-project-article', type: Project},
+		blog: {selector: '.js-blog-article', type: Blog}
+	},
 
 	initialize: function (options) {
 		Object.assign(this, ScrollAwareView);
@@ -29,10 +29,6 @@ const AboutPage = View.extend({
 		TweenLite.to(this.ui.title, 0.6, {opacity: 1, delay: 0.2});
 		TweenLite.from(this.ui.title, 0.6, {y: '20%', delay: 0.1, ease: Circ.easeOut});	
 		TweenLite.to(this.ui.subtitle, 0.8, {opacity: 1, delay: 0.8});
-	},
-
-	carouselVisible: function(carousel) {
-		TweenLite.to(carousel, 0.8, {opacity: 1, delay: 0.3});
 	},
 
 	transitionIn() {

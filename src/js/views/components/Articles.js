@@ -3,7 +3,8 @@ import Size from '../../lib/Size';
 import { TweenLite, TimelineLite } from 'gsap';
 import { bindAll } from 'underscore';
 import ArticlesCollection from '../../data/ArticlesCollection';
-import Article from './Article';
+import ArticleExcerpt from './ArticleExcerpt';
+
 
 const Articles = View.extend({
 	ui: {
@@ -13,6 +14,7 @@ const Articles = View.extend({
 	templates: {
 		article: 'article'
 	},
+
 
 	initialize: function () {
 
@@ -32,7 +34,7 @@ const Articles = View.extend({
 		if (!this._isInitialized) return;
 
 		this.transitionOutArticles()
-				.then(this.swapArticles);
+			.then(this.swapArticles);
 
 	},
 
@@ -57,7 +59,7 @@ const Articles = View.extend({
 
 		this.components.articles = [];
 
-		this.currentModels.forEach(model => this.components.articles.push(new Article({model, template: this.templates.article})))
+		this.currentModels.forEach(model => this.components.articles.push(new ArticleExcerpt({model, template: this.templates.article})))
 		this.components.articles.forEach(a => {
 			this.ui.list.appendChild(a.el);
 			a.transitionIn();

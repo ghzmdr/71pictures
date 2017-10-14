@@ -1,17 +1,16 @@
-.page-articles {
+.page-article {
 
 	padding-top: 5rem;
 
 	.page__title {
 		font-size: 2.4rem;
-		margin-bottom: 1.4rem;
+		margin-bottom: 1rem;
 		margin-left: 0.2rem;
 	}
 
 	@include break-wide {	
-		.page__title {
-			font-size: 5rem;
-			margin-bottom: 4rem;
+		.page__header {
+			margin-bottom: 3rem;
 		}
 	}
 

@@ -41,5 +41,6 @@
 
 .main-navigation.is-fixed {
 	transition: background 0.2s ease-in;
-	background: linear-gradient(to bottom, black 94%, transparent 100%);
+	background: $color-black;
+	// background: linear-gradient(to bottom, black 94%, transparent 100%);
 }

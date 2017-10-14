@@ -2,6 +2,7 @@ import { View } from '../../lib/View';
 import ScrollAwareView from '../../helpers/ScrollAwareView';
 import { TweenLite } from 'gsap';
 import Articles from '../components/Articles';
+import StickyElement from '../components/StickyElement';
 
 const ArticlesPage = View.extend({
 
@@ -13,6 +14,10 @@ const ArticlesPage = View.extend({
 
 	components: {
 
+		articlesSelector: {
+			selector: '.js-articles-selector', 
+			type: StickyElement, options: {triggerTopOffset:-1.7}
+		},
 		articles: {selector: '.js-articles', type: Articles}
 
 	},	

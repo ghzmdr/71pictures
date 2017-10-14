@@ -1,0 +1,18 @@
+.blog-article {
+	padding: 3rem 1rem 0;
+
+	section {
+		width: 100%;
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	@include break-wide {
+		padding-top: 3rem;
+	}
+}
+
+.blog-article__content {
+	font-size: 1.2rem;
+	color: white;
+}

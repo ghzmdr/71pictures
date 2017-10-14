@@ -18,14 +18,15 @@ const ApplicationView = View.extend({
 	},
 
 	_routeClickHandler: function (e) {
+		const target = e.delegateTarget || e.target;
 
-		const isDev = window.location.hostname.indexOf('localhost') == 0 && e.target.hostname.indexOf('71p') === 0;
+		const isDev = window.location.hostname.indexOf('localhost') == 0 && target.hostname.indexOf('71p') === 0;
 		
-		if (!isDev && e.target.hostname !== window.location.hostname)
+		if (!isDev && target.hostname !== window.location.hostname)
 			return;
 
 		e.preventDefault();
-		Backbone.history.navigate(e.target.pathname, { trigger: true });
+		Backbone.history.navigate(target.pathname, { trigger: true });
 	}
 })
 

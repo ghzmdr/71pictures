@@ -1,26 +1,45 @@
+.article-selector {
+	height: 2.5rem;
+}
+
 .article-selector__types {
 	display: block;
 	width: 100%;
-	border: 1px solid $color-white;
+	// border: 1px solid $color-white;
 }
 
 .article-selector__types {
 	width: 100%;
 	text-align: center;
+	height: 2.5rem;
 }
 
 .article-selector__type {
 	font-size: 1.2rem;
 	color: $color-white;
-	padding: 0.4rem 1.2rem;
-	border-right: 1px solid $color-white;
+	padding: 0 0.6rem;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	// border-right: 1px solid $color-white;
+
+	@include break-narrow {
+		padding: 0 1.2rem;
+	}
 
 	&:first-child {
-		border-left: 1px solid $color-white;
+		// border-left: 1px solid $color-white;
 	}
 
 	a {
 		text-decoration: none;
 		color: inherit;
 	}
+}
+
+.article-selector.is-fixed .article-selector__types {
+	position: fixed;
+	top: $navbar-height;
+	left: 0;
+	background-color: $color-black;
+	z-index: 2;
 }

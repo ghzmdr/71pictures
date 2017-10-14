@@ -1,7 +1,11 @@
 .articles {
 	width: 100%;
 	min-height: 100vh;
-	padding-top: 6rem;
+	padding-top: 3rem;
+	
+	@include break-narrow {
+		padding-top: 6rem;		
+	}
 }
 
 .articles__list {
