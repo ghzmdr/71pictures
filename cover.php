@@ -14,7 +14,7 @@
 		<?php } ?>
 
 		<div class="cover__logo">
-			<?php include 'assets/img/logo-with-text.svg' ?>
+			<?php include 'assets/svg/logo-with-text.svg' ?>
 		</div>
 	</div>
 

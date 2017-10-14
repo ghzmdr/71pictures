@@ -5,8 +5,6 @@ import { offsetTop } from '../../utils/DOM';
 
 const StickyElement = View.extend({
 	initialize: function(options) {
-
-		console.log('opt', options)
 		this._triggerTopOffset = options.triggerTopOffset || 0; //in percentages of element height
 	},
 

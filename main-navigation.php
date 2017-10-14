@@ -1,6 +1,6 @@
 <nav class="main-navigation js-main-navigation">
 	<a class="main-navigation__logo" href="/">
-		<?php include 'assets/img/logo.svg' ?>
+		<?php include 'assets/svg/logo.svg' ?>
 	</a>
 	
 	<?php $nav_links = get_field('nav_links', 'option'); ?>

@@ -32,13 +32,7 @@
 			
 		</div>
 		<script type="text/template" data-template="article">
-			<div class="article" data-id="<%= id %>">
-				<h3><%= title.rendered %></h3>
-				<p>
-					<%= excerpt.rendered %>
-				</p>
-				<a href="<%= link %>">Read more</a>
-			</div>
+			<?php include 'parts/templates/article-excerpt.php' ?>
 		</script>
 	</section>
 
