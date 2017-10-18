@@ -11,8 +11,18 @@
 	@include break-narrow {	
 		.page__header {
 			margin-bottom: 3rem;
-			padding: 0;
-			max-width: 60rem;
+			padding: 0 2rem;
+			// max-width: 60rem;
+		}
+	}
+	
+	@include break-wide {	
+		padding-top: 15rem;
+		
+		.page__title {
+			width: 100%;
+			text-align: center;
+			font-size: 8rem;
 		}
 	}
 

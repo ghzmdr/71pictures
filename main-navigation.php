@@ -2,7 +2,7 @@
 	<a class="main-navigation__logo" href="/">
 		<?php include 'assets/svg/logo.svg' ?>
 	</a>
-	
+	<div class="main-navigation__background"></div>
 	<?php $nav_links = get_field('nav_links', 'option'); ?>
 	<?php if($nav_links) { ?>
 	<ul class="list list--horizontal main-navigation__items">

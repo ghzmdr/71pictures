@@ -12,7 +12,19 @@
 	z-index: 2;
 
 	@include v-align;
-	transition: background 0.2s ease-out;
+}
+.main-navigation__background {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: block;
+	transform: translateY(-100%);
+	opacity: 0;
+	background-color: $color-black;
+	transition: opacity 0.15s 0.05s, transform 0.2s ease-out;
+	z-index: -1;
 }
 
 .main-navigation__logo {
@@ -39,8 +51,8 @@
 	text-decoration: none;
 }
 
-.main-navigation.is-fixed {
-	transition: background 0.2s ease-in;
-	background: $color-black;
+.main-navigation.is-fixed .main-navigation__background {
+	opacity: 1;
+	transform: translateY(0%);
 	// background: linear-gradient(to bottom, black 94%, transparent 100%);
 }

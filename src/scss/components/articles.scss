@@ -32,6 +32,10 @@
 		font-size: 1.2rem;
 		color: $color-white;
 		margin-bottom: 2rem;
+
+		@include break-wide {
+			max-width: 36rem;
+		}
 	}
 
 	h3 {
@@ -39,7 +43,7 @@
 		letter-spacing: 0.03em;
 		font-size: 3rem;
 		color: $color-white;
-		margin: 0 0 1rem;
+		margin: 0 0 1.5rem;
 	}
 
 	a {

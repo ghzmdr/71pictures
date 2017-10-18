@@ -38,8 +38,15 @@
 
 .article-selector.is-fixed .article-selector__types {
 	position: fixed;
-	top: $navbar-height;
+	top: $navbar-height - 1.25rem;
 	left: 0;
 	background-color: $color-black;
 	z-index: 2;
+	
+	@include break-wide {
+		left: 50%;
+		top: 1.25rem;
+		width: auto;
+		transform: translateX(-50%);
+	}
 }

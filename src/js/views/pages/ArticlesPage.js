@@ -16,7 +16,7 @@ const ArticlesPage = View.extend({
 
 		articlesSelector: {
 			selector: '.js-articles-selector', 
-			type: StickyElement, options: {triggerTopOffset:-1.7}
+			type: StickyElement, options: {triggerTopOffset:-1.4}
 		},
 		articles: {selector: '.js-articles', type: Articles}
 

@@ -32,7 +32,8 @@ const MainNavigation = View.extend({
 	},
 
 	_computeTop: function () {
-		this._originalTop = Size.innerHeight() - this.el.clientHeight;
+		this._originalTop = Size.innerHeight() - 1.3 * this.el.clientHeight;
+
 	},
 
 	_resizeHandler: function () {
