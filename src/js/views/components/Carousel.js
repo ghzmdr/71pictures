@@ -15,12 +15,22 @@ const Carousel = View.extend({
 
 	events: {
 		'click .js-carousel-prev': '_buttonPrevClickHandler',
-		'mouseenter .js-carousel-prev': '_buttonPrevMouseEnterHandler',
-		'mouseleave .js-carousel-prev': '_buttonPrevMouseLeaveHandler',
+		'click .js-carousel-next': '_buttonNextClickHandler'
+	},
 
-		'click .js-carousel-next': '_buttonNextClickHandler',
-		'mouseenter .js-carousel-next': '_buttonNextMouseEnterHandler',
-		'mouseleave .js-carousel-next': '_buttonNextMouseLeaveHandler'	
+	onClose: function() {
+		
+		this._removeListeners();
+		
+	},
+
+	initialize: function() {
+		bindAll(this, 
+			'_buttonPrevMouseEnterHandler',
+			'_buttonPrevMouseLeaveHandler',
+			'_buttonNextMouseEnterHandler',
+			'_buttonNextMouseLeaveHandler'
+		)
 	},
 
 	onInitialized: function () {
@@ -33,6 +43,18 @@ const Carousel = View.extend({
 
 	_setListeners: function () {
 		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
+		this.ui.buttonPrev.addEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
+		this.ui.buttonPrev.addEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
+		this.ui.buttonNext.addEventListener('mouseenter', this._buttonNextMouseEnterHandler);
+		this.ui.buttonNext.addEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
+	},
+	_removeListeners: function() {
+
+		this.ui.buttonPrev.removeEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
+		this.ui.buttonPrev.removeEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
+		this.ui.buttonNext.removeEventListener('mouseenter', this._buttonNextMouseEnterHandler);
+		this.ui.buttonNext.removeEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
+
 	},
 
 	_setSizes: function () {
@@ -44,7 +66,7 @@ const Carousel = View.extend({
 		if (this._currentIndex === this.ui.slides.length - 1) return;
 		
 		++this._currentIndex;
-		TweenLite.to(this.ui.slidePanel, 1.4, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
+		TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
 		this._setPosition();
 	},
 
@@ -52,24 +74,25 @@ const Carousel = View.extend({
 		if (this._currentIndex === 0) return;
 
 		--this._currentIndex;
-		TweenLite.to(this.ui.slidePanel, 1.4, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
+		TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
 		this._setPosition();
 	},
 
 	_setPosition: function () {
 		if (this._currentIndex === 0) {
-			TweenLite.to(this.ui.buttonPrev, 0.3, {scaleX: 0, autoAlpha: 0});
+			TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-100%', autoAlpha: 0});
 		} else {
 			if (!this._isMouseOverButtonPrev) {
-				TweenLite.to(this.ui.buttonPrev, 0.3, {scaleX: 1, autoAlpha: 0.5});
+				TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-30%', autoAlpha: 0.5});
 			}
 		}
 
 		if (this._currentIndex === this.ui.slides.length - 1) {
-			TweenLite.to(this.ui.buttonNext, 0.3, {scaleX: 0, autoAlpha: 0});
+			TweenLite.to(this.ui.buttonNext, 0.3, {x:' 100%', autoAlpha: 0});
 		} else {
 			if (!this._isMouseOverButtonNext) {
-				TweenLite.to(this.ui.buttonNext, 0.3, {scaleX: 1, autoAlpha: 0.5});
+				console.log('asd')
+				TweenLite.to(this.ui.buttonNext, 0.3, {x:' 30%', autoAlpha: 0.5});
 			}
 		}
 	},
@@ -87,31 +110,23 @@ const Carousel = View.extend({
 	},
 
 	_buttonPrevMouseEnterHandler: function () {
-		debugger
 		this._isMouseOverButtonPrev = true;
-		debugger
-		TweenLite.to(this.ui.buttonPrev, 0.4, {scaleX: 1.3, opacity: 1});
+		TweenLite.to(this.ui.buttonPrev, 0.4, {x:' 0%', opacity: 1});
 	},
 
 	_buttonPrevMouseLeaveHandler: function () {
-		debugger
 		this._isMouseOverButtonPrev = false;
-		debugger
-		TweenLite.to(this.ui.buttonPrev, 0.4, {scaleX: 1, opacity: 0.5});
+		TweenLite.to(this.ui.buttonPrev, 0.4, {x: '-30%', opacity: 0.5});
 	},
 
 	_buttonNextMouseEnterHandler: function () {
-		debugger
 		this._isMouseOverButtonNext = true;
-		debugger
-		TweenLite.to(this.ui.buttonNext, 0.4, {scaleX: 1.3, opacity: 1});
+		TweenLite.to(this.ui.buttonNext, 0.4, {x:' 0%', opacity: 1});
 	},
 
 	_buttonNextMouseLeaveHandler: function () {
-		debugger
 		this._isMouseOverButtonNext = false;
-		debugger
-		TweenLite.to(this.ui.buttonNext, 0.4, {scaleX: 1, opacity: 0.5});
+		TweenLite.to(this.ui.buttonNext, 0.4, {x:' 30%', opacity: 0.5});
 	}
 });
 
