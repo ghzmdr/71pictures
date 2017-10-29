@@ -5,7 +5,7 @@
 	<div class="main-navigation__background"></div>
 	<?php $nav_links = get_field('nav_links', 'option'); ?>
 	<?php if($nav_links) { ?>
-	<ul class="list list--horizontal main-navigation__items">
+	<ul class="list list--horizontal main-navigation__items">		
 		<?php foreach ($nav_links as $nav_link) { 
 			$slug = $nav_link['slug'];
 			$label = $nav_link['label'];

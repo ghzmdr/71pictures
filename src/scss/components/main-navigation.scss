@@ -1,5 +1,5 @@
 .main-navigation {
-	position: absolute;
+	position: fixed;
 
 	width: 100%;
 	height: $navbar-height;
@@ -21,7 +21,6 @@
 	bottom: 0;
 	display: block;
 	transform: translateY(-100%);
-	opacity: 0;
 	background-color: $color-black;
 	transition: opacity 0.15s 0.05s, transform 0.2s ease-out;
 	z-index: -1;

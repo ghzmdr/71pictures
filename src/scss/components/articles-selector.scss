@@ -1,5 +1,8 @@
 .article-selector {
 	height: 2.5rem;
+
+	//defaults
+	opacity: 0;
 }
 
 .article-selector__types {
@@ -33,20 +36,5 @@
 	a {
 		text-decoration: none;
 		color: inherit;
-	}
-}
-
-.article-selector.is-fixed .article-selector__types {
-	position: fixed;
-	top: $navbar-height - 1.25rem;
-	left: 0;
-	background-color: $color-black;
-	z-index: 2;
-	
-	@include break-wide {
-		left: 50%;
-		top: 1.25rem;
-		width: auto;
-		transform: translateX(-50%);
 	}
 }

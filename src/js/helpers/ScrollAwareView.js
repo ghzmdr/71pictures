@@ -4,6 +4,12 @@ import { Events } from 'backbone';
 import { isArray, isFunction } from 'underscore';
 import { offsetTop } from '../utils/DOM';
 
+/**	
+ *  Mixin which adds *Visible callbacks, where * is the name of an element 
+ *	as assigned	in the view's UI object.
+ *  Exotic...  justfforffunnn
+ */
+
 export default {
 	initScrollUI: function() {
 		this.__uiKeys = Object.keys(this.ui);
