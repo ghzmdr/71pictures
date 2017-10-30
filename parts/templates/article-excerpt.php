@@ -1,12 +1,13 @@
 <div class="article-excerpt" data-id="<%= id %>">
-	<h3><%= title.rendered %></h3>
+	<a href="<%= link %>"><h3><%= title.rendered %></h3></a>
+
 	<p>
 		<%= excerpt.rendered %>
 	</p>
 	<a href="<%= link %>">Read more</a>
 	<!-- <div class="article-excerpt__cover">
-		
-		<svg viewBox="0 0 112.29237 107.77274" preserveAspectRatio="none" 
+
+		<svg viewBox="0 0 112.29237 107.77274" preserveAspectRatio="none"
 			xmlns="http://www.w3.org/2000/svg"
 			xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>
