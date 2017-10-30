@@ -35,6 +35,7 @@ function seventyone_pictures_setup() {
 	 * provide it for us.
 	 */
 	add_theme_support( 'title-tag' );
+	add_theme_support( 'post-thumbnails' );
 
 	acf_add_options_page(array(
 		'page_title' 	=> 'Site Options',

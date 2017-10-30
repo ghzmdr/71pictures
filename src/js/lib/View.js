@@ -23,6 +23,21 @@ const _initializeView = function () {
 
 	}
 
+	if (this.templates) {
+
+		var templates = Object.assign({}, this.templates);
+
+		for (var k in this.templates) {
+
+			templates[k] = this.el.querySelector('[data-template=' + templates[k] + ']' ).innerHTML;
+
+		}
+		
+		this.templates = templates;
+
+	}
+
+
 	if (this.components) {
 
 		var components = Object.assign({}, this.components);
@@ -36,6 +51,8 @@ const _initializeView = function () {
 	}
 
 	if (isFunction(this.onInitialized)) this.onInitialized();
+	this.__isInitialized = true;
+	this.trigger('initialized');
 }
 
 const _initializeComponents = function (component) {
@@ -61,7 +78,7 @@ const _attachComponents = function() {
 					this.components[k][i].trigger('attached');
 				}
 			} else {
-				this.components[k].trigger('attached');		
+				if (this.components[k]) this.components[k].trigger('attached');		
 			}
 		}
 	}
@@ -95,14 +112,14 @@ const View = {
 
 			if(isFunction(this.onClose)) this.onClose();
 			
-			if(this.components) {
+			if(this.__isInitialized && this.components) {
 				for (var k in this.components) {
 					if (isArray(this.components[k])) {
 						for (var i = 0; i < this.components[k].length; ++i) {
 							this.components[k][i].remove();
 						}
 					} else {
-						this.components[k].remove();
+						if (this.components[k]) this.components[k].remove();
 					}
 				}
 			}

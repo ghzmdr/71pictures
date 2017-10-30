@@ -15,10 +15,8 @@ const BackgroundVideo = View.extend({
 		bindAll(this, '_tickHandler');
 
 		this._maskTweenObj = {
-			rx: 0, ry: 0, 
-			color1: 'rgb(0, 255, 255)',
-			color2: 'rgb(255, 0, 255)',
-			color3: 'rgb(255, 255, 0)'
+			stopTransparent: 0,
+			stopBlack: 1
 		};
 
 		this._skippedTicks = 0;
@@ -93,23 +91,14 @@ const BackgroundVideo = View.extend({
 
 	_getCurrentMaskFrame: function () {
 
-		this._ctx.fillStyle = this._maskTweenObj.color1;
-		this._ctx.strokeWidth = 0;
-		this._ctx.beginPath();
-		this._ctx.arc(this._width * (2/3), this._height * (2/3), this._width * this._maskTweenObj.rx, this._height * this._maskTweenObj.ry, 0, Math.PI*2, true);
-		this._ctx.closePath();
-		this._ctx.fill();
-
-		this._ctx.fillStyle = this._maskTweenObj.color2;
-		this._ctx.beginPath();
-		this._ctx.arc(this._width / 3, this._height / 3, (this._width / 2) * this._maskTweenObj.rx, (this._height /2) * this._maskTweenObj.ry, 0, Math.PI*2, true);
-		this._ctx.closePath();
-		this._ctx.fill();
-
-		this._ctx.fillStyle = this._maskTweenObj.color3;
-		this._ctx.beginPath();
-		this._ctx.arc(this._width / 7, this._height * (8/10), (this._width / 3) * this._maskTweenObj.rx, (this._height /3) * this._maskTweenObj.ry, 0, Math.PI*2, true);
-		this._ctx.closePath();
+		var radius = Math.max(this._width, this._height)/2;
+		var gradient = this._ctx.createRadialGradient(this._width/2, this._height/2, 0, this._width/2, this._height/2, radius);
+      
+      	gradient.addColorStop(this._maskTweenObj.stopTransparent, 'rgba(0, 0, 0, 0.000)');
+    	gradient.addColorStop(this._maskTweenObj.stopBlack, 'rgba(0, 0, 0, 1.000)');
+    	
+		this._ctx.fillStyle = gradient;
+		this._ctx.fillRect(0, 0, this._width, this._height)
 		this._ctx.fill();
 
 		return this.ui.underwaterCanvas;
@@ -121,20 +110,10 @@ const BackgroundVideo = View.extend({
 
 		const maskTimeline = new TimelineLite({paused: true, ease: Power0.easeNone});
 		maskTimeline.fromTo(this._maskTweenObj, 1, {
-			rx: 0, ry: 0,
+			stopBlack: 1
 		}, {
-			rx: 1.4, ry: 1.4,
+			stopBlack: 0
 		});
-
-		maskTimeline.fromTo(this._maskTweenObj, 1, {
-			color1: 'rgb(0, 255, 255)',
-			color2: 'rgb(255, 0, 255)',
-			color3: 'rgb(255, 255, 0)'
-		}, {
-			color1: 'rgb(0, 0, 0)',
-			color2: 'rgb(0, 0, 0)',
-			color3: 'rgb(0, 0, 0)'
-		}, 0);
 
 		return this._maskTimeline = maskTimeline;
 	},
@@ -158,7 +137,7 @@ const BackgroundVideo = View.extend({
 			this._shown = true;
 		}
 
-		var progress = Math.min(Math.max(Scroll.scrollY() / Size.innerHeight(), 0), 1);
+		var progress = Math.min(Math.max(Scroll.Y() / Size.innerHeight(), 0), 1);
 		this.progress(progress);
 
 	},

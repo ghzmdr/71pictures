@@ -1,0 +1,9 @@
+.title-appear {
+	display: inline-block;
+	position: relative;
+
+	&__content {
+		position: relative;
+		display: inline-block;
+	}
+}

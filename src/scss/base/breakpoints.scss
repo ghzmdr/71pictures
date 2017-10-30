@@ -1,0 +1,17 @@
+@mixin break-wide {
+	@media (min-width: 1280px) {
+		@content;
+	}
+}
+
+@mixin break-narrow {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin break-tall {
+	@media (min-height: 840px) {
+		@content;
+	}
+}

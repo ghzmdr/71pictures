@@ -14,15 +14,90 @@ html, body, #seventyonepictures, #main-region {
 	border: none;
 	cursor: hand;
 	cursor: pointer;
+	background: none;
 }
 
 #main-region {
 	position: relative;
+	width: 100%;
+	box-shadow: 0 -1.8rem 6.7rem 2.5rem black;
 }
 
 #seventyonepictures {
 	@include font-primary();
 	@include text-rendering();
-	
+
 	line-height: initial;
+}
+
+.section {
+	max-width: 1280px;
+	margin: 0 auto;
+	margin-bottom: 10vh;
+
+	&--wide {
+		max-width: none;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+}
+
+.list {
+	font-size: 0;
+}
+
+.list, .list-item {
+
+	appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-mz-appearance: none;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+
+}
+
+.list--horizontal .list-item {
+	display: inline-block;
+}
+
+.relative-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+a.link {
+    color: #dadada;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+
+    &:after {
+        content: '';
+        bottom: 1px;
+        left: 0;
+        right: 0;
+        display: block;
+        height: 1px;
+
+        transition: background-color 0.3s, transform 0.3s;
+        background-color: currentColor;
+        transform-origin: center center;
+    }
+
+    transition: color 0.3s;
+
+    &:hover {
+        color: $color-white;
+        &:after {
+            transform: scaleX(0.7);
+        }
+    }
+
 }

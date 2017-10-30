@@ -6,43 +6,56 @@ export default class Region {
 	}
 
 	show(NextView, options) {
-		if (this._currentView && this._currentView.constructor === NextView) return;
+		options = options || {};
+		if (!options.forceRefresh && this._currentView && this._currentView.constructor === NextView) {
+			if (isFunction(this._currentView.updateData)) {
+				this._currentView.updateData(options);
+			}
+			return this._currentView;
+		}
 
 		var nextView = new NextView(options);
+		var prevView = this._currentView;
+		this._currentView = nextView;
 		var isAttached = false;
+
 		const attach = () => {
-			if (!isAttached) {
-				isAttached = true;
-				this.el.appendChild(nextView.el);
-				nextView.trigger('attached');
+			if (isAttached) return;
+			isAttached = true;
+
+			this.el.appendChild(nextView.el);
+			nextView.trigger('attached');
+		}
+
+		const immediateTransitionIn = () => {
+			if (isFunction(nextView.immediateTransitionIn)) {
+				attach();
+				nextView.immediateTransitionIn();
 			}
 		}
 
 		const transitionIn = () => {
+			attach();
 			if (isFunction(nextView.transitionIn)) nextView.transitionIn();
-			this._currentView = nextView;
 		}
 
-		const transitionOutCallback = () => {
-
-		 	this._currentView.remove();
-
-			attach();
+		const disposePrevView = () => {
+		 	prevView.remove();
 			transitionIn();
 		}
 
-		if (isFunction(nextView.immediateTransitionIn)) {
-			attach();
-			nextView.immediateTransitionIn();
-		}		
+		immediateTransitionIn();
 
-		if (this._currentView) {
-			if (isFunction(this._currentView.transitionOut)) {
-				this._currentView.transitionOut(transitionOutCallback);
-			} else transitionOutCallback();
+		if (prevView) {
+			if (isFunction(prevView.transitionOut)) {
+				prevView.transitionOut(disposePrevView);
+			} else {
+				disposePrevView();
+			}
 		} else {			
-			attach();
 			transitionIn();
 		}
+
+		return this._currentView;
 	}
 }

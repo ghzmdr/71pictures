@@ -34,6 +34,14 @@ class ParallaxContainer {
 		TweenLite.ticker.removeEventListener('tick', this._tickHandler);
 	}
 
+	enable() {
+		this._isEnabled = true;
+	}
+
+	disable() {
+		this._isEnabled = false;
+	}
+
 	_setSizes() {
 		var boundingRect = this.el.getBoundingClientRect();
 
@@ -96,6 +104,7 @@ class ParallaxContainer {
 	}
 	
 	_tickHandler() {
+		if (!this._isEnabled) return;
 		if (this._pendingUpdate && this._isMouseOver) {
 			this._pendingUpdate = false;			
 			this.reposition();
@@ -103,11 +112,13 @@ class ParallaxContainer {
 	}
 
 	_mouseLeaveHandler() {
+		if (!this._isEnabled) return;
 		this._isMouseOver = false;
 		this._end();
 	}
 	
 	_mouseMoveHandler(e) {
+		if (!this._isEnabled) return;
 		this._mouse = {x: e.clientX - this._left, y: e.clientY - this._top};
 		
 		// console.log(`[ParallaxContainer] - Mouse: X${this._mouse.x} Y${this._mouse.y}`);

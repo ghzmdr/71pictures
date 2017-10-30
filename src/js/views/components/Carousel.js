@@ -1,5 +1,6 @@
 import { View } from '../../lib/View';
 import Size from '../../lib/Size';
+import Hammer from 'hammerjs';
 import { TweenLite, TimelineLite } from 'gsap';
 import { bindAll } from 'underscore';
 
@@ -15,12 +16,24 @@ const Carousel = View.extend({
 
 	events: {
 		'click .js-carousel-prev': '_buttonPrevClickHandler',
-		'mouseenter .js-carousel-prev': '_buttonPrevMouseEnterHandler',
-		'mouseleave .js-carousel-prev': '_buttonPrevMouseLeaveHandler',
+		'click .js-carousel-next': '_buttonNextClickHandler'
+	},
 
-		'click .js-carousel-next': '_buttonNextClickHandler',
-		'mouseenter .js-carousel-next': '_buttonNextMouseEnterHandler',
-		'mouseleave .js-carousel-next': '_buttonNextMouseLeaveHandler'	
+	onClose: function() {
+		
+		this._removeListeners();
+		
+	},
+
+	initialize: function() {
+		bindAll(this, 
+			'_buttonPrevMouseEnterHandler',
+			'_buttonPrevMouseLeaveHandler',
+			'_buttonNextMouseEnterHandler',
+			'_buttonNextMouseLeaveHandler',
+			'_swipeLeftHandler',
+			'_swipeRightHandler'
+		)
 	},
 
 	onInitialized: function () {
@@ -32,7 +45,30 @@ const Carousel = View.extend({
 	},
 
 	_setListeners: function () {
+
+		const hammerOptions = {
+			dragLockToAxis: true,
+			dragBlockHorizontal: true
+		};
+
+		this._hammer = new Hammer(this.ui.slidePanel, hammerOptions);
+		this._hammer.on('swipeleft', this._swipeLeftHandler);
+		this._hammer.on('swiperight', this._swipeRightHandler);
+
 		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
+		this.ui.buttonPrev.addEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
+		this.ui.buttonPrev.addEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
+		this.ui.buttonNext.addEventListener('mouseenter', this._buttonNextMouseEnterHandler);
+		this.ui.buttonNext.addEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
+	},
+
+	_removeListeners: function() {
+
+		this.ui.buttonPrev.removeEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
+		this.ui.buttonPrev.removeEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
+		this.ui.buttonNext.removeEventListener('mouseenter', this._buttonNextMouseEnterHandler);
+		this.ui.buttonNext.removeEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
+
 	},
 
 	_setSizes: function () {
@@ -44,7 +80,7 @@ const Carousel = View.extend({
 		if (this._currentIndex === this.ui.slides.length - 1) return;
 		
 		++this._currentIndex;
-		TweenLite.to(this.ui.slidePanel, 1.4, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
+		TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
 		this._setPosition();
 	},
 
@@ -52,24 +88,32 @@ const Carousel = View.extend({
 		if (this._currentIndex === 0) return;
 
 		--this._currentIndex;
-		TweenLite.to(this.ui.slidePanel, 1.4, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
+		TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
 		this._setPosition();
+	},
+
+	_swipeLeftHandler: function() {
+		this.next();
+	},
+
+	_swipeRightHandler: function() {
+		this.prev();
 	},
 
 	_setPosition: function () {
 		if (this._currentIndex === 0) {
-			TweenLite.to(this.ui.buttonPrev, 0.3, {scaleX: 0, autoAlpha: 0});
+			TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-100%', autoAlpha: 0});
 		} else {
 			if (!this._isMouseOverButtonPrev) {
-				TweenLite.to(this.ui.buttonPrev, 0.3, {scaleX: 1, autoAlpha: 0.5});
+				TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-30%', autoAlpha: 0.5});
 			}
 		}
 
 		if (this._currentIndex === this.ui.slides.length - 1) {
-			TweenLite.to(this.ui.buttonNext, 0.3, {scaleX: 0, autoAlpha: 0});
+			TweenLite.to(this.ui.buttonNext, 0.3, {x:' 100%', autoAlpha: 0});
 		} else {
 			if (!this._isMouseOverButtonNext) {
-				TweenLite.to(this.ui.buttonNext, 0.3, {scaleX: 1, autoAlpha: 0.5});
+				TweenLite.to(this.ui.buttonNext, 0.3, {x:' 30%', autoAlpha: 0.5});
 			}
 		}
 	},
@@ -88,22 +132,22 @@ const Carousel = View.extend({
 
 	_buttonPrevMouseEnterHandler: function () {
 		this._isMouseOverButtonPrev = true;
-		TweenLite.to(this.ui.buttonPrev, 0.4, {scaleX: 1.3, opacity: 1});
+		TweenLite.to(this.ui.buttonPrev, 0.4, {x:' 0%', opacity: 1});
 	},
 
 	_buttonPrevMouseLeaveHandler: function () {
 		this._isMouseOverButtonPrev = false;
-		TweenLite.to(this.ui.buttonPrev, 0.4, {scaleX: 1, opacity: 0.5});
+		TweenLite.to(this.ui.buttonPrev, 0.4, {x: '-30%', opacity: 0.5});
 	},
 
 	_buttonNextMouseEnterHandler: function () {
 		this._isMouseOverButtonNext = true;
-		TweenLite.to(this.ui.buttonNext, 0.4, {scaleX: 1.3, opacity: 1});
+		TweenLite.to(this.ui.buttonNext, 0.4, {x:' 0%', opacity: 1});
 	},
 
 	_buttonNextMouseLeaveHandler: function () {
 		this._isMouseOverButtonNext = false;
-		TweenLite.to(this.ui.buttonNext, 0.4, {scaleX: 1, opacity: 0.5});
+		TweenLite.to(this.ui.buttonNext, 0.4, {x:' 30%', opacity: 0.5});
 	}
 });
 

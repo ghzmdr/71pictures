@@ -1,29 +1,32 @@
+import Backbone from 'backbone';
 import { View } from '../lib/View';
-import Background from './components/Background';
-import Intro from './components/Intro';
+import Cover from './components/Cover';
+import MainNavigation from './components/MainNavigation';
+import ActionBar from './components/ActionBar';
 
 const ApplicationView = View.extend({
 
 	components: {
-		background: {selector: '.js-background', type: Background},
-		intro: {selector: '.js-intro', type: Intro}
+		mainNavigation: {selector: '.js-main-navigation', type: MainNavigation},
+		actionBar: {selector: '.js-action-bar', type: ActionBar},
+		cover: {selector: '.js-cover', type: Cover},
 	},
 
 	events: {
-		'click [href^="/"]': '_routeClickHandler'
-	},
-
-	onInitialized: function() {
-		this.transitionIn();
-	},
-
-	transitionIn: function () {
-		this.components.intro.transitionIn();
+		'click [href^="/"]': '_routeClickHandler',
+		'click [href^="http"]': '_routeClickHandler'
 	},
 
 	_routeClickHandler: function (e) {
+		const target = e.delegateTarget || e.target;
+
+		const isDev = window.location.hostname.indexOf('localhost') == 0 && target.hostname.indexOf('71p') === 0;
+		
+		if (!isDev && target.hostname !== window.location.hostname)
+			return;
+
 		e.preventDefault();
-		Backbone.history.navigate(e.target.pathname, { trigger: true });
+		Backbone.history.navigate(target.pathname, { trigger: true });
 	}
 })
 

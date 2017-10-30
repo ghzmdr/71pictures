@@ -33,12 +33,12 @@
 		bottom: 0;
 
 		width: 3rem;
-		background-color: rgba(white, 0.3);
+		background-color: rgba($color-white, 0.3);
 
 		transform-origin: top left;
 
 		//defaults
-		transform: scaleX(0);
+		transform: translateX(-100%);
 		opacity: 0;
 		visibility: hidden;
 	}
@@ -50,13 +50,13 @@
 		bottom: 0;
 
 		width: 3rem;
-		background-color: rgba(white, 0.3);
+		background-color: rgba($color-white, 0.3);
 
 		transform-origin: top right;
 		
 
 		//defaults
-		transform: scaleX(0);
+		transform: translateX(100%);
 		opacity: 0;
 		visibility: hidden;
 	}
