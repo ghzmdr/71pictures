@@ -5,7 +5,7 @@ import Scroll from '../../lib/Scroll';
 import { offsetTop } from '../../utils/DOM';
 
 const MainNavigation = View.extend({
-	
+
 	onInitialized: function () {
 		this._setListeners();
 		this._scrollHandler();
@@ -27,7 +27,6 @@ const MainNavigation = View.extend({
 	},
 
 	_showBackground: function() {
-		console.log('show')
 		if (this._isBgShown) return;
 		this._isBgShown = true;
 

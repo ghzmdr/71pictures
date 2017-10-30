@@ -1,43 +1,18 @@
-$link-c: rgb(46, 48, 107);
-
 .social-link {
-	position: relative;
 	display: inline-block;
-	width: 1.64rem;
-	height: 1.64rem;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid $color-text-light;
 	color: $color-text-light;
 	text-align: center;
 	text-decoration: none;
-
-	margin: 0 1rem;
-
-
 	@include v-align;
-	&:after {
-		content: '';
-		position: absolute;
 
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-
-		border-radius: 4px;
-		background-color: rgba(lighten($link-c, 30%), 0.1);
-		box-shadow: 0 0 2px 0.6rem rgba(112, 115, 194, 0.3);
-		
-		transition: opacity 0.2s, box-shadow 0.3s;
-		opacity: 0.8;
-	}
-
-	&:hover:after {
-		opacity: 1;
-		box-shadow: 0 0 0px 0.8rem rgba(112, 115, 194, 0.3);
-	}
+	margin: 0 0.3rem;
 }
 
 .social-link__icon {
 	vertical-align: middle;
-	fill: rgba(240, 240, 240, 0.8);
-	width: 0.9rem;
+	fill: white;
+	width: 1rem;
 }
