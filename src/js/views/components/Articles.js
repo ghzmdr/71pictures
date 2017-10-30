@@ -25,13 +25,7 @@ const Articles = View.extend({
 
 	},
 
-	onInitialized: function () {
-		this._isInitialized = true;
-		this._render();
-	},
-
 	_render: function () {
-		if (!this._isInitialized) return;
 
 		this.transitionOutArticles()
 			.then(this.swapArticles);

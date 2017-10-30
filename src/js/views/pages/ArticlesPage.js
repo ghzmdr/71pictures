@@ -2,22 +2,17 @@ import { View } from '../../lib/View';
 import ScrollAwareView from '../../helpers/ScrollAwareView';
 import { TweenLite } from 'gsap';
 import Articles from '../components/Articles';
-import StickyElement from '../components/StickyElement';
 
 const ArticlesPage = View.extend({
 
 	ui: {
 		title: '.js-page-title',
 		subtitle: '.js-page-subtitle',
-		carousel: '.js-carousel'
+		selector: '.js-articles-selector'
 	},
 
 	components: {
 
-		articlesSelector: {
-			selector: '.js-articles-selector', 
-			type: StickyElement, options: {triggerTopOffset:-1.4}
-		},
 		articles: {selector: '.js-articles', type: Articles}
 
 	},	
@@ -41,14 +36,7 @@ const ArticlesPage = View.extend({
 		TweenLite.to(this.ui.title, 0.6, {opacity: 1, delay: 0.2});
 		TweenLite.from(this.ui.title, 0.6, {y: '20%', delay: 0.1, ease: Circ.easeOut});	
 		TweenLite.to(this.ui.subtitle, 0.8, {opacity: 1, delay: 0.8});
-	},
-
-	carouselVisible: function(carousel) {
-		TweenLite.to(carousel, 0.8, {opacity: 1, delay: 0.3});
-	},
-
-	transitionIn() {
-		TweenLite.fromTo(this.el.children, 0.3, {opacity: 0}, {opacity: 1})
+		TweenLite.to(this.ui.selector, 0.5, {opacity: 1, delay: 0.7});
 	},
 
 	transitionOut(callback) {
