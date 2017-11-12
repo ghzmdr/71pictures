@@ -1,22 +1,16 @@
 <section class="cover js-cover" id="#cover">
 
-	<div class="cover__content">
-		<?php $cover = get_field('cover', 'option'); ?>
-		<?php if ($cover['video_enabled']) { ?>
-			<div class="background js-background">
-				<video autoplay loop muted src="<?php echo $cover['video'] ?>" class="js-video"></video>
-				<canvas class="js-canvas"></canvas>
-			</div>
-		<?php } ?>
+    <div class="cover__content">
+        <?php $cover = get_field('cover', 'option'); ?>
+        <div class="cover-background js-background">
+            <img class="cover-background__image" src="<?php echo $cover['image']; ?>" alt="">
+            <div class="cover-background__version">Version: 0.5.0</div>
+        </div>
 
-		<?php if (!$cover['video_enabled']) { ?>
-			<img class="cover__image js-image" src="<?php echo $cover['image']; ?>" alt="">
-		<?php } ?>
-
-		<div class="cover__logo">
-			<?php include 'assets/svg/logo-with-text.svg' ?>
-		</div>
-	</div>
+        <div class="cover__logo">
+            <?php include 'assets/svg/logo-with-text.svg' ?>
+        </div>
+    </div>
 
 </section>
 

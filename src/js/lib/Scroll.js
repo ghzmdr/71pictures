@@ -5,74 +5,90 @@ import Size from '../lib/Size';
 import { offsetTop } from '../utils/DOM';
 
 class Scroll {
-	constructor() {
-		extend(this, Events);
+    constructor() {
+        extend(this, Events);
 
-		bindAll(this, '_scrollHandler');
+        bindAll(this, '_scrollHandler');
 
-		this._trigger();
+        this._trigger();
 
-		window.addEventListener('scroll', this._scrollHandler, {passive: true});
-		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
-	}
+        window.addEventListener('scroll', this._scrollHandler, {passive: true});
+        this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
+    }
 
-	get _screensPerSecond() {
-		return 2;
-	}
+    get _screensPerSecond() {
+        return 2;
+    }
 
-	get Y() {
-		return window.scrollY;
-	}
+    get Y() {
+        return window.scrollY;
+    }
 
-	set Y(val) {
-		window.scrollTo(0, val); 
-	}
+    set Y(val) {
+        window.scrollTo(0, val);
+    }
 
-	scrollToElement(element, time) {
+    lock() {
+        this._lockScrollPosition = {x: window.scrollX, y: window.scrollY};
+        document.body.style.height = '100%';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+    }
 
-		var top = offsetTop(element);
-		this.scrollTo(top, time);
-	}
+    unlock() {
+        document.body.style.height = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
 
-	scrollTo(y, time) {
+        window.scrollX = this._lockScrollPosition.x;
+        window.scrollY = this._lockScrollPosition.y;
+    }
 
-		if (time === undefined) {
-			time = this._computeScrollTime(y);
-		}
+    scrollToElement(element, time) {
 
-		this._killScrollToTween();
-		var tweenData = {y: this.Y};
-		this._scrollToTween = TweenLite.to(tweenData, time, {y, onUpdate: () => this.Y = tweenData.y});
-	}
+        var top = offsetTop(element);
+        this.scrollTo(top, time);
+    }
 
-	_computeScrollTime(y) {
-		if (y === 0) y = 1;
-		let deltaY = Math.abs(this.Y - y);
-		let vh = Size.innerHeight();
-		let screens = deltaY / vh;
+    scrollTo(y, time) {
 
-		return Math.max(Math.min(1 / this._screensPerSecond * screens, 1.5), 0.25);
-	}
+        if (time === undefined) {
+            time = this._computeScrollTime(y);
+        }
 
-	_killScrollToTween() {
-		if (this._scrollToTween) {
-			this._scrollToTween.kill();
-			this._scrollToTween = null;
-		}
-	}
+        this._killScrollToTween();
+        var tweenData = {y: this.Y};
+        this._scrollToTween = TweenLite.to(tweenData, time, {y, onUpdate: () => this.Y = tweenData.y});
+    }
 
-	_trigger() {
-		const viewports = this.Y / Size.innerHeight();
-		this.trigger('scroll', {x: this._scrollX, y: this.Y, viewports });
-	}
+    _computeScrollTime(y) {
+        if (y === 0) y = 1;
+        let deltaY = Math.abs(this.Y - y);
+        let vh = Size.innerHeight();
+        let screens = deltaY / vh;
 
-	_scrollHandler(e) {
-		this._trigger();
-	}
+        return Math.max(Math.min(1 / this._screensPerSecond * screens, 1.5), 0.25);
+    }
 
-	_resizeCompleteHandler() {
-		this._trigger();
-	}
+    _killScrollToTween() {
+        if (this._scrollToTween) {
+            this._scrollToTween.kill();
+            this._scrollToTween = null;
+        }
+    }
+
+    _trigger() {
+        const viewports = this.Y / Size.innerHeight();
+        this.trigger('scroll', {x: this._scrollX, y: this.Y, viewports });
+    }
+
+    _scrollHandler(e) {
+        this._trigger();
+    }
+
+    _resizeCompleteHandler() {
+        this._trigger();
+    }
 }
 
 export default new Scroll();

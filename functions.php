@@ -44,7 +44,7 @@ function seventyone_pictures_setup() {
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false
 	));
-	
+
 
 }
 add_action( 'after_setup_theme', 'seventyone_pictures_setup' );
@@ -53,7 +53,7 @@ add_action( 'after_setup_theme', 'seventyone_pictures_setup' );
  * seventyonepictures theme init hook
  */
 function seventyone_pictures_init() {
-	
+
 	/*
 	 * Remove WYSIWYG editor from pages
 	 */
@@ -68,7 +68,7 @@ function seventyone_pictures_fonts_url() {
 	$fonts_url = '';
 
 	$font_families = array(
-		'Exo 2:300,400,700',
+		'Roboto 2:300,400,700',
 		'Oswald'
 	);
 

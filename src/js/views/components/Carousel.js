@@ -6,149 +6,149 @@ import { bindAll } from 'underscore';
 
 const Carousel = View.extend({
 
-	ui: {
-		slidePanel: '.js-carousel-slides',
-		slides: '.js-carousel-slide',
+    ui: {
+        slidePanel: '.js-carousel-slides',
+        slides: '.js-carousel-slide',
 
-		buttonPrev: '.js-carousel-prev',
-		buttonNext: '.js-carousel-next'
-	},
+        buttonPrev: '.js-carousel-prev',
+        buttonNext: '.js-carousel-next'
+    },
 
-	events: {
-		'click .js-carousel-prev': '_buttonPrevClickHandler',
-		'click .js-carousel-next': '_buttonNextClickHandler'
-	},
+    events: {
+        'click .js-carousel-prev': '_buttonPrevClickHandler',
+        'click .js-carousel-next': '_buttonNextClickHandler'
+    },
 
-	onClose: function() {
-		
-		this._removeListeners();
-		
-	},
+    onClose: function() {
 
-	initialize: function() {
-		bindAll(this, 
-			'_buttonPrevMouseEnterHandler',
-			'_buttonPrevMouseLeaveHandler',
-			'_buttonNextMouseEnterHandler',
-			'_buttonNextMouseLeaveHandler',
-			'_swipeLeftHandler',
-			'_swipeRightHandler'
-		)
-	},
+        this._removeListeners();
 
-	onInitialized: function () {
-		this._setListeners();
-		this._setSizes();
+    },
 
-		this._currentIndex = 0;
-		this._setPosition();
-	},
+    initialize: function() {
+        bindAll(this,
+            '_buttonPrevMouseEnterHandler',
+            '_buttonPrevMouseLeaveHandler',
+            '_buttonNextMouseEnterHandler',
+            '_buttonNextMouseLeaveHandler',
+            '_swipeLeftHandler',
+            '_swipeRightHandler'
+        )
+    },
 
-	_setListeners: function () {
+    onInitialized: function () {
+        this._setListeners();
+        this._setSizes();
 
-		const hammerOptions = {
-			dragLockToAxis: true,
-			dragBlockHorizontal: true
-		};
+        this._currentIndex = 0;
+        this._setPosition();
+    },
 
-		this._hammer = new Hammer(this.ui.slidePanel, hammerOptions);
-		this._hammer.on('swipeleft', this._swipeLeftHandler);
-		this._hammer.on('swiperight', this._swipeRightHandler);
+    _setListeners: function () {
 
-		this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
-		this.ui.buttonPrev.addEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
-		this.ui.buttonPrev.addEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
-		this.ui.buttonNext.addEventListener('mouseenter', this._buttonNextMouseEnterHandler);
-		this.ui.buttonNext.addEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
-	},
+        const hammerOptions = {
+            dragLockToAxis: true,
+            dragBlockHorizontal: true
+        };
 
-	_removeListeners: function() {
+        this._hammer = new Hammer(this.ui.slidePanel, hammerOptions);
+        this._hammer.on('swipeleft', this._swipeLeftHandler);
+        this._hammer.on('swiperight', this._swipeRightHandler);
 
-		this.ui.buttonPrev.removeEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
-		this.ui.buttonPrev.removeEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
-		this.ui.buttonNext.removeEventListener('mouseenter', this._buttonNextMouseEnterHandler);
-		this.ui.buttonNext.removeEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
+        this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
+        this.ui.buttonPrev.addEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
+        this.ui.buttonPrev.addEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
+        this.ui.buttonNext.addEventListener('mouseenter', this._buttonNextMouseEnterHandler);
+        this.ui.buttonNext.addEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
+    },
 
-	},
+    _removeListeners: function() {
 
-	_setSizes: function () {
-		this._slideWidth = this.ui.slides[0].offsetWidth;
-		TweenLite.set(this.ui.slidePanel, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true})
-	},
+        this.ui.buttonPrev.removeEventListener('mouseenter', this._buttonPrevMouseEnterHandler);
+        this.ui.buttonPrev.removeEventListener('mouseleave', this._buttonPrevMouseLeaveHandler);
+        this.ui.buttonNext.removeEventListener('mouseenter', this._buttonNextMouseEnterHandler);
+        this.ui.buttonNext.removeEventListener('mouseleave', this._buttonNextMouseLeaveHandler);
 
-	next: function () {
-		if (this._currentIndex === this.ui.slides.length - 1) return;
-		
-		++this._currentIndex;
-		TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
-		this._setPosition();
-	},
+    },
 
-	prev: function () {
-		if (this._currentIndex === 0) return;
+    _setSizes: function () {
+        this._slideWidth = this.ui.slides[0].offsetWidth;
+        TweenLite.set(this.ui.slidePanel, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true})
+    },
 
-		--this._currentIndex;
-		TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
-		this._setPosition();
-	},
+    next: function () {
+        if (this._currentIndex === this.ui.slides.length - 1) return;
 
-	_swipeLeftHandler: function() {
-		this.next();
-	},
+        ++this._currentIndex;
+        TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
+        this._setPosition();
+    },
 
-	_swipeRightHandler: function() {
-		this.prev();
-	},
+    prev: function () {
+        if (this._currentIndex === 0) return;
 
-	_setPosition: function () {
-		if (this._currentIndex === 0) {
-			TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-100%', autoAlpha: 0});
-		} else {
-			if (!this._isMouseOverButtonPrev) {
-				TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-30%', autoAlpha: 0.5});
-			}
-		}
+        --this._currentIndex;
+        TweenLite.to(this.ui.slidePanel, 0.8, {x: -1 * this._currentIndex * this._slideWidth, ease: Power3.easeInOut, force3D: true});
+        this._setPosition();
+    },
 
-		if (this._currentIndex === this.ui.slides.length - 1) {
-			TweenLite.to(this.ui.buttonNext, 0.3, {x:' 100%', autoAlpha: 0});
-		} else {
-			if (!this._isMouseOverButtonNext) {
-				TweenLite.to(this.ui.buttonNext, 0.3, {x:' 30%', autoAlpha: 0.5});
-			}
-		}
-	},
+    _swipeLeftHandler: function() {
+        this.next();
+    },
 
-	_resizeCompleteHandler: function () {
-		this._setSizes();
-	},
+    _swipeRightHandler: function() {
+        this.prev();
+    },
 
-	_buttonNextClickHandler: function () {
-		this.next();
-	},
+    _setPosition: function () {
+        if (this._currentIndex === 0) {
+            TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-100%', autoAlpha: 0});
+        } else {
+            if (!this._isMouseOverButtonPrev) {
+                TweenLite.to(this.ui.buttonPrev, 0.3, {x: '-30%', autoAlpha: 0.5});
+            }
+        }
 
-	_buttonPrevClickHandler: function () {
-		this.prev();
-	},
+        if (this._currentIndex === this.ui.slides.length - 1) {
+            TweenLite.to(this.ui.buttonNext, 0.3, {x:' 100%', autoAlpha: 0});
+        } else {
+            if (!this._isMouseOverButtonNext) {
+                TweenLite.to(this.ui.buttonNext, 0.3, {x:' 30%', autoAlpha: 0.5});
+            }
+        }
+    },
 
-	_buttonPrevMouseEnterHandler: function () {
-		this._isMouseOverButtonPrev = true;
-		TweenLite.to(this.ui.buttonPrev, 0.4, {x:' 0%', opacity: 1});
-	},
+    _resizeCompleteHandler: function () {
+        this._setSizes();
+    },
 
-	_buttonPrevMouseLeaveHandler: function () {
-		this._isMouseOverButtonPrev = false;
-		TweenLite.to(this.ui.buttonPrev, 0.4, {x: '-30%', opacity: 0.5});
-	},
+    _buttonNextClickHandler: function () {
+        this.next();
+    },
 
-	_buttonNextMouseEnterHandler: function () {
-		this._isMouseOverButtonNext = true;
-		TweenLite.to(this.ui.buttonNext, 0.4, {x:' 0%', opacity: 1});
-	},
+    _buttonPrevClickHandler: function () {
+        this.prev();
+    },
 
-	_buttonNextMouseLeaveHandler: function () {
-		this._isMouseOverButtonNext = false;
-		TweenLite.to(this.ui.buttonNext, 0.4, {x:' 30%', opacity: 0.5});
-	}
+    _buttonPrevMouseEnterHandler: function () {
+        this._isMouseOverButtonPrev = true;
+        TweenLite.to(this.ui.buttonPrev, 0.4, {x:' 0%', opacity: 1});
+    },
+
+    _buttonPrevMouseLeaveHandler: function () {
+        this._isMouseOverButtonPrev = false;
+        TweenLite.to(this.ui.buttonPrev, 0.4, {x: '-30%', opacity: 0.5});
+    },
+
+    _buttonNextMouseEnterHandler: function () {
+        this._isMouseOverButtonNext = true;
+        TweenLite.to(this.ui.buttonNext, 0.4, {x:' 0%', opacity: 1});
+    },
+
+    _buttonNextMouseLeaveHandler: function () {
+        this._isMouseOverButtonNext = false;
+        TweenLite.to(this.ui.buttonNext, 0.4, {x:' 30%', opacity: 0.5});
+    }
 });
 
 export default Carousel;

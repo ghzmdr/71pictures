@@ -3,7 +3,6 @@ import { bindAll } from 'underscore';
 import { TweenLite, TimelineLite } from 'gsap';
 import Size from '../../lib/Size';
 import Scroll from '../../lib/Scroll';
-import Background from './Background';
 
 import logoAnimation from '../../animations/logo';
 
@@ -11,13 +10,9 @@ const Cover = View.extend({
 
     ui: {
         logo: '.js-logo',
-        image: '.js-image',
+        background: '.js-background',
         logoLetters: '.js-logo-letter',
         logoPieces: '.js-logo-piece'
-    },
-
-    components: {
-        background: {selector: '.js-background', type: Background},
     },
 
     onInitialized: function () {
@@ -41,7 +36,7 @@ const Cover = View.extend({
         this._parallaxTimeline = new TimelineLite({paused: true});
         this._parallaxTimeline.fromTo(this.ui.logo, 1, {y: 0}, {y: Size.innerHeight(0) * -0.2}, 0);
         this._parallaxTimeline.fromTo(this.ui.logo, 0.6, {opacity: 1}, {opacity: 0}, 0.3);
-        this._parallaxTimeline.fromTo(this.ui.image, 1, {y: 0}, {y: Size.innerHeight() * -0.1}, 0);
+        this._parallaxTimeline.fromTo(this.ui.background, 1, {y: 0}, {y: Size.innerHeight() * -0.1}, 0);
     },
 
     _setProgressFromScroll: function () {

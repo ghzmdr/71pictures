@@ -1,0 +1,35 @@
+.menu {
+    position: fixed;
+    display: block;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: black;
+
+    z-index: 1;
+
+    perspective: 0px;
+
+    //defaults
+    transform: translateX(-100%) translateZ(0px);
+    text-align: center;
+    @include v-align;
+}
+
+.menu__links {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.menu__link {
+    @include font-secondary;
+    font-size: 3rem;
+    font-weight: bold;
+    color: $color-ivory;
+
+    letter-spacing: 0.1em;
+}

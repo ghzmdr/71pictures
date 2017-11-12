@@ -1,19 +1,27 @@
 @mixin text-rendering() {
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 @mixin v-align {
-	font-size: 0;
-	&:before {
-		content: '';
-		height: 100%;
-		display: inline-block;
-		vertical-align: middle;
-	}
+    font-size: 0;
+    &:before {
+        content: '';
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+    }
 
-	& > * {
-		display: inline-block;
-		vertical-align: middle;
-	}
+    & > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+@mixin button-shadow-1 {
+    box-shadow: -1px -1px 0 rgba(255, 0, 0, 0.5), 1px -1px 0 rgba(0, 128, 0, 0.5), -1px 1px 0 rgba(0, 0, 255, 0.5);
+}
+
+@mixin button-shadow-2 {
+    box-shadow: 1px -1px 0 rgba(255, 0, 0, 0.5), 1px -1px 0 rgba(0, 128, 0, 0.5), -1px 1px 0 rgba(0, 0, 255, 0.5);
 }

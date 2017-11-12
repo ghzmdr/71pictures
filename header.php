@@ -14,13 +14,7 @@
 
 <body>
 
-	<div id="seventyonepictures">
-		<?php include_once "main-navigation.php" ?>
+    <div id="seventyonepictures">
 
-		<div class="relative-wrapper">			
-			<?php include_once "cover.php" ?>
-			<?php include_once "action-bar.php" ?>
-			<?php include_once "button-trailer.php" ?>
-		</div>
-		
-		<main id="main-region">
+        <?php include_once "cover.php" ?>
+        <main id="main-region">

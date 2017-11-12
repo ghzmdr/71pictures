@@ -1,0 +1,18 @@
+.anchor {
+    display: inline-block;
+    text-decoration: none;
+    color: $color-white;
+    outline: none;
+    border: none;
+
+    text-shadow: -1px -1px 0 rgba(255, 0, 0, 0.5), 1px -1px 0 rgba(0, 255, 0, 0.5), -1px 1px 0 rgba(0, 0, 255, 0.5);
+
+    &:hover {
+        text-shadow: 1px 1px 0 rgba(255, 0, 0, 0.5), -1px 1px 0 rgba(0, 255, 0, 0.5), 1px -1px 0 rgba(0, 0, 255, 0.5);
+    }
+
+    &:active {
+        transform: translate(0.1rem, 0.1rem);
+    }
+
+}
