@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<article class="page page-about js-page">
+<article class="page page-visuals js-page">
 
     <header class="page-header">
         <h2 class="page-header__title js-page-title">

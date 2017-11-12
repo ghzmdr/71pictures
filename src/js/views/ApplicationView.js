@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import { View } from '../lib/View';
 import Scroll from '../lib/Scroll';
+import Size from '../lib/Size';
 import Cover from './components/Cover';
 import Menu from './components/Menu';
 import MenuButton from './components/MenuButton';
@@ -21,10 +22,15 @@ const ApplicationView = View.extend({
 
     initialize: function () {
         this.listenTo(ApplicationStore, 'change:isMenuVisible', this._updateMenuVisibility);
+        this.listenTo(Size, 'resize', this._updateMenuVisibility);
     },
 
     _updateMenuVisibility: function () {
-        ApplicationStore.get('isMenuVisible') ? Scroll.lock() : Scroll.unlock();
+        if (Size.innerWidth() < 768) {
+            ApplicationStore.get('isMenuVisible') ? Scroll.lock() : Scroll.unlock();
+        } else {
+            Scroll.unlock();
+        }
     },
 
     _routeClickHandler: function (e) {

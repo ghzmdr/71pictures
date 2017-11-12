@@ -5,10 +5,10 @@
     outline: none;
     border: none;
 
-    text-shadow: -1px -1px 0 rgba(255, 0, 0, 0.5), 1px -1px 0 rgba(0, 255, 0, 0.5), -1px 1px 0 rgba(0, 0, 255, 0.5);
 
+    @include text-rgba-top-left;
     &:hover {
-        text-shadow: 1px 1px 0 rgba(255, 0, 0, 0.5), -1px 1px 0 rgba(0, 255, 0, 0.5), 1px -1px 0 rgba(0, 0, 255, 0.5);
+        @include text-rgba-bottom-right;
     }
 
     &:active {

@@ -29,19 +29,25 @@ class Scroll {
     }
 
     lock() {
+        if (this._isLocked) return;
+        this._isLocked = true;
         this._lockScrollPosition = {x: window.scrollX, y: window.scrollY};
-        document.body.style.height = '100%';
+        document.body.style.height = '100%'
         document.body.style.width = '100%';
         document.body.style.overflow = 'hidden';
     }
 
     unlock() {
+        if (!this._isLocked) return;
+        this._isLocked = false;
         document.body.style.height = '';
         document.body.style.width = '';
         document.body.style.overflow = '';
 
         window.scrollX = this._lockScrollPosition.x;
         window.scrollY = this._lockScrollPosition.y;
+
+        this._trigger();
     }
 
     scrollToElement(element, time) {

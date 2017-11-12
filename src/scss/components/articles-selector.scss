@@ -1,40 +1,81 @@
 .article-selector {
-	height: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    overflow: hidden;
 
-	//defaults
-	opacity: 0;
+    //defaults
+    opacity: 0;
 }
 
 .article-selector__types {
-	display: block;
-	width: 100%;
-	// border: 1px solid $color-white;
+    display: block;
+    width: 100%;
+    // border: 1px solid $color-white;
 }
 
 .article-selector__types {
-	width: 100%;
-	text-align: center;
-	height: 2.5rem;
+    width: 100%;
+    text-align: center;
+    padding-left: 0.8rem;
+    height: 8rem;
+    padding-bottom: 50px;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 .article-selector__type {
-	font-size: 1.2rem;
-	color: $color-white;
-	padding: 0 0.6rem;
-	height: 2.5rem;
-	line-height: 2.5rem;
-	// border-right: 1px solid $color-white;
+    @include font-secondary;
+    font-size: 1.2rem;
+    position: relative;
+    color: rgba($color-ivory, 0.7);
+    padding: 0 1.2rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
 
-	@include break-narrow {
-		padding: 0 1.2rem;
-	}
 
-	&:first-child {
-		// border-left: 1px solid $color-white;
-	}
+    &:after {
+        content: '';
+        display: inline-block;
+        height: 1.2rem;
+        width: 1px;
+        background-color: rgba($color-ivory, 0.3);
+        position: absolute;
+        right: 0;
+        top: 0.65rem;
+    }
 
-	a {
-		text-decoration: none;
-		color: inherit;
-	}
+    &:last-child:after {
+        display: none;
+        content: none;
+    }
+
+    a {
+        @include text-rgba-top-left;
+        text-decoration: none;
+        color: inherit;
+        &:hover {
+            color: rgba($color-ivory, 0.9);
+        }
+        &.is-active {
+            @include text-rgba-bottom-right;
+            color: $color-white;
+        }
+    }
+
+}
+
+@include break-narrow {
+    .article-selector__type {
+        font-size: 1.6rem;
+    }
+    .article-selector {
+        margin-bottom: 3rem;
+    }
+    .article-selector__types {
+        padding-left: 0;
+    }
 }

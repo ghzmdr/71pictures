@@ -21,10 +21,10 @@
 }
 
 @mixin font-secondary() {
-    font-family: 'Oswald';
+    font-family: 'Share Tech Mono', monospace;
 }
 
 @mixin font-primary() {
-    font-family: 'Roboto';
+    font-family: 'Titillium Web', sans-serif;
     line-height: 1.4em;
 }

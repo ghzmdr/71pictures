@@ -1,0 +1,205 @@
+.article-excerpt {
+    position: relative;
+    display: block;
+    width: 100%;
+    // height: 220px;
+    margin: 0 auto 5rem;
+    padding: 2rem;
+    font-size: 0;
+    text-decoration: none;
+    color: #b2b2b2;
+    font-weight: bold;
+
+    //debug
+    opacity: 0;
+    border: 1px solid rgba(#b2b2b2, 0.4);
+
+    .article-excerpt__header {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .article-excerpt__title {
+        text-transform: uppercase;
+        margin: 0;
+        z-index: 1;
+        position: relative;
+        margin-bottom: 1rem;
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: -1px -1px 0 rgba(255, 0, 0, 0.333), 1px -1px 0 rgba(0, 128, 0, 0.333), -1px 1px 0 rgba(0, 0, 255, 0.333);
+        letter-spacing: 0.1px;
+        font-family: Titillium Web;
+        transition: color 0.2s;
+        color: #d2d2d2;
+    }
+
+    .article-excerpt__subtitle {
+        display: none;
+        font-size: 1.1rem;
+        width: 440px;
+        padding-left: 0.3rem;
+        font-weight: normal;
+        line-height: 1.2em;
+        letter-spacing: 0.1px;
+        font-family: 'Share Tech Mono';
+    }
+
+    .article-excerpt__image {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 360px;
+        height: 120%;
+        top: -10%;
+
+        transform-origin: bottom right;
+        transition: transform 0.25s, clip-path 0.3s ease-in-out;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+      clip-path: polygon(100% calc(8% + 1px), 100% calc(92% - 1px), 0% calc(92% - 1px), 20% calc(8% + 1px));
+
+    }
+
+    transition: transform 0.3s;
+}
+
+
+.article-excerpt:nth-child(odd) {
+
+    text-align: right;
+
+    .article-excerpt__header {
+        text-align: left;
+    }
+
+    .article-excerpt__subtitle {
+
+    }
+
+    .article-excerpt__image {
+        right: 0;
+        clip-path: polygon(100% calc(8% + 1px), 100% calc(92% - 1px), 20% calc(92% - 1px), 0% calc(8% + 1px));
+    }
+}
+
+
+@include break-wide {
+
+.article-excerpt {
+    position: relative;
+    display: block;
+    width: 800px;
+    height: 220px;
+    margin: 0 auto 5rem;
+    padding: 2rem;
+    font-size: 0;
+    text-decoration: none;
+    color: #b2b2b2;
+    font-weight: bold;
+
+    //debug
+    border: 1px solid rgba(#b2b2b2, 0.4);
+
+    .article-excerpt__header {
+        display: inline-block;
+        width: 440px;
+    }
+
+    .article-excerpt__title {
+        text-transform: uppercase;
+        margin: 0;
+        margin-bottom: 1rem;
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: -1px -1px 0 rgba(255, 0, 0, 0.333), 1px -1px 0 rgba(0, 128, 0, 0.333), -1px 1px 0 rgba(0, 0, 255, 0.333);
+        letter-spacing: 0.1px;
+        font-family: Titillium Web;
+        transition: color 0.2s;
+        color: #d2d2d2;
+    }
+
+    .article-excerpt__subtitle {
+        font-size: 1.1rem;
+        width: 440px;
+        padding-left: 0.3rem;
+        font-weight: normal;
+        line-height: 1.2em;
+        letter-spacing: 0.1px;
+        font-family: 'Share Tech Mono';
+    }
+
+    .article-excerpt__image {
+        position: absolute;
+        right: -0.7%;
+        top: 0;
+        bottom: 0;
+        width: 360px;
+        height: 120%;
+        top: -10%;
+
+        transform-origin: bottom right;
+        transition: transform 0.25s, clip-path 0.3s ease-in-out;
+        background-color: red;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+      clip-path: polygon(90% calc(8% + 1px), calc(70% - 1px) calc(92% - 1px), 0% calc(92% - 1px), 20% calc(8% + 1px));
+
+    }
+
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: translate(-0rem, -0.25rem);
+
+        .article-excerpt__image {
+          clip-path: polygon(100% 0%, 80% 100%, 0% 100%, 20% 0%);
+        }
+
+        .article-excerpt__title {
+            color: white;
+        }
+    }
+}
+
+
+.article-excerpt:nth-child(odd) {
+
+    text-align: right;
+
+    .article-excerpt__header {
+    }
+
+    .article-excerpt__subtitle {
+
+    }
+
+    .article-excerpt__image {
+        right: auto;
+        left: -0.7%;
+        clip-path: polygon(80% calc(8% + 1px), 100% calc(92% - 1px), 30% calc(92% - 1px), 10% calc(8% + 1px));
+    }
+
+
+    &:hover {
+
+        .article-excerpt__image {
+          clip-path: polygon(80% 0%, 100% 100%, 20% 100%, 0% 0%);
+        }
+
+    }
+}
+
+
+}

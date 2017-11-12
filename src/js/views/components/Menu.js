@@ -34,7 +34,7 @@ const Menu = View.extend({
 
         this._timeline = new TimelineLite();
         this._timeline.fromTo(this.el, 0.9, {x: '-100%'}, {x: '0%', force3D: true, ease: Power3.easeInOut});
-        this._timeline.fromTo(this.el.children, 0.45, {x: '-10%', opacity: 0}, {x: '0%', opacity: 1, ease: Circ.easeInOut}, 0.4);
+        this._timeline.fromTo(this.el.children, 0.45, {x: '-10%', opacity: 0}, {x: '0%', opacity: 1, ease: Power2.easeInOut}, 0.4);
         this._timeline.fromTo(this.el.children, 0.4, {opacity: 0}, {x: '0%', ease: Power0.easeNone}, 0.45);
 
         return this._timeline;

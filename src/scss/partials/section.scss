@@ -13,3 +13,14 @@
         padding: 0;
     }
 }
+
+
+@include break-narrow {
+    .section {
+        padding: 0 4rem 5rem;
+
+        &--wide {
+            padding: 0;
+        }
+    }
+}
