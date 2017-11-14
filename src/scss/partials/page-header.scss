@@ -17,13 +17,16 @@
 
 .page-header__subtitle {
     margin: 0;
-    font-size: 1.6rem;
-    font-style: italic;
+    font-size: 1.2rem;
     font-weight: normal;
     @include text-rgba-top-left;
 
     //defaults
     opacity: 0;
+    // @include font-secondary;
+    // letter-spacing: -5px;
+    font-weight: lighter;
+    @include text-rendering;
 }
 
 
@@ -34,6 +37,7 @@
 
     .page-header__title {
         font-size: 4rem;
+        line-height: 1em;
     }
 
     .page-header__subtitle {

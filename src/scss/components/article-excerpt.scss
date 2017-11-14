@@ -15,6 +15,7 @@
     border: 1px solid rgba(#b2b2b2, 0.4);
 
     .article-excerpt__header {
+        position: relative;
         display: inline-block;
         width: 100%;
     }
@@ -35,14 +36,13 @@
     }
 
     .article-excerpt__subtitle {
-        display: none;
         font-size: 1.1rem;
         width: 440px;
-        padding-left: 0.3rem;
+        // padding-left: 0.3rem;
         font-weight: normal;
         line-height: 1.2em;
         letter-spacing: 0.1px;
-        font-family: 'Share Tech Mono';
+        @include font-secondary;
     }
 
     .article-excerpt__image {
@@ -53,10 +53,8 @@
         width: 80%;
         height: 120%;
         top: -10%;
-        background-color: red;
 
         transform-origin: bottom right;
-        transition: transform 0.25s, clip-path 0.3s ease-in-out;
 
         img {
             width: 100%;
@@ -138,7 +136,7 @@
         font-weight: normal;
         line-height: 1.2em;
         letter-spacing: 0.1px;
-        font-family: 'Share Tech Mono';
+        @include font-secondary;
     }
 
     .article-excerpt__image {
@@ -151,26 +149,30 @@
         top: -10%;
 
         transform-origin: bottom right;
-        transition: transform 0.25s, clip-path 0.3s ease-in-out;
-        background-color: red;
+        transition: clip-path 0.4s ease-out;
 
         img {
-            width: 100%;
-            height: 100%;
+            width: 111%;
+            height: 111%;
             object-fit: cover;
+            transition: transform 0.5s ease-in-out;
         }
 
       clip-path: polygon(90% calc(8% + 1px), calc(70% - 1px) calc(92% - 1px), 0% calc(92% - 1px), 20% calc(8% + 1px));
 
     }
 
-    transition: transform 0.3s;
+    transition: transform 0.35s ease-out;
 
     &:hover {
-        transform: translate(-0rem, -0.25rem);
+        transform: translate(0, -0.25rem);
 
         .article-excerpt__image {
-          clip-path: polygon(100% 0%, 80% 100%, 0% 100%, 20% 0%);
+          clip-path: polygon(100% 0%, 90% 100%, 0% 100%, 10% 0%);
+
+          img {
+            // transform: translate(2%, 2%);
+          }
         }
 
         .article-excerpt__title {
@@ -206,7 +208,7 @@
     &:hover {
 
         .article-excerpt__image {
-          clip-path: polygon(80% 0%, 100% 100%, 20% 100%, 0% 0%);
+          clip-path: polygon(90% 0%, 100% 100%, 10% 100%, 0% 0%);
         }
 
     }

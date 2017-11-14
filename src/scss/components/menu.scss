@@ -17,6 +17,12 @@
     //defaults
     transform: translateX(-100%) translateZ(0px);
     text-align: center;
+}
+
+.menu__content {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
     @include v-align;
 }
 
@@ -39,6 +45,7 @@
 
 
     transition: transform 0.33s ease-in-out, color 0.3s;
+    @include text-rendering();
 
     &:hover {
         color: $color-white;

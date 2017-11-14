@@ -16,9 +16,5 @@ html, body, #seventyonepictures, #main-region {
 
 #seventyonepictures {
     @include font-primary();
-    font-weight: lighter;
-    @include text-rendering();
-    perspective: 0px;
-    backface-visbility: hidden;
     line-height: initial;
 }

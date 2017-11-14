@@ -10,7 +10,7 @@ const Cover = View.extend({
 
     ui: {
         logo: '.js-logo',
-        background: '.js-background',
+        image: '.js-image',
         logoLetters: '.js-logo-letter',
         logoPieces: '.js-logo-piece'
     },
@@ -18,33 +18,35 @@ const Cover = View.extend({
     onInitialized: function () {
         this.transitionIn();
 
-        this._createParallaxTimeline();
         this.listenTo(Scroll, 'scroll', this._scrollHandler);
         this.listenTo(Size, 'resize', this._resizeHandler);
         this._setProgressFromScroll();
+
     },
 
     transitionIn: function () {
 
-        TweenLite.to(this.ui.logo, 0.7, {opacity: 1});
         logoAnimation(this.ui.logoPieces, this.ui.logoLetters);
+
+    },
+
+    _setProgressFromScroll: function () {
+        if (!this._parallaxTimeline) this._createParallaxTimeline();
+        var progress = Math.min(Math.max(Scroll.Y / Size.innerHeight(), 0), 1);
+        this._parallaxTimeline.progress(progress);
 
     },
 
     _createParallaxTimeline: function () {
         if (this._parallaxTimeline) this._killParallaxTimeline();
+
+        const logoTimeline = logoAnimation(this.ui.logoPieces, this.ui.logoLetters);
+
         this._parallaxTimeline = new TimelineLite({paused: true});
-        this._parallaxTimeline.fromTo(this.ui.logo, 1, {y: 0}, {y: Size.innerHeight(0) * -0.2}, 0);
-        this._parallaxTimeline.fromTo(this.ui.logo, 0.6, {opacity: 1}, {opacity: 0}, 0.3);
-        this._parallaxTimeline.fromTo(this.ui.background, 1, {y: 0}, {y: Size.innerHeight() * -0.1}, 0);
-    },
-
-    _setProgressFromScroll: function () {
-
-        var progress = Math.min(Math.max(Scroll.Y / Size.innerHeight(), 0), 1);
-        this._parallaxTimeline.progress(progress);
-
-    },
+        this._parallaxTimeline.fromTo(this.ui.image, logoTimeline.totalDuration(), {y: 0}, {y: Size.innerHeight() * -0.1, ease: Power2.easeOut}, 0);
+        this._parallaxTimeline.add(logoTimeline.reverse(), 0);
+        this._parallaxTimeline.fromTo(this.ui.logo, logoTimeline.totalDuration(), {y: '0%'}, {y: Size.innerHeight() * -0.2, ease: Power2.easeOut}, 0)
+   },
 
     _killParallaxTimeline: function () {
         this._parallaxTimeline.stop();

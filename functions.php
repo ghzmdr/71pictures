@@ -68,7 +68,7 @@ function seventyone_pictures_fonts_url() {
     $fonts_url = '';
 
     $query_args = array(
-        'family' => 'Share+Tech+Mono|Titillium+Web:400,700'
+        'family' => 'Overpass+Mono|Titillium+Web:400,700'
     );
 
     $fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
@@ -107,6 +107,24 @@ function seventyone_pictures_pingback_header() {
 }
 add_action( 'wp_head', 'seventyone_pictures_pingback_header' );
 
+
+function customize_admin() {
+       if (!WP_DEBUG) remove_menu_page('edit.php');
+       if (!WP_DEBUG) remove_menu_page('edit-comments.php');
+       if (!WP_DEBUG) remove_menu_page('users.php');
+       if (!WP_DEBUG) remove_menu_page('index.php');
+       if (!WP_DEBUG) remove_menu_page('tools.php');
+       if (!WP_DEBUG) remove_menu_page('options-general.php');
+       if (!WP_DEBUG) remove_menu_page('edit.php?post_type=acf-field-group');
+       if (!WP_DEBUG) remove_menu_page('themes.php');
+       if (!WP_DEBUG) remove_menu_page('plugins.php');
+}
+add_action('admin_menu', 'customize_admin');
+
+function disable_dashboard() {
+        wp_redirect('edit.php?post_type=article');
+}
+add_action('admin_init', 'disable_dashboard');
 /**
  * Overwrite default stylesheet location
  */

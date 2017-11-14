@@ -1,11 +1,13 @@
 import { Router } from 'backbone';
 import Regions from './regions.js';
 import Scroll from './lib/Scroll.js';
+import { offsetTop } from './utils/DOM.js';
 import PageManager from './utils/PageManager.js';
 
 import NTSCPage from './views/pages/NTSCPage.js';
 import AboutPage from './views/pages/AboutPage.js';
 import ArticlesPage from './views/pages/ArticlesPage.js';
+import VisualsPage from './views/pages/VisualsPage.js';
 import ArticlePage from './views/pages/ArticlePage.js';
 
 const ApplicationRouter = Router.extend({
@@ -14,6 +16,7 @@ const ApplicationRouter = Router.extend({
         '': '_home',
         'ntsc': '_ntsc',
         'about': '_about',
+        'visuals/': '_visuals',
         'articles/': '_articles',
         'articles/:category/': '_articles',
         'articles/:category/:slug': '_article',
@@ -60,8 +63,22 @@ const ApplicationRouter = Router.extend({
             });
     },
 
+    _visuals: function () {
+        this._getElementFromRoute('visuals')
+            .then(el => {
+                Regions.main.show(VisualsPage, {el});
+                this._scrollToSection('.js-page')
+            });
+    },
+
     _scrollToSection: function(selector) {
-        Scroll.scrollToElement(document.querySelector(selector));
+
+        const el = document.querySelector(selector);
+
+        // if (Scroll.Y < offsetTop(el)) {
+            Scroll.scrollToElement(el);
+        // }
+
     },
 
     _getElementFromRoute: function(slug, options) {

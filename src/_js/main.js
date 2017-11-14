@@ -3,7 +3,7 @@ import Backbone from 'backbone';
 import CSSPlugin from 'gsap/CSSPlugin';
 import Router from './Router';
 import ApplicationView from './views/ApplicationView';
-import PageCache from './utils/PageCache.js';
+import PageManager from './utils/PageManager.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     window.seventyonepictures = {

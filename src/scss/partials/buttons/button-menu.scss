@@ -23,25 +23,6 @@
     z-index: 2;
 }
 
-.button-menu__border {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    stroke-linecap: butt;
-    stroke-linejoin: bevel;
-    fill: none;
-    stroke-width: 0.3px;
-
-    &-blue, &-red, &-green {
-        stroke-dasharray:0 0 20;
-        transition: stroke-dasharray 0.3s ease-in-out;
-        opacity: 0.5;
-    }
-}
-
-
 .button-menu:hover {
     .button-menu__border {
         &-blue, &-red, &-green {

@@ -2,7 +2,7 @@ import { Events } from 'backbone';
 import { TweenLite } from 'gsap';
 import { extend, bindAll } from 'underscore';
 import Size from '../lib/Size';
-import { offsetTop } from '../utils/DOM';
+import { offsetTop, supportsPassiveEvents } from '../utils/DOM';
 
 class Scroll {
     constructor() {
@@ -12,7 +12,7 @@ class Scroll {
 
         this._trigger();
 
-        window.addEventListener('scroll', this._scrollHandler, {passive: true});
+        window.addEventListener('scroll', this._scrollHandler, supportsPassiveEvents ? {passive: false} : false);
         this.listenTo(Size, 'resize:complete', this._resizeCompleteHandler);
     }
 
@@ -31,7 +31,9 @@ class Scroll {
     lock() {
         if (this._isLocked) return;
         this._isLocked = true;
+
         this._lockScrollPosition = {x: window.scrollX, y: window.scrollY};
+
         document.body.style.height = '100%'
         document.body.style.width = '100%';
         document.body.style.overflow = 'hidden';
@@ -40,6 +42,7 @@ class Scroll {
     unlock() {
         if (!this._isLocked) return;
         this._isLocked = false;
+
         document.body.style.height = '';
         document.body.style.width = '';
         document.body.style.overflow = '';
