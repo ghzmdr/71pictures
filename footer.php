@@ -1,7 +1,7 @@
 
         </main>  <!-- .page-container#main-region -->
-        <?php include_once "button-menu.php" ?>
-        <?php include_once "menu.php" ?>
+        <?php include_once "parts/buttons/button-menu.php" ?>
+        <?php include_once "parts/overlays/menu.php" ?>
 
     </div > <!-- #seventyonepictures -->
 

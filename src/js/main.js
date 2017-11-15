@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    window.seventyonepictures.application.view.trigger('attached');
-    PageManager.add(window.location.pathname, document.querySelector('.js-page'));
+    PageCache.add(window.location.pathname, document.querySelector('.js-page'));
     Backbone.history.start({ pushState: true });
 });

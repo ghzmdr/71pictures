@@ -1,25 +1,3 @@
-@font-face {
-    font-family: 'Chosence';
-    src:  url('../fonts/Chosence_Regular.woff2') format('woff2'),
-            url('../fonts/Chosence_Regular.woff') format('woff');
-}
-
-
-@font-face {
-    font-family: 'Chosence';
-    src:  url('../fonts/Chosence_Bold.woff2') format('woff2'),
-            url('../fonts/Chosence_Bold.woff') format('woff');
-    font-weight: bold;
-}
-
-
-@font-face {
-    font-family: 'Chosence';
-    src:  url('../fonts/Chosence_Light.woff2') format('woff2'),
-            url('../fonts/Chosence_Light.woff') format('woff');
-    font-weight: 300;
-}
-
 @mixin font-secondary() {
     font-family: 'Overpass Mono', monospace;
 }

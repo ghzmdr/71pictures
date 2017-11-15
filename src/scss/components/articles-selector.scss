@@ -54,14 +54,13 @@
     }
 
     a {
-        @include text-rgba-top-left;
         text-decoration: none;
         color: inherit;
         &:hover {
             color: rgba($color-ivory, 0.9);
         }
         &.is-active {
-            @include text-rgba-bottom-right;
+
             color: $color-white;
         }
     }

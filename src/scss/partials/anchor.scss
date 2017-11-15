@@ -4,15 +4,4 @@
     color: $color-white;
     outline: none;
     border: none;
-
-
-    @include text-rgba-top-left;
-    &:hover {
-        @include text-rgba-bottom-right;
-    }
-
-    &:active {
-        transform: translate(0.1rem, 0.1rem);
-    }
-
 }

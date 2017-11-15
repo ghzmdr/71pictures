@@ -8,13 +8,7 @@ html, body, #seventyonepictures, #main-region {
     box-sizing: border-box;
 }
 
-
-#main-region {
-    position: relative;
-    width: 100%;
-}
-
 #seventyonepictures {
     @include font-primary();
-    line-height: initial;
+    line-height: 1;
 }

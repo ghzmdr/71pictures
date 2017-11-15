@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function seventuonepictures_create_post_type() {
   register_post_type( 'article',
@@ -44,9 +44,9 @@ function seventyone_custom_taxonomy() {
     'show_admin_column'          => true,
     'show_in_nav_menus'          => true,
     'show_tagcloud'              => true,
-    'rewrite'   => array( 
-      'slug' => 'articles', 
-      'with_front' => false 
+    'rewrite'   => array(
+      'slug' => 'articles',
+      'with_front' => false
     ),
     'show_in_rest'       => true,
     'rest_base'          => 'article-types',
@@ -58,6 +58,8 @@ function seventyone_custom_taxonomy() {
 }
 add_action( 'init', 'seventyone_custom_taxonomy', 0 );
 
+
+// To always show the slug
 function seventyone_show_permalinks( $post_link, $post ){
     if ( is_object( $post ) && $post->post_type == 'article' ){
         $terms = wp_get_object_terms( $post->ID, 'article_types' );
@@ -70,9 +72,11 @@ function seventyone_show_permalinks( $post_link, $post ){
 add_filter( 'post_type_link', 'seventyone_show_permalinks', 1, 2 );
 
 
+// I don't rememeber what this is for.
 function my_allow_meta_query( $valid_vars ) {
-  
+
   $valid_vars = array_merge( $valid_vars, array( 'meta_key', 'meta_value' ) );
   return $valid_vars;
+
 }
 add_filter( 'rest_query_vars', 'my_allow_meta_query' );

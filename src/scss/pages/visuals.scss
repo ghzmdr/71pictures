@@ -1,21 +1,4 @@
 .page-visuals {
-    padding-bottom: 4rem;
-
-    .carousel {
-        margin-bottom: 2rem;
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-}
-
-@include break-narrow {
-    .page-visuals {
-
-        .page-header {
-            margin-bottom: 3rem;
-        }
-
-    }
+  
 }
 

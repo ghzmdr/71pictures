@@ -1,43 +1,51 @@
+/*
+
+    </////////////////////////////
+
+*/
+
+
 @import 'base/colors.scss';
 @import 'base/breakpoints.scss';
-
 @import 'base/mixins.scss';
-
 @import 'base/fonts.scss';
 @import 'base/base.scss';
 
 
-@import 'partials/buttons/button.scss';
-@import 'partials/buttons/button-menu.scss';
+@import 'partials/button.scss';
 @import 'partials/anchor.scss';
 @import 'partials/list.scss';
 @import 'partials/page.scss';
 @import 'partials/section.scss';
-@import 'partials/page-header.scss';
 @import 'partials/typography.scss';
 
 
-@import 'components/menu.scss';
-@import 'components/carousel.scss';
-@import 'components/cover.scss';
-@import 'components/parallax-poster.scss';
+@import 'components/buttons/button-menu.scss';
 
 @import 'components/articles-selector.scss';
-@import 'components/articles.scss';
 @import 'components/article-excerpt.scss';
 
 
-
+@import 'pages/home.scss';
 @import 'pages/ntsc.scss';
 @import 'pages/about.scss';
 @import 'pages/articles.scss';
 @import 'pages/article.scss';
 @import 'pages/visuals.scss';
 
-
-
 @import 'articles/project.scss';
 @import 'articles/blog.scss';
 @import 'articles/interview.scss';
 
+
+@import 'overlays/menu.scss';
+
+// Keep as last! Has to override.
 @import 'base/adapt.scss';
+
+
+/*
+
+    <////////#~~~~~~
+
+*/
