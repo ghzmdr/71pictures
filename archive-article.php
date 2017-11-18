@@ -19,7 +19,7 @@
             foreach ($article_types as $article_type) { ?>
                 <?php $article_type = get_object_vars($article_type); ?>
                 <li class="list-item article-selector__type">
-                    <a class="js-article-type" href="/articles/<?php echo $article_type['slug']; ?>/">
+                    <a class="button button-article-type js-article-type" href="/articles/<?php echo $article_type['slug']; ?>/">
                         <?php echo $article_type['name']; ?>
                     </a>
                 </li>

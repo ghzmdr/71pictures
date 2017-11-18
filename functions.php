@@ -23,7 +23,6 @@ function seventyone_pictures_setup() {
         'redirect'      => false
     ));
 
-
 }
 add_action( 'after_setup_theme', 'seventyone_pictures_setup' );
 

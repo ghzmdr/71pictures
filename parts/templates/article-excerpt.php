@@ -1,5 +1,5 @@
 
-<a class="anchor article-excerpt" href="<%= link %>" data-id="<%= id %>">
+<a class="button article-excerpt" href="<%= link %>" data-id="<%= id %>">
     <div class="article-excerpt__image">
         <img src="<%= _embedded['wp:featuredmedia'] && _embedded['wp:featuredmedia'][0].source_url %>" alt="">
     </div>

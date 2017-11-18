@@ -1,20 +1,32 @@
-@include break-narrow {
-    .mobile-only {
+@media (min-width: $breakpoint-extra-wide) {
+    .not-extra-wide,
+    .not-desktop {
         display: none;
     }
 }
 
-@include break-wide {
-    .narrow-only {
+@media (min-width: $breakpoint-wide) and (max-width: $breakpoint-extra-wide - 1px) {
+    .not-wide,
+    .not-desktop {
         display: none;
     }
 }
 
-@media (max-width: 1280px) {
-    .wide-only {
+@media (min-width: $breakpoint-narrow) and (max-width: $breakpoint-wide - 1px) {
+    .not-narrow,
+    .not-mobile {
         display: none;
     }
 }
+
+@media (max-width: $breakpoint-narrow - 1px) {
+    .not-extra-narrow,
+    .not-mobile {
+        display: none;
+    }
+}
+
+
 
 @media (min-width: 2048px) {
     html {

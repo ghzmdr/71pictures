@@ -1,7 +1,16 @@
 .button {
+    display: inline-block;
+    text-decoration: none;
+    color: $color-white;
+    outline: none;
+    border: none;
     outline: none;
     border: none;
     cursor: hand;
     cursor: pointer;
     background: none;
+
+    &:focus, &:active {
+        outline: none;
+    }
 }

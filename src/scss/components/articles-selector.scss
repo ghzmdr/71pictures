@@ -53,28 +53,16 @@
         content: none;
     }
 
-    a {
-        text-decoration: none;
-        color: inherit;
-        &:hover {
-            color: rgba($color-ivory, 0.9);
-        }
-        &.is-active {
-
-            color: $color-white;
-        }
-    }
-
 }
 
-@include break-narrow {
-    .article-selector__type {
-        font-size: 1.6rem;
-    }
+@include break-regular {
     .article-selector {
         margin-bottom: 3rem;
     }
     .article-selector__types {
         padding-left: 0;
+    }
+    .article-selector__type {
+        font-size: 1.6rem;
     }
 }

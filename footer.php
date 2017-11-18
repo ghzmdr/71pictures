@@ -1,5 +1,4 @@
-
-        </main>  <!-- .page-container#main-region -->
+    </main>  <!-- .#region-main -->
         <?php include_once "parts/buttons/button-menu.php" ?>
         <?php include_once "parts/overlays/menu.php" ?>
 

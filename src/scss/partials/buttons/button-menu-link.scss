@@ -1,0 +1,20 @@
+.button-menu-link {
+    @include font-secondary;
+    font-size: 3rem;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+    color: $color-ivory;
+    text-transform: lowercase;
+
+    letter-spacing: 0.1em;
+
+
+    transition: transform 0.33s ease-in-out, color 0.3s;
+    @include text-rendering();
+
+    &:hover {
+        color: $color-white;
+        transform: translate(-0.1rem, -0.1rem);
+        animation: flicker 0.3s;
+    }
+}

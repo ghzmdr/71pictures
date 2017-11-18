@@ -1,0 +1,9 @@
+.button-article-type {
+    @include font-secondary;
+    &:hover {
+        color: rgba($color-ivory, 0.9);
+    }
+    &.is-active {
+        color: $color-white;
+    }
+}
