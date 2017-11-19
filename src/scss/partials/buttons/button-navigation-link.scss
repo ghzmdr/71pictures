@@ -22,6 +22,7 @@
         top: 0;
         left: 0;
         opacity: 0;
+        transition: opacity 0.3s;
     }
 
     // li:first-child &,
@@ -29,6 +30,7 @@
         opacity: 1;
         &:before {
             opacity: 1;
+            transition: opacity 0.3s 0.1s;
         }
     }
 
@@ -40,5 +42,6 @@
         .button-navigation-link__label {
             animation: flicker 0.2s;
         }
+
     }
 }

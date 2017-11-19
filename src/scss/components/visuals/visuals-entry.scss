@@ -24,7 +24,7 @@
     background-color: rgba(0, 0, 0, 0.6);
 
     opacity: 0;
-    transition: opacity 0.4s;
+    transition: opacity 0.4s 0.2s;
 
     padding: 3rem;
 }
@@ -61,6 +61,7 @@
 .visuals-entry:hover {
     .visuals-entry__content {
         opacity: 1;
+        transition: opacity 0.5s;
     }
 }
 
