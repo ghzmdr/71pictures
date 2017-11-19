@@ -1,3 +1,4 @@
+import {lazysizes} from 'lazysizes';
 import {TweenLite} from 'gsap';
 import Backbone from 'backbone';
 import CSSPlugin from 'gsap/CSSPlugin';
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
+    window.seventyonepictures.application.view.trigger('attached');
     PageCache.add(window.location.pathname, document.querySelector('.js-page'));
     Backbone.history.start({ pushState: true });
 });

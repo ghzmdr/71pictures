@@ -1,3 +1,4 @@
+$breakpoint-2k: 1920px;
 $breakpoint-extra-wide: 1440px;
 $breakpoint-wide: 1024px;
 $breakpoint-regular: 768px;
@@ -34,3 +35,10 @@ $breakpoint-narrow: 320px;
     }
 }
 
+
+
+@mixin break-full-hd {
+    @media (min-width: $breakpoint-2k) {
+        @content;
+    }
+}

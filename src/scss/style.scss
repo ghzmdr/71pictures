@@ -10,12 +10,14 @@
 @import 'base/fonts.scss';
 @import 'base/base.scss';
 
-
+@import 'animations/flicker';
 
 @import 'partials/page.scss';
 @import 'partials/section.scss';
 @import 'partials/typography.scss';
 @import 'partials/logo.scss';
+
+@import 'partials/icons/icon-facebook.scss';
 
 @import 'partials/button.scss';
 @import 'partials/buttons/button-menu.scss';
@@ -29,12 +31,19 @@
 @import 'partials/lists/list-navigation-links.scss';
 @import 'partials/lists/list-navigation-socials.scss';
 
+@import 'partials/grids/visuals-masonry.scss';
+
 
 
 @import 'components/showreel.scss';
+@import 'components/showreel-slide.scss';
+@import 'components/showreel-slide-header.scss';
 @import 'components/main-navigation.scss';
 @import 'components/articles-selector.scss';
 @import 'components/article-excerpt.scss';
+
+@import 'components/visuals/visuals-header.scss';
+@import 'components/visuals/visuals-entry.scss';
 
 
 

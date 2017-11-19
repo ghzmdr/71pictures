@@ -1,24 +1,19 @@
 <?php get_header(); ?>
 <div class="page page-articles js-page">
 
-    <header class="page-header">
-        <h2 class="page-header__title js-page-title">
-            Articles
-        </h2>
-        <h5 class="page-header__subtitle js-page-subtitle">
-            <?php the_field('subtitle'); ?>
-        </h5>
-    </header>
+    <div class="articles-header">
+        <h3 class="articles-header__title">Articles</h3>
+    </div>
 
-    <div class="article-selector js-articles-selector">
-        <ul class="list list--horizontal article-selector__types">
-            <li class="list-item article-selector__type" data-article-type="all">
+    <div class="articles-selector js-articles-selector">
+        <ul class="list list--horizontal articles-selector__types">
+            <li class="list-item articles-selector__type" data-article-type="all">
                 <a class="js-article-type" href="/articles/">All</a>
             </li>
             <?php $article_types = get_terms( array('taxonomy'=>'article_types', 'hide_empty' => false ));
             foreach ($article_types as $article_type) { ?>
                 <?php $article_type = get_object_vars($article_type); ?>
-                <li class="list-item article-selector__type">
+                <li class="list-item articles-selector__type">
                     <a class="button button-article-type js-article-type" href="/articles/<?php echo $article_type['slug']; ?>/">
                         <?php echo $article_type['name']; ?>
                     </a>

@@ -10,5 +10,5 @@ const AppStore = Model.extend({
     }
 })
 
-
-export default new AppStore();
+const appStore = new AppStore();
+export default appStore;

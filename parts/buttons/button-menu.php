@@ -1,4 +1,4 @@
-<button class="button button-menu not-desktop js-button-menu">
+<button class="button button-menu main-navigation__button-menu not-desktop js-button-menu">
 
     <span class="button-menu__icon button-menu-hamburger">
         <span class="button-menu-hamburger__line js-burger-line"></span>

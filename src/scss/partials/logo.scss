@@ -1,6 +1,6 @@
 .logo {
     display: inline-block;
-    height: 2.2rem;
+    height: 2.7rem;
 }
 
 .logo__image {
@@ -10,6 +10,18 @@
 
 @include break-regular {
     .logo {
-        height: 3rem;
+        height: 100%;
+        padding: 2.3rem;
+        padding-bottom: 1rem;
+    }
+
+    .logo__image {
+        height: 3.4rem;
+    }
+}
+
+@include break-wide {
+    .logo__image {
+        height: 5.4rem;
     }
 }

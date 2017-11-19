@@ -28,8 +28,8 @@
 
 
 
-@media (min-width: 2048px) {
-    html {
-        font-size: 18px;
+@include break-full-hd {
+    html, body {
+        font-size: 12px;
     }
 }

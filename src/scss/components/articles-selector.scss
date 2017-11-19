@@ -1,4 +1,4 @@
-.article-selector {
+.articles-selector {
     height: 2.5rem;
     margin-bottom: 2rem;
     width: 100%;
@@ -8,13 +8,13 @@
     opacity: 0;
 }
 
-.article-selector__types {
+.articles-selector__types {
     display: block;
     width: 100%;
     // border: 1px solid $color-white;
 }
 
-.article-selector__types {
+.articles-selector__types {
     width: 100%;
     text-align: center;
     padding-left: 0.8rem;
@@ -27,7 +27,7 @@
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.article-selector__type {
+.articles-selector__type {
     @include font-secondary;
     font-size: 1.2rem;
     position: relative;
@@ -56,13 +56,13 @@
 }
 
 @include break-regular {
-    .article-selector {
+    .articles-selector {
         margin-bottom: 3rem;
     }
-    .article-selector__types {
+    .articles-selector__types {
         padding-left: 0;
     }
-    .article-selector__type {
+    .articles-selector__type {
         font-size: 1.6rem;
     }
 }

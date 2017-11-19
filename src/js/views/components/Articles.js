@@ -45,7 +45,6 @@ const Articles = View.extend({
     },
 
     swapArticles: function () {
-        console.log('swap');
         if (this.components.articles) this.components.articles.forEach(
             c => this.ui.list.removeChild(c.el)
         );

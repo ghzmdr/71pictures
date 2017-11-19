@@ -1,24 +1,31 @@
 import { Router } from 'backbone';
-import Regions from './regions.js';
-import Scroll from './lib/Scroll.js';
-import { offsetTop } from './utils/DOM.js';
-import PageCache from './utils/PageCache.js';
+import Regions from './regions';
+import Scroll from './lib/Scroll';
+import { offsetTop } from './utils/DOM';
+import AppActions from './actions/AppActions'
+import PageCache from './utils/PageCache';
 
-import HomePage from './views/pages/NTSCPage.js';
-import NTSCPage from './views/pages/NTSCPage.js';
-import AboutPage from './views/pages/AboutPage.js';
-import ArticlesPage from './views/pages/ArticlesPage.js';
-import VisualsPage from './views/pages/VisualsPage.js';
-import ArticlePage from './views/pages/ArticlePage.js';
+import HomePage from './views/pages/NTSCPage';
+import NTSCPage from './views/pages/NTSCPage';
+import AboutPage from './views/pages/AboutPage';
+import ArticlesPage from './views/pages/ArticlesPage';
+import VisualsPage from './views/pages/VisualsPage';
+import ArticlePage from './views/pages/ArticlePage';
 
 const ApplicationRouter = Router.extend({
 
     routes: {
-        '': '_home'
+        '(/)': '_home',
+        'visuals/': '_visuals',
+        'articles/': '_articles'
+    },
+
+    initialize: function () {
+        this.on('route', r => AppActions.setCurrentRoute(r))
     },
 
     _home:function () {
-        this._getElementFromRoute('ntsc')
+        this._getElementFromRoute('')
             .then(el => {
                 Regions.main.show(HomePage, {el});
             });
@@ -63,7 +70,7 @@ const ApplicationRouter = Router.extend({
         options = options || {};
         return new Promise((res, rej) => {
 
-            if (!this._previousPage) {
+            if (this._previousPage === void 0) {
                 this._previousPage = slug;
 
                 const page = document.querySelector('.js-page');
