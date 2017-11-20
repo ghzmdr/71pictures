@@ -1,38 +1,86 @@
-@import 'base/constants.scss';
+/*
+
+    </////////////////////////////
+
+*/
 @import 'base/colors.scss';
+@import 'base/constants.scss';
 @import 'base/breakpoints.scss';
-@import 'base/scale.scss';
-
 @import 'base/mixins.scss';
-
 @import 'base/fonts.scss';
 @import 'base/base.scss';
-@import 'base/typography.scss';
 
-@import 'icons/play.scss';
 
+
+@import 'animations/flicker';
+
+
+
+@import 'partials/page.scss';
+@import 'partials/section.scss';
+@import 'partials/typography.scss';
+@import 'partials/logo.scss';
+
+@import 'partials/icons/icon-facebook.scss';
+
+@import 'partials/button.scss';
+@import 'partials/buttons/button-menu.scss';
+@import 'partials/buttons/button-menu-link.scss';
+@import 'partials/buttons/button-navigation-link.scss';
+@import 'partials/buttons/button-navigation-social.scss';
+@import 'partials/buttons/button-article-type.scss';
+
+@import 'partials/list.scss';
+@import 'partials/lists/list-menu-links.scss';
+@import 'partials/lists/list-navigation-links.scss';
+@import 'partials/lists/list-navigation-socials.scss';
+@import 'partials/lists/list-article-types.scss';
+
+@import 'grids/visuals-masonry.scss';
+
+
+
+@import 'components/showreel.scss';
+@import 'components/showreel-slide.scss';
+@import 'components/showreel-slide-header.scss';
 @import 'components/main-navigation.scss';
-@import 'components/action-bar.scss';
-@import 'components/articles.scss';
 
-@import 'components/carousel.scss';
-@import 'components/button-trailer.scss';
-@import 'components/title-appear.scss';
-@import 'components/background.scss';
-@import 'components/cover.scss';
-@import 'components/social-link.scss';
+@import 'components/articles/articles-header.scss';
+@import 'components/articles/articles-selector.scss';
+@import 'components/articles/article-excerpt.scss';
 
-@import 'components/parallax-poster.scss';
-@import 'components/articles-selector.scss';
+@import 'components/visuals/visuals-header.scss';
+@import 'components/visuals/visuals-entry.scss';
 
-@import 'pages/page.scss';
+@import 'components/about/about-header.scss';
+// @import 'components/about/visuals-entry.scss';
+
+
+
+@import 'pages/home.scss';
 @import 'pages/ntsc.scss';
 @import 'pages/about.scss';
 @import 'pages/articles.scss';
 @import 'pages/article.scss';
+@import 'pages/visuals.scss';
+
+
 
 @import 'articles/project.scss';
 @import 'articles/blog.scss';
 @import 'articles/interview.scss';
 
+
+
+@import 'overlays/menu.scss';
+
+
+// Keep as last! Has to override.
 @import 'base/adapt.scss';
+
+
+/*
+
+    <////////#~~~~~~
+
+*/

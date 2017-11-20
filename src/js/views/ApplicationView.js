@@ -1,33 +1,43 @@
 import Backbone from 'backbone';
 import { View } from '../lib/View';
-import Cover from './components/Cover';
+import Scroll from '../lib/Scroll';
+import Size from '../lib/Size';
+import Menu from './overlays/Menu';
+import MenuButton from './components/MenuButton';
 import MainNavigation from './components/MainNavigation';
-import ActionBar from './components/ActionBar';
+import AppStore from '../stores/AppStore';
 
 const ApplicationView = View.extend({
 
-	components: {
-		mainNavigation: {selector: '.js-main-navigation', type: MainNavigation},
-		actionBar: {selector: '.js-action-bar', type: ActionBar},
-		cover: {selector: '.js-cover', type: Cover},
-	},
+    components: {
+        menu: {selector: '.js-menu', type: Menu},
+        buttonMenu: {selector: '.js-button-menu', type: MenuButton},
+        mainNavigation: {selector: '.js-main-navigation', type: MainNavigation},
+    },
 
-	events: {
-		'click [href^="/"]': '_routeClickHandler',
-		'click [href^="http"]': '_routeClickHandler'
-	},
+    events: {
+        'click [href^="http"]': '_routeClickHandler',
+        'click [href^="/"]': '_routeClickHandler'
+    },
 
-	_routeClickHandler: function (e) {
-		const target = e.delegateTarget || e.target;
+    initialize: function () {
+        this.listenTo(AppStore, 'change:isMenuVisible', this._updateMenuVisibility);
+        this.listenTo(Size, 'resize', this._updateMenuVisibility);
+    },
 
-		const isDev = window.location.hostname.indexOf('localhost') == 0 && target.hostname.indexOf('71p') === 0;
-		
-		if (!isDev && target.hostname !== window.location.hostname)
-			return;
+    _updateMenuVisibility: function () {
+        if (Size.innerWidth() < 768) {
+            AppStore.get('isMenuVisible') ? Scroll.lock() : Scroll.unlock();
+        } else {
+            Scroll.unlock();
+        }
+    },
 
-		e.preventDefault();
-		Backbone.history.navigate(target.pathname, { trigger: true });
-	}
+    _routeClickHandler: function (e) {
+        const target = e.delegateTarget || e.target;
+        e.preventDefault();
+        Backbone.history.navigate(target.pathname, { trigger: true });
+    }
 })
 
 export default ApplicationView;

@@ -1,1 +1,1 @@
-<?php include 'page-articles-content.php' ?> 
+<?php include 'archive-article.php';

@@ -1,0 +1,47 @@
+.button-navigation-link {
+    height: 100%;
+    position: relative;
+    @include font-primary;
+    font-size: 1.8rem;
+    width: 9rem;
+    height: 100%;
+    padding-top: 4.2rem;
+    padding-left: 1rem;
+    vertical-align: middle;
+    opacity: 0.6;
+
+    transition: opacity 0.4s;
+
+    &:before {
+        content: '';
+        display: block;
+        height: 2px;
+        background-color: $color-ivory;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    // li:first-child &,
+    &.is-active {
+        opacity: 1;
+        &:before {
+            opacity: 1;
+            transition: opacity 0.4s 0.4s;
+        }
+    }
+
+    &:hover{
+        opacity: 1;
+    }
+
+    &:active {
+        .button-navigation-link__label {
+            animation: flicker 0.2s;
+        }
+
+    }
+}

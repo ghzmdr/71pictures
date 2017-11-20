@@ -1,0 +1,32 @@
+.menu {
+    position: fixed;
+    display: block;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: black;
+    z-index: $z-index-overlay;
+
+    perspective: 0px;
+
+    //defaults
+    transform: translateX(-100%) translateZ(0px);
+    text-align: center;
+}
+
+.menu__content {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    @include v-align;
+}
+
+@include break-regular {
+    .menu {
+        width: 420px;
+    }
+}

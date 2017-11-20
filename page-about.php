@@ -1,22 +1,12 @@
 <?php get_header(); ?>
 
-<?php 
-	$poster = get_field('poster');
-	$intro = $post->post_content;
-	
-	$galleryImages = array(get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'), get_field('gallery_image'));
-?>
-<article class="page page-about js-page">
-	
-	<header class="page__header">
-		<h2 class="page__title js-page-title">
-			<?php echo $post->post_title; ?>
-		</h2>
-		<h5 class="page__subtitle js-page-subtitle">
-			<?php the_field('subtitle'); ?>
-		</h5>
-	</header>
+<div class="page page-about js-page">
 
-</article>
+        <header class="about-header">
+            <h3 class="about-header__title">About</h3>
+            <p class="about-header__description">Get to know us</p>
+        </header>
 
-<?php get_footer();
+</div>
+
+<?php get_footer(); ?>

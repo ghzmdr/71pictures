@@ -4,38 +4,38 @@ const ArticleModel = Model.extend({
 });
 
 const ArticlesCollection = Collection.extend({
-	url: '/wp-json/wp/v2/articles/',
-	typesUrl: '/wp-json/wp/v2/article-types',
-	model: ArticleModel,
+    url: '/wp-json/wp/v2/articles/?_embed',
+    typesUrl: '/wp-json/wp/v2/article-types',
+    model: ArticleModel,
 
-	fetch: function() {
-		var _models, _types;
+    fetch: function() {
+        var _models, _types;
 
-		Promise.all([
-			fetch(this.url)
-				.then(res => res.json())
-				.then(models => _models = models),
+        Promise.all([
+            fetch(this.url)
+                .then(res => res.json())
+                .then(models => _models = models),
 
-			fetch(this.typesUrl)
-				.then(res => res.json())
-				.then(types => _types = types)
-			
-		]).then(() => {
+            fetch(this.typesUrl)
+                .then(res => res.json())
+                .then(types => _types = types)
 
-			var types = {};
+        ]).then(() => {
 
-			_types.forEach(function(type) {
-				types[type.id] = type.slug;
-			});
+            var types = {};
 
-			_models.forEach(function(model) { 
-				model.type = types[model['article-types'][0]];
-			});
+            _types.forEach(function(type) {
+                types[type.id] = type.slug;
+            });
 
-			this.add(_models);
-			this.trigger('fetch:complete')
-		})
-	},
+            _models.forEach(function(model) {
+                model.type = types[model['article-types'][0]];
+            });
+
+            this.add(_models);
+            this.trigger('fetch:complete')
+        })
+    },
 
 
 });

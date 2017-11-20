@@ -1,0 +1,35 @@
+.articles-header {
+    display: block;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.articles-header__title {
+    @include font-primary;
+    @include text-rendering;
+    font-size: 4rem;
+    margin: 0;
+    margin-bottom: 1.8rem;
+}
+
+
+.articles-header__description {
+    @include font-secondary;
+    @include text-rendering;
+    font-size: 1.4rem;
+}
+
+
+@include break-wide {
+    .articles-header__title {
+        font-size: 8rem;
+        margin-bottom: 3rem;
+    }
+
+    .articles-header__description {
+        font-size: 2rem;
+    }
+}

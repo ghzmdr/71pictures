@@ -1,0 +1,43 @@
+.list-article-types {
+    width: 100%;
+    font-size: 0;
+    text-align: center;
+    padding-left: 0.8rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    padding-bottom: 5rem;
+}
+
+.list-article-types__item {
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 1px;
+
+        background-color: rgba($color-ivory, 0.3);
+    }
+
+    &:last-child:after {
+        display: none;
+        content: none;
+    }
+
+}
+
+@include break-regular {
+
+    .list-article-types {
+        padding-left: 0;
+    }
+
+}

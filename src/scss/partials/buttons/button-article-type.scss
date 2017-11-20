@@ -1,0 +1,19 @@
+.button-article-type {
+    @include font-secondary;
+    @include text-rendering;
+
+    display: block;
+    font-size: 2rem;
+    color: rgba($color-ivory, 0.7);
+    padding: 0 1.65rem;
+    height: 2rem;
+    line-height: 1.35em;
+
+    &:hover {
+        color: rgba($color-ivory, 0.9);
+    }
+
+    &.is-active {
+        color: $color-white;
+    }
+}

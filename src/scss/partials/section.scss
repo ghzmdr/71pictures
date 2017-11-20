@@ -1,0 +1,25 @@
+.section {
+    max-width: 1280px;
+    margin: 0 auto;
+    margin-bottom: 10vh;
+    padding: 0 2rem 4rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &--wide {
+        max-width: none;
+        padding: 0;
+    }
+}
+
+@include break-regular {
+    .section {
+        padding: 0 4rem 5rem;
+
+        &--wide {
+            padding: 0;
+        }
+    }
+}

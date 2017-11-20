@@ -1,47 +1,49 @@
 import { View } from '../../lib/View';
-import ScrollAwareView from '../../helpers/ScrollAwareView';
 import { TweenLite } from 'gsap';
 import Articles from '../components/Articles';
 
 const ArticlesPage = View.extend({
 
-	ui: {
-		title: '.js-page-title',
-		subtitle: '.js-page-subtitle',
-		selector: '.js-articles-selector'
-	},
+    ui: {
+        title: '.js-page-title',
+        subtitle: '.js-page-subtitle',
+        selector: '.js-articles-selector',
+        articles: '.js-articles'
+    },
 
-	components: {
+    components: {
 
-		articles: {selector: '.js-articles', type: Articles}
+        articles: {selector: '.js-articles', type: Articles}
 
-	},	
+    },
 
-	initialize: function (options) {
-		Object.assign(this, ScrollAwareView);
-		this.initScrollUI();
-		this._initialCategory = options.category;
-	},
+    initialize: function (options) {
+        this._initialCategory = options.category;
+    },
 
-	onInitialized: function() {
-		this.components.articles.update(this._initialCategory);
-	},
+    onInitialized: function() {
+        this.components.articles.update(this._initialCategory);
+        this.listenToOnce(this.components.articles, 'render', this._showArticles);
+    },
 
-	updateData(data) {
-		console.log('[ArticlesPage] Category: ', data.category || 'all')
-		this.components.articles.update(data.category);
-	},
+    transitionIn: function () {
+        TweenLite.set(this.components.articles.el, {autoAlpha: 0});
+        TweenLite.fromTo(this.el, 0.4, {autoAlpha: 1}, {autoAlpha: 1});
+    },
 
-	titleVisible: function () {
-		TweenLite.to(this.ui.title, 0.6, {opacity: 1, delay: 0.2});
-		TweenLite.from(this.ui.title, 0.6, {y: '20%', delay: 0.1, ease: Circ.easeOut});	
-		TweenLite.to(this.ui.subtitle, 0.8, {opacity: 1, delay: 0.8});
-		TweenLite.to(this.ui.selector, 0.5, {opacity: 1, delay: 0.7});
-	},
+    transitionOut: function(cb) {
+        TweenLite.to(this.el, 0.4, {autoAlpha: 0, onComplete: cb});
+    },
 
-	transitionOut(callback) {
-		TweenLite.to(this.el.children, 0.3, {opacity: 0, onComplete: callback})
-	}
+    _showArticles: function() {
+        TweenLite.to(this.ui.articles, 0.4, {autoAlpha: 1});
+    },
+
+    updateData(data) {
+        console.log('[ArticlesPage] Category: ', data.category || 'all')
+        this.components.articles.update(data.category);
+    }
+
 })
 
 export default ArticlesPage;

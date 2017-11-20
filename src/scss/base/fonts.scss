@@ -1,8 +1,8 @@
 @mixin font-secondary() {
-	font-family: 'Oswald';
+    font-family: 'Overpass Mono', monospace;
 }
 
 @mixin font-primary() {
-	font-family: 'Exo 2';
-    line-height: 1.4em;
+    font-family: 'Titillium Web', sans-serif;
+    // line-height: 0.8;
 }

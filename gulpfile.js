@@ -51,7 +51,7 @@ var webpackProdConfig = {
         path: path.join(__dirname, "assets/js/"),
         filename: "[name].js"
     },
-    
+
     resolve: {
         alias: {
           'underscore': 'lodash'
@@ -107,7 +107,7 @@ gulp.task('sass:dev', function () {
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./assets/css/'))
+        .pipe(gulp.dest('./'))
         .pipe(browserSync.stream());
 
 });
@@ -120,13 +120,13 @@ gulp.task('sass:prod', function () {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(gulp.dest('./assets/css/'));
+        .pipe(gulp.dest('./'));
 
 
 });
 
 gulp.task('develop', ['webpack:dev', 'sass:dev'], function () {
-    
+
     browserSync.init({
         proxy   : "71pictures.localhost"
     });

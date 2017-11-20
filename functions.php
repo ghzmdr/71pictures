@@ -1,149 +1,88 @@
 <?php
 /**
- * Twenty Seventeen functions and definitions
+ * 71 Pictures theme
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
+ * @link https://github.com/ghzmdr/71pictures
  */
 
 /**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
+ * Setup
  */
 function seventyone_pictures_setup() {
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/seventyone_pictures
-	 * If you're building a theme based on Twenty Seventeen, use a find and replace
-	 * to change 'seventyone_pictures' to the name of your theme in all the template files.
-	 */
-	load_theme_textdomain( 'seventyone_pictures' );
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+    // Add default posts and comments RSS feed links to head.
+    add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
 
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
-	add_theme_support( 'post-thumbnails' );
-
-	acf_add_options_page(array(
-		'page_title' 	=> 'Site Options',
-		'menu_title'	=> 'Site Options',
-		'menu_slug' 	=> 'site-options',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
-	));
-	
+    acf_add_options_page(array(
+        'page_title'    => 'Site Options',
+        'menu_title'    => 'Site Options',
+        'menu_slug'     => 'site-options',
+        'capability'    => 'edit_posts',
+        'redirect'      => false
+    ));
 
 }
 add_action( 'after_setup_theme', 'seventyone_pictures_setup' );
 
+
+// Custom post types
+require_once("inc/post-types.php");
+
+
 /*
- * seventyonepictures theme init hook
+ * Remove editor from pages by default.
+ * Content is managed trough Custom Fields.
  */
-function seventyone_pictures_init() {
-	
-	/*
-	 * Remove WYSIWYG editor from pages
-	 */
-	remove_post_type_support( 'page', 'editor' );
+function remove_editor() {
+    remove_post_type_support( 'page', 'editor' );
 }
-add_action( 'init', 'seventyone_pictures_init' );
-
-/**
- * Register custom fonts.
- */
-function seventyone_pictures_fonts_url() {
-	$fonts_url = '';
-
-	$font_families = array(
-		'Exo 2:300,400,700',
-		'Oswald'
-	);
-
-	$query_args = array(
-		'family' => urlencode( implode( '|', $font_families ) ),
-		'subset' => urlencode( 'latin,latin-ext' ),
-	);
-
-	$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-
-	return esc_url_raw( $fonts_url );
-}
-
-/**
- * Add preconnect for Google Fonts.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param array  $urls           URLs to print for resource hints.
- * @param string $relation_type  The relation type the URLs are printed.
- * @return array $urls           URLs to print for resource hints.
- */
-function seventyone_pictures_resource_hints( $urls, $relation_type ) {
-	if ( wp_style_is( 'seventyone_pictures-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href' => 'https://fonts.gstatic.com',
-			'crossorigin',
-		);
-	}
-
-	return $urls;
-}
-add_filter( 'wp_resource_hints', 'seventyone_pictures_resource_hints', 10, 2 );
+add_action( 'init', 'remove_editor' );
 
 /**
  * Add a pingback url auto-discovery header for singularly identifiable articles.
  */
 function seventyone_pictures_pingback_header() {
-	if ( is_singular() && pings_open() ) {
-		printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
-	}
+    if ( is_singular() && pings_open() ) {
+        printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
+    }
 }
 add_action( 'wp_head', 'seventyone_pictures_pingback_header' );
 
-/**
- * Overwrite default stylesheet location
- */
-function seventyone_pictures_stylesheet_directory($dir) {
-	return $dir.'/assets/css';
-}
-add_filter('stylesheet_directory_uri', 'seventyone_pictures_stylesheet_directory' );
 
-show_admin_bar( false );
+function customize_admin() {
+       if (!WP_DEBUG) remove_menu_page('edit.php');
+       if (!WP_DEBUG) remove_menu_page('edit-comments.php');
+       if (!WP_DEBUG) remove_menu_page('users.php');
+       if (!WP_DEBUG) remove_menu_page('index.php');
+       if (!WP_DEBUG) remove_menu_page('tools.php');
+       if (!WP_DEBUG) remove_menu_page('options-general.php');
+       if (!WP_DEBUG) remove_menu_page('edit.php?post_type=acf-field-group');
+       if (!WP_DEBUG) remove_menu_page('themes.php');
+       if (!WP_DEBUG) remove_menu_page('plugins.php');
+}
+add_action('admin_menu', 'customize_admin');
+
 
 /**
  * Enqueue scripts and styles.
  */
 function seventyone_pictures_scripts() {
-	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'seventyone_pictures-fonts', seventyone_pictures_fonts_url(), array(), null );
 
-	// Theme stylesheet.
-	wp_enqueue_style( 'seventyone_pictures-style', get_stylesheet_uri(), array(), null );
+    // Theme stylesheet.
+    wp_enqueue_style( 'seventyone_pictures-style', get_stylesheet_uri(), array(), null );
 
-	//Remove WP embed shit
-	wp_deregister_script('wp-embed');
+    //Remove WP embed shit
+    wp_deregister_script('wp-embed');
 
-	// Load the html5 shiv.
-	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
-	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
-
-	// Theme stylesheet.
-	wp_enqueue_script( 'seventyone_pictures-logic', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
+    // Main JS.
+    wp_enqueue_script( 'seventyone_pictures-logic', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'seventyone_pictures_scripts' );
+
+
+// Remove SHIT
 
 function disable_wp_emojicons() {
 
@@ -161,8 +100,12 @@ function disable_wp_emojicons() {
 }
 add_action( 'init', 'disable_wp_emojicons' );
 
+
+// Remove admin bar
+add_filter('show_admin_bar', '__return_false');
+
 //Remove head link to comments
 add_filter( 'feed_links_show_comments_feed', '__return_false' );
 
-// Custom post types
-require_once("inc/post-types.php");
+//Remove head link to comments
+add_filter( 'feed_links_show_comments_feed', '__return_false' );
