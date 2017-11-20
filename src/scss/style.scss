@@ -10,7 +10,11 @@
 @import 'base/fonts.scss';
 @import 'base/base.scss';
 
+
+
 @import 'animations/flicker';
+
+
 
 @import 'partials/page.scss';
 @import 'partials/section.scss';
@@ -30,8 +34,9 @@
 @import 'partials/lists/list-menu-links.scss';
 @import 'partials/lists/list-navigation-links.scss';
 @import 'partials/lists/list-navigation-socials.scss';
+@import 'partials/lists/list-article-types.scss';
 
-@import 'partials/grids/visuals-masonry.scss';
+@import 'grids/visuals-masonry.scss';
 
 
 
@@ -39,8 +44,10 @@
 @import 'components/showreel-slide.scss';
 @import 'components/showreel-slide-header.scss';
 @import 'components/main-navigation.scss';
-@import 'components/articles-selector.scss';
-@import 'components/article-excerpt.scss';
+
+@import 'components/articles/articles-header.scss';
+@import 'components/articles/articles-selector.scss';
+@import 'components/articles/article-excerpt.scss';
 
 @import 'components/visuals/visuals-header.scss';
 @import 'components/visuals/visuals-entry.scss';

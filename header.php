@@ -13,6 +13,7 @@
 <meta property="og:title"              content="<?php bloginfo('name') ?>" />
 <meta property="og:description"        content="<?php bloginfo('description') ?>" />
 <meta property="og:image"              content="<?php the_field('sharing_data', 'option')['image'] ?>" />
+<script async src="assets/js/lazysizes.min.js"></script>
 </head>
 
 <?php

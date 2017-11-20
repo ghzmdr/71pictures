@@ -16,7 +16,16 @@ const VisualsPage = View.extend({
             grid: this.ui.masonry,
             items: this.ui.masonryItems
         })
+    },
+
+    transitionIn: function() {
+        TweenLite.to(this.el, 0.4, {opacity: 1});
+    },
+
+    transitionOut: function (cb) {
+        TweenLite.to(this.el, 0.3, {opacity: 0, onComplete: cb})
     }
+
 
 })
 

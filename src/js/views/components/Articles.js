@@ -25,6 +25,7 @@ const Articles = View.extend({
     },
 
     _render: function () {
+        this.trigger('render');
 
         this.transitionOutArticles()
             .then(this.swapArticles);
@@ -54,6 +55,7 @@ const Articles = View.extend({
         this.currentModels.forEach(model => this.components.articles.push(new ArticleExcerpt({model, template: this.templates.article})))
         this.components.articles.forEach(a => {
             this.ui.list.appendChild(a.el);
+            a.trigger('attached');
             a.transitionIn();
         });
     },

@@ -7,7 +7,8 @@ const ArticlesPage = View.extend({
     ui: {
         title: '.js-page-title',
         subtitle: '.js-page-subtitle',
-        selector: '.js-articles-selector'
+        selector: '.js-articles-selector',
+        articles: '.js-articles'
     },
 
     components: {
@@ -22,6 +23,20 @@ const ArticlesPage = View.extend({
 
     onInitialized: function() {
         this.components.articles.update(this._initialCategory);
+        this.listenToOnce(this.components.articles, 'render', this._showArticles);
+    },
+
+    transitionIn: function () {
+        TweenLite.set(this.components.articles.el, {autoAlpha: 0});
+        TweenLite.to(this.el, 0.4, {opacity: 1});
+    },
+
+    transitionOut: function(cb) {
+        TweenLite.to(this.el, 0.4, {opacity: 0, onComplete: cb});
+    },
+
+    _showArticles: function() {
+        TweenLite.to(this.ui.articles, 0.4, {autoAlpha: 1});
     },
 
     updateData(data) {

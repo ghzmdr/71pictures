@@ -5,7 +5,7 @@ import { offsetTop } from './utils/DOM';
 import AppActions from './actions/AppActions'
 import PageCache from './utils/PageCache';
 
-import HomePage from './views/pages/NTSCPage';
+import HomePage from './views/pages/HomePage';
 import NTSCPage from './views/pages/NTSCPage';
 import AboutPage from './views/pages/AboutPage';
 import ArticlesPage from './views/pages/ArticlesPage';
@@ -16,8 +16,8 @@ const ApplicationRouter = Router.extend({
 
     routes: {
         '(/)': '_home',
-        'visuals/': '_visuals',
-        'articles/': '_articles'
+        'visuals(/)': '_visuals',
+        'articles(/)(:category)(/)': '_articles',
     },
 
     initialize: function () {

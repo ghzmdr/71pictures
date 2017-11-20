@@ -1,4 +1,3 @@
-import {lazysizes} from 'lazysizes';
 import {TweenLite} from 'gsap';
 import Backbone from 'backbone';
 import CSSPlugin from 'gsap/CSSPlugin';
