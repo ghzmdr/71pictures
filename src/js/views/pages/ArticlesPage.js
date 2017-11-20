@@ -28,11 +28,11 @@ const ArticlesPage = View.extend({
 
     transitionIn: function () {
         TweenLite.set(this.components.articles.el, {autoAlpha: 0});
-        TweenLite.to(this.el, 0.4, {opacity: 1});
+        TweenLite.fromTo(this.el, 0.4, {autoAlpha: 1}, {autoAlpha: 1});
     },
 
     transitionOut: function(cb) {
-        TweenLite.to(this.el, 0.4, {opacity: 0, onComplete: cb});
+        TweenLite.to(this.el, 0.4, {autoAlpha: 0, onComplete: cb});
     },
 
     _showArticles: function() {

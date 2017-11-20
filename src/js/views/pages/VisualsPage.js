@@ -11,6 +11,10 @@ const VisualsPage = View.extend({
         masonryItems: '.js-masonry-item'
     },
 
+    onClose: function () {
+        this._masonry.kill();
+    },
+
     onInitialized: function () {
         this._masonry = new MasonryLayout({
             grid: this.ui.masonry,
@@ -19,7 +23,7 @@ const VisualsPage = View.extend({
     },
 
     transitionIn: function() {
-        TweenLite.to(this.el, 0.4, {opacity: 1});
+        TweenLite.fromTo(this.el, 0.4, {autoAlpha: 1}, {autoAlpha: 1});
     },
 
     transitionOut: function (cb) {

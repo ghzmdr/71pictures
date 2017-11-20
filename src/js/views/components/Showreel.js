@@ -54,7 +54,7 @@ export default View.extend({
         this._swapTimeline.add(this.components.slides[this._currentIndex].transitionOut());
 
         this._currentIndex = index;
-        this._swapTimeline.add(this.components.slides[this._currentIndex].transitionIn(), 0);
+        this._swapTimeline.add(this.components.slides[this._currentIndex].transitionIn(), 0.8);
     },
 
     _getPrevIndex: function () {

@@ -3,6 +3,7 @@ import {bindAll} from 'lodash';
 
 export default class MasonryLayout {
 
+
     constructor({grid, items}) {
         bindAll(this, '_resizeHandler');
         this.grid = grid;
@@ -25,4 +26,7 @@ export default class MasonryLayout {
         this.layout();
     }
 
+    kill() {
+        Size.off('resize', this._resizeHandler);
+    }
 }

@@ -25,12 +25,13 @@ export default View.extend({
     },
 
     _createTransitionInTimline: function () {
-        this._transitionInTimline = new TimelineLite({delay: 0.4});
+        this._transitionInTimline = new TimelineLite();
 
         this._transitionInTimline.set(this.el, {zIndex: 1, autoAlpha: 1});
 
-        this._transitionInTimline.fromTo(this.el, 0.7, {x:'-100%', ease: Power2.easeinOut, force3D: true}, {x:'0%'});
-        this._transitionInTimline.to(this.ui.image, 0.4, {scale: 1, ease: Power2.easeInOut});
+        this._transitionInTimline.add(() => this.el.classList.add('is-masked'));
+        this._transitionInTimline.fromTo(this.el, 0.7, {autoAlpha: 0, ease: Power2.easeinOut, force3D: true}, {autoAlpha: 1, x:'0%'});
+        this._transitionInTimline.add(() => this.el.classList.remove('is-masked'));
 
         // this._transitionInTimline.from(this.ui.title, 0.4, {y:'2rem'}, 0.9);
         // this._transitionInTimline.from(this.ui.title, 0.35, {opacity: 0}, 0.95);
@@ -43,8 +44,8 @@ export default View.extend({
 
         this._transitionOutTimline.set(this.el, {zIndex: 0});
 
-        this._transitionOutTimline.to(this.ui.image, 0.4, {scale: 0.9, ease: Power2.easeInOut});
-        this._transitionOutTimline.to(this.el, 0.7, {x:'100%', ease: Power2.easeinOut, force3D: true});
+        this._transitionOutTimline.add(() => this.el.classList.add('is-masked'));
+        this._transitionOutTimline.to(this.el, 0.7, {autoAlpha: 0, ease: Power2.easeinOut, force3D: true}, 0.4);
 
         // this._transitionOutTimline.to(this.ui.title, 0.4, {y:'-2rem'}, 0.9);
         // this._transitionOutTimline.to(this.ui.title, 0.35, {opacity: 0}, 0.95);
