@@ -1,12 +1,16 @@
 import { View } from '../../lib/View';
 import { TweenLite, TimelineLite } from 'gsap';
 import ShowreelSlide from './ShowreelSlide';
+import ShowreelDescription from './ShowreelDescription';
+import ShowreelBullet from './ShowreelBullet';
 import { bindAll } from 'lodash';
 
 export default View.extend({
 
     components: {
-        slides: {selector: '.js-showreel-slide', type: ShowreelSlide}
+        slides: {selector: '.js-slide', type: ShowreelSlide},
+        descriptions: {selector: '.js-description', type: ShowreelDescription},
+        bullets: {selector: '.js-bullet', type: ShowreelBullet}
     },
 
     _currentIndex: 0,
@@ -23,9 +27,15 @@ export default View.extend({
     },
 
     onInitialized: function() {
-        TweenLite.set(this.components.slides[0].el, {x: '0%'})
-        TweenLite.to(this.components.slides[0].el, 0.3, {autoAlpha: 1})
-        // this.components.slides[0].transitionIn();
+        this.components.slides[0].transitionIn();
+        this.components.descriptions[0].transitionIn();
+        this.components.bullets[0].activate();
+
+        this.components.bullets.forEach(
+            (b, i) => b.on('click', this._bulletClickHandler.bind(this, i))
+        );
+
+        //start auto looping
         this._loop();
     },
 
@@ -52,9 +62,15 @@ export default View.extend({
         this._swapTimeline = new TimelineLite({onComplete: this._swapTimelineCompleteHandler});
 
         this._swapTimeline.add(this.components.slides[this._currentIndex].transitionOut());
+        this._swapTimeline.add(this.components.descriptions[this._currentIndex].transitionOut(), 0);
+        this.components.bullets[this._currentIndex].deactivate();
 
         this._currentIndex = index;
+
         this._swapTimeline.add(this.components.slides[this._currentIndex].transitionIn(), 0.8);
+        this._swapTimeline.add(this.components.descriptions[this._currentIndex].transitionIn(), 0.8);
+        this.components.bullets[this._currentIndex].activate();
+
     },
 
     _getPrevIndex: function () {
@@ -75,5 +91,9 @@ export default View.extend({
 
     _swapTimelineCompleteHandler: function () {
         this._isSwapping = false;
+    },
+
+    _bulletClickHandler: function(index) {
+        this._swap(index);
     }
 });

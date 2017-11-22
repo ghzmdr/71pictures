@@ -1,37 +1,29 @@
 .button-navigation-link {
+    @include font-secondary;
+    @include text-rendering;
     height: 100%;
     position: relative;
-    @include font-primary;
-    font-size: 1.8rem;
-    width: 9rem;
+    font-size: 1.6rem;
+    width: 12rem;
     height: 100%;
     padding-top: 4.2rem;
-    padding-left: 1rem;
+    padding-left: 2rem;
     vertical-align: middle;
     opacity: 0.6;
 
     transition: opacity 0.4s;
 
-    &:before {
-        content: '';
-        display: block;
-        height: 2px;
-        background-color: $color-ivory;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
 
     // li:first-child &,
     &.is-active {
         opacity: 1;
-        &:before {
+
+        .button-navigation-link__label:before {
             opacity: 1;
             transition: opacity 0.4s 0.4s;
+            animation: flicker 0.2s;
         }
+
     }
 
     &:hover{
@@ -39,9 +31,28 @@
     }
 
     &:active {
+
         .button-navigation-link__label {
             animation: flicker 0.2s;
         }
 
+
+    }
+}
+
+.button-navigation-link__label {
+    position: relative;
+
+    &:before {
+        content: '';
+        display: block;
+        height: 1px;
+        background-color: $color-ivory;
+        position: absolute;
+        bottom: -0.1rem;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        transition: opacity 0.3s;
     }
 }

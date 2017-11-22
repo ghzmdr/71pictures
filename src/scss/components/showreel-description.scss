@@ -1,0 +1,40 @@
+.showreel-description {
+    width: 100%;
+    // padding: 1rem;
+}
+
+.showreel-description__title {
+    @include font-primary;
+    @include text-rendering;
+
+    width: 100%;
+    max-width: 50rem;
+
+    margin: 0;
+    margin-bottom: 4rem;
+
+    // padding: 3rem;
+
+    font-size: 12rem;
+    font-weight: lighter;
+
+    text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.8);
+}
+
+.showreel-description__excerpt {
+    @include font-secondary;
+    @include text-rendering;
+
+    max-width: 60rem;
+    font-size: 1.9rem;
+
+    line-height: 1.4em;
+    padding-left: 4rem;
+
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.showreel-description__title-content {
+    // background:rgba(10, 10, 10, 0.8);
+    // height: 80%;
+}

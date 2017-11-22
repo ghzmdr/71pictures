@@ -4,6 +4,7 @@
     position: relative;
     z-index: $z-index-initial;
 
+
     .main-navigation__socials {
         position: absolute;
         right: 3rem;
@@ -14,8 +15,9 @@
 
 @include break-regular {
     .main-navigation {
+        background:rgba(0,0,0,0.3);
         padding: 0;
-        height: 8rem;
+        height: 9rem;
     }
 
 }

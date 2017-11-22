@@ -1,5 +1,9 @@
 /*
 
+    Theme Name: 71 Pictures v6.1.0
+    Author: ghzmdr (Vincent)
+    Author URI: https://ghzmdr.github.io/
+
     </////////////////////////////
 
 */
@@ -29,12 +33,16 @@
 @import 'partials/buttons/button-navigation-link.scss';
 @import 'partials/buttons/button-navigation-social.scss';
 @import 'partials/buttons/button-article-type.scss';
+@import 'partials/buttons/button-showreel-bullet.scss';
 
 @import 'partials/list.scss';
 @import 'partials/lists/list-menu-links.scss';
 @import 'partials/lists/list-navigation-links.scss';
 @import 'partials/lists/list-navigation-socials.scss';
 @import 'partials/lists/list-article-types.scss';
+@import 'partials/lists/list-showreel-slides.scss';
+@import 'partials/lists/list-showreel-descriptions.scss';
+@import 'partials/lists/list-showreel-bullets.scss';
 
 @import 'grids/visuals-masonry.scss';
 
@@ -42,7 +50,7 @@
 
 @import 'components/showreel.scss';
 @import 'components/showreel-slide.scss';
-@import 'components/showreel-slide-header.scss';
+@import 'components/showreel-description.scss';
 @import 'components/main-navigation.scss';
 
 @import 'components/articles/articles-header.scss';

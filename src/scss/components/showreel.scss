@@ -6,20 +6,25 @@
     z-index: $z-index-base;
 }
 
-.showreel__slides,
-.showreel__slide {
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
+.showreel__slides {
+    position: relative;
     width: 100%;
     height: 100%;
-    background-color: black;
+
+    z-index: 0;
 }
 
-.showreel__slide {
-    //defaults
-    opacity: 0;
-    visibility: hidden;
-    // transform: translateX(-100%);
+.showreel__descriptions {
+    position: absolute;
+    left: 2.7rem;
+    bottom: 4.7rem;
+    // width: 100px;
+    // height: 100px;
+    // border: 2px solid red;
+}
+
+.showreel__bullets {
+    position: absolute;
+    right: 4rem;
+    bottom: 3rem;
 }

@@ -12,7 +12,7 @@ const VisualsPage = View.extend({
     },
 
     onClose: function () {
-        this._masonry.kill();
+        if (this._masonry) this._masonry.kill();
     },
 
     onInitialized: function () {
