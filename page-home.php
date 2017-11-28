@@ -11,7 +11,7 @@
                 $image = wp_get_attachment_image_src( get_post_thumbnail_id( $slide['slide']->ID ), 'single-post-thumbnail' )[0];
             ?>
             <li class="list__item list-showreel-slides__item showreel-slide js-slide">
-                <img src="<?php echo $image ?>" alt="" class="lazyload showreel-slide__image">
+                <img data-src="<?php echo $image ?>" alt="" class="lazyload showreel-slide__image">
             </li>
             <?php } ?>
         </ul>

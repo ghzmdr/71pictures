@@ -1,4 +1,4 @@
-.visuals-masonry {
+.masonry {
     width: 100%;
     margin: 0 auto;
     font-size: 0;
@@ -10,18 +10,18 @@
     transform: translateZ(1px);
 }
 
-.visuals-masonry-item {
+.masonry-item {
     width: 100%;
     grid-row-end: span 10000;
     overflow: hidden;
 }
 
-.visuals-masonry-item__content {
+.masonry-item__content {
     padding-bottom: 1rem;
 }
 
 @include break-regular {
-    .visuals-masonry {
+    .masonry {
         display: grid;
         padding: 0 1rem;
     }
@@ -29,7 +29,7 @@
 
 
 @include break-wide {
-    .visuals-masonry {
+    .masonry {
         width: 80%;
         padding: 0;
         grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
@@ -37,7 +37,7 @@
 }
 
 @include break-full-hd {
-    .visuals-masonry {
+    .masonry {
         max-width: 1800px;
         grid-template-columns: repeat(auto-fill, minmax(470px,1fr));
     }

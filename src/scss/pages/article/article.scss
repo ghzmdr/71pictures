@@ -1,0 +1,12 @@
+.page-article {
+    padding: 0;
+}
+
+.article {
+    @include font-primary;
+}
+
+.article__content {
+    position: relative;
+    padding-bottom: 3rem;
+}

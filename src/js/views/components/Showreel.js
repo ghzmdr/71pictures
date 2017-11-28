@@ -8,9 +8,9 @@ import { bindAll } from 'lodash';
 export default View.extend({
 
     components: {
-        slides: {selector: '.js-slide', type: ShowreelSlide},
-        descriptions: {selector: '.js-description', type: ShowreelDescription},
-        bullets: {selector: '.js-bullet', type: ShowreelBullet}
+        slides: {selector: '.js-slide', type: ShowreelSlide, forceArray: true},
+        descriptions: {selector: '.js-description', type: ShowreelDescription, forceArray: true},
+        bullets: {selector: '.js-bullet', type: ShowreelBullet, forceArray: true}
     },
 
     _currentIndex: 0,
@@ -20,30 +20,42 @@ export default View.extend({
     },
 
     onClose: function () {
+
         if (this._swapTimeline) {
             this._swapTimeline.kill();
             delete this._swapTimeline;
         }
+
+        this._isClosed = true;
+
     },
 
     onInitialized: function() {
         this.components.slides[0].transitionIn();
         this.components.descriptions[0].transitionIn();
-        this.components.bullets[0].activate();
+        this.components.bullets[0].big();
 
-        this.components.bullets.forEach(
-            (b, i) => b.on('click', this._bulletClickHandler.bind(this, i))
-        );
+        if (this.components.slides.length > 0) {
+            this.components.bullets.forEach(
+                (b, i) => b.on('click', this._bulletClickHandler.bind(this, i))
+            );
+        }
 
-        //start auto looping
-        this._loop();
+        if (this.components.slides.length > 0) {
+            this._delayLoop(5);
+        }
+
     },
 
     _loop: function () {
-        TweenLite.delayedCall(5, () => {
-            this.next();
-            this._loop();
-        })
+        if (this._isClosed) return;
+
+        this.next();
+        this._delayLoop(5);
+    },
+
+    _delayLoop: function (delay) {
+        TweenLite.delayedCall(delay, this._loop)
     },
 
     next: function () {
@@ -58,18 +70,22 @@ export default View.extend({
         if (this._isSwapping) return;
         this._isSwapping = true;
 
+        const otherBullets = this.components.bullets.filter((b, i) => i !== index);
+
         if (this._swapTimeline) this._swapTimeline.kill();
         this._swapTimeline = new TimelineLite({onComplete: this._swapTimelineCompleteHandler});
 
         this._swapTimeline.add(this.components.slides[this._currentIndex].transitionOut());
         this._swapTimeline.add(this.components.descriptions[this._currentIndex].transitionOut(), 0);
-        this.components.bullets[this._currentIndex].deactivate();
+        this.components.bullets[this._currentIndex].normal();
+        otherBullets.forEach(b => b.shrunk());
+        console.log(otherBullets);
 
         this._currentIndex = index;
 
         this._swapTimeline.add(this.components.slides[this._currentIndex].transitionIn(), 0.8);
         this._swapTimeline.add(this.components.descriptions[this._currentIndex].transitionIn(), 0.8);
-        this.components.bullets[this._currentIndex].activate();
+        this.components.bullets[this._currentIndex].big();
 
     },
 
@@ -91,6 +107,9 @@ export default View.extend({
 
     _swapTimelineCompleteHandler: function () {
         this._isSwapping = false;
+
+        const otherBullets = this.components.bullets.filter((b, i) => i !== this._currentIndex);
+        otherBullets.forEach(b => b.normal());
     },
 
     _bulletClickHandler: function(index) {

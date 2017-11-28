@@ -1,0 +1,31 @@
+
+.button-explore {
+    font-size: 1.6rem;
+    padding: 6px 12px;
+    // border: 1px solid white;//debug
+
+    font-size: 0;
+    @include v-align;
+}
+
+.button-explore__label,
+.button-explore__arrow {
+    display: inline-block;
+}
+
+.button-explore__label {
+    text-transform: uppercase;
+    color: white;
+    font-size: 14px;
+    @include font-primary;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.button-explore__arrow {
+    width: 18px;
+    fill: white;
+    vertical-align: middle;
+    opacity: 0.4;
+    padding-top: 2px;
+}

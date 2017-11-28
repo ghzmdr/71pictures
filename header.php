@@ -4,7 +4,7 @@
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Titillium+Web:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Abel|Titillium+Web:400,700" rel="stylesheet">
 
 <?php wp_head(); ?>
 <base href="<?php echo get_template_directory_uri(); ?>/">

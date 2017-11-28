@@ -1,5 +1,5 @@
 .articles-selector {
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
     width: 100%;
     overflow: hidden;
 }
@@ -11,6 +11,6 @@
 
 @include break-regular {
     .articles-selector {
-        margin-bottom: 8rem;
+        margin-bottom: 4rem;
     }
 }

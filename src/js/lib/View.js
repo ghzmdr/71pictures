@@ -66,7 +66,13 @@ const _initializeComponents = function (component) {
 
     }
 
-    return components.length < 2 ? components[0] : components;
+
+    if (component.forceArray || components.length > 1) {
+        return components;
+    } else {
+        return components[0]
+    }
+
 }
 
 const _attachComponents = function() {

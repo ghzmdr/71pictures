@@ -9,12 +9,19 @@ export default View.extend({
         }
     },
 
-    activate: function () {
+    big: function () {
         TweenLite.to(this.el, 0.3, {scale: 1.3});
+        this.el.disabled = false;
     },
 
-    deactivate: function () {
+    normal: function () {
         TweenLite.to(this.el, 0.3, {scale: 1});
+        this.el.disabled = false;
+    },
+
+    shrunk: function () {
+        TweenLite.to(this.el, 0.3, {scale: 0.7});
+        this.el.disabled = true;
     }
 
 });

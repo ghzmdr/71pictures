@@ -12,3 +12,11 @@
         vertical-align: middle;
     }
 }
+
+@mixin split-rgb {
+    text-shadow: -1px -1px 0 rgba(255, 0, 0, 0.333), 1px -1px 0 rgba(0, 128, 0, 0.333), -1px 1px 0 rgba(0, 0, 255, 0.333);
+}
+
+@mixin split-rgb--alt {
+    text-shadow: 1px -1px 0 rgba(255, 0, 0, 0.333), 1px -1px 0 rgba(0, 128, 0, 0.333), -1px 1px 0 rgba(0, 0, 255, 0.333);
+}

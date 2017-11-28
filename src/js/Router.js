@@ -18,7 +18,8 @@ const ApplicationRouter = Router.extend({
         '(/)': '_home',
         'visuals(/)': '_visuals',
         'articles(/)(:category)(/)': '_articles',
-        'about(/)': '_about'
+        'articles(/)(:category)(/)(:id)(/)': '_article',
+        'about(/)': '_about',
     },
 
     initialize: function () {

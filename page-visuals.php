@@ -10,7 +10,8 @@
     <div class="visuals-masonry page-visuals__masonry js-masonry">
 
         <?php
-        $visuals = get_field('visuals');
+        var_dump(get_field('masonry'));
+        $visuals = get_field('masonry');
         foreach ($visuals as $visuals_entry) {
             $image = $visuals_entry['image'];
             $imageHeightRatio = ($image['height'] / $image['width']) * 100 . '%';

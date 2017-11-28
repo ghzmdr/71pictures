@@ -10,7 +10,11 @@
     cursor: pointer;
     background: none;
 
-    &:focus, &:active {
+    &:focus,
+    &:active,
+    &::-moz-focus-inner {
         outline: none;
+        border: none;
     }
+
 }

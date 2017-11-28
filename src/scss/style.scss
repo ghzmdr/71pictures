@@ -7,35 +7,58 @@
     </////////////////////////////
 
 */
+
+
+/*
+ *   Base
+*/
 @import 'base/colors.scss';
 @import 'base/constants.scss';
 @import 'base/breakpoints.scss';
 @import 'base/mixins.scss';
 @import 'base/fonts.scss';
 @import 'base/base.scss';
+@import 'base/typography.scss';
 
 
-
+/*
+ *   Animations
+*/
 @import 'animations/flicker';
 
 
+/*
+ *   Components
+*/
+@import 'components/showreel/showreel.scss';
+@import 'components/showreel/showreel-slide.scss';
+@import 'components/showreel/showreel-description.scss';
 
+@import 'components/article-excerpt.scss';
+@import 'components/articles-selector.scss';
+@import 'components/content-components.scss';
+@import 'components/logo.scss';
+@import 'components/main-navigation.scss';
+@import 'components/masonry.scss';
+@import 'components/visuals-entry.scss';
+
+/*
+ *   Partials
+*/
 @import 'partials/page.scss';
-@import 'partials/section.scss';
-@import 'partials/typography.scss';
-@import 'partials/logo.scss';
 
-@import 'partials/icons/icon-facebook.scss';
-
-@import 'partials/button.scss';
+//Buttons
+@import 'partials/buttons/button.scss';
 @import 'partials/buttons/button-menu.scss';
 @import 'partials/buttons/button-menu-link.scss';
 @import 'partials/buttons/button-navigation-link.scss';
 @import 'partials/buttons/button-navigation-social.scss';
 @import 'partials/buttons/button-article-type.scss';
 @import 'partials/buttons/button-showreel-bullet.scss';
+@import 'partials/buttons/button-explore.scss';
 
-@import 'partials/list.scss';
+//Lists
+@import 'partials/lists/list.scss';
 @import 'partials/lists/list-menu-links.scss';
 @import 'partials/lists/list-navigation-links.scss';
 @import 'partials/lists/list-navigation-socials.scss';
@@ -44,42 +67,35 @@
 @import 'partials/lists/list-showreel-descriptions.scss';
 @import 'partials/lists/list-showreel-bullets.scss';
 
-@import 'grids/visuals-masonry.scss';
+
+/*
+ *   Grids
+*/
+@import 'partials/grids/masonry.scss';
 
 
-
-@import 'components/showreel.scss';
-@import 'components/showreel-slide.scss';
-@import 'components/showreel-description.scss';
-@import 'components/main-navigation.scss';
-
-@import 'components/articles/articles-header.scss';
-@import 'components/articles/articles-selector.scss';
-@import 'components/articles/article-excerpt.scss';
-
-@import 'components/visuals/visuals-header.scss';
-@import 'components/visuals/visuals-entry.scss';
-
-@import 'components/about/about-header.scss';
-// @import 'components/about/visuals-entry.scss';
-
-
-
+/*
+ *   Pages
+*/
 @import 'pages/home.scss';
 @import 'pages/ntsc.scss';
-@import 'pages/about.scss';
-@import 'pages/articles.scss';
-@import 'pages/article.scss';
-@import 'pages/visuals.scss';
 
+@import 'pages/about/about.scss';
+@import 'pages/about/about-header.scss';
 
+@import 'pages/articles/articles.scss';
+@import 'pages/articles/articles-header.scss';
 
-@import 'articles/project.scss';
-@import 'articles/blog.scss';
-@import 'articles/interview.scss';
+@import 'pages/article/article.scss';
+@import 'pages/article/article-header.scss';
+@import 'pages/article/article-content-header.scss';
 
+@import 'pages/visuals/visuals.scss';
+@import 'pages/visuals/visuals-header.scss';
 
-
+/*
+ *   Overlays
+*/
 @import 'overlays/menu.scss';
 
 
