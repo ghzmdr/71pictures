@@ -1,6 +1,6 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite } from 'gsap';
-import Articles from '../components/Articles';
+import Articles from 'views/components/Articles';
 
 const ArticlesPage = View.extend({
 

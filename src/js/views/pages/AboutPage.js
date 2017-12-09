@@ -1,4 +1,4 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite } from 'gsap';
 
 const AboutPage = View.extend({

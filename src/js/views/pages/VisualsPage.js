@@ -1,25 +1,17 @@
-import Size from '../../lib/Size';
-import { View } from '../../lib/View';
-import MasonryLayout from '../../modules/MasonryLayout';
-
+import Size from 'lib/Size';
+import { View } from 'lib/View';
 import { TweenLite } from 'gsap';
+
+import FlexibleContent from 'views/components/FlexibleContent';
 
 const VisualsPage = View.extend({
 
-    ui: {
-        masonry: '.js-masonry',
-        masonryItems: '.js-masonry-item'
-    },
-
-    onClose: function () {
-        if (this._masonry) this._masonry.kill();
+    components: {
+        content: {type: FlexibleContent, selector: '.js-flexible-content'}
     },
 
     onInitialized: function () {
-        this._masonry = new MasonryLayout({
-            grid: this.ui.masonry,
-            items: this.ui.masonryItems
-        })
+        window.lazySizes.init();
     },
 
     transitionIn: function() {

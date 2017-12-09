@@ -28,6 +28,7 @@
             <?php } ?>
         </ul>
 
+        <?php if (count($showreel_slides) > 1) { ?>
         <ul class="list list--horizontal list-showreel-bullets showreel__bullets">
             <?php foreach ($showreel_slides as $slide) { ?>
             <li class="list__item list-showreel-bullets__item">
@@ -35,6 +36,7 @@
             </li>
             <?php } ?>
         </ul>
+        <?php } ?>
 
     </div>
 

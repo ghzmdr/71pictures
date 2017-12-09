@@ -1,16 +1,15 @@
 import { Router } from 'backbone';
-import Regions from './regions';
-import Scroll from './lib/Scroll';
-import { offsetTop } from './utils/DOM';
-import AppActions from './actions/AppActions'
-import PageCache from './utils/PageCache';
+import Regions from 'regions';
+import Scroll from 'lib/Scroll';
+import { offsetTop } from 'utils/DOM';
+import AppActions from 'actions/AppActions'
+import PageCache from 'utils/PageCache';
 
-import HomePage from './views/pages/HomePage';
-import NTSCPage from './views/pages/NTSCPage';
-import AboutPage from './views/pages/AboutPage';
-import ArticlesPage from './views/pages/ArticlesPage';
-import VisualsPage from './views/pages/VisualsPage';
-import ArticlePage from './views/pages/ArticlePage';
+import HomePage from 'views/pages/HomePage';
+import AboutPage from 'views/pages/AboutPage';
+import ArticlesPage from 'views/pages/ArticlesPage';
+import VisualsPage from 'views/pages/VisualsPage';
+import ArticlePage from 'views/pages/ArticlePage';
 
 const ApplicationRouter = Router.extend({
 
@@ -32,14 +31,6 @@ const ApplicationRouter = Router.extend({
                 Regions.main.show(HomePage, {el});
             });
     },
-
-    _ntsc: function () {
-        this._getElementFromRoute('ntsc')
-            .then(el => {
-                Regions.main.show(NTSCPage, {el});
-            });
-    },
-
     _about: function () {
         this._getElementFromRoute('about')
             .then(el => {

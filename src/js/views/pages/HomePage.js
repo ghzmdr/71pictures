@@ -1,12 +1,16 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite } from 'gsap';
-import Showreel from '../components/Showreel';
+import Showreel from 'views/components/showreel/Showreel';
 
 
 const HomePage = View.extend({
 
     components: {
         showreel: {selector: '.js-showreel', type: Showreel}
+    },
+
+    onInitialized: function() {
+        window.lazySizes.init();
     },
 
     transitionIn: function() {

@@ -7,6 +7,7 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync');
+var gap = require('gulp-append-prepend');
 
 var webpackDevConfig = {
     entry: path.join(__dirname, 'src/js/main.js'),
@@ -16,6 +17,7 @@ var webpackDevConfig = {
     },
 
     devtool: '#inline-source-map',
+
 
     module: {
 
@@ -35,6 +37,7 @@ var webpackDevConfig = {
     },
 
     resolve: {
+        modules: [path.resolve(__dirname, "src", "js"), "node_modules"],
         alias: {
           'underscore': 'lodash'
         },
@@ -53,6 +56,7 @@ var webpackProdConfig = {
     },
 
     resolve: {
+        modules: [path.resolve(__dirname, "src", "js"), "node_modules"],
         alias: {
           'underscore': 'lodash'
         },
@@ -107,6 +111,7 @@ gulp.task('sass:dev', function () {
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
+        .pipe(gap.prependFile('theme-header.txt'))
         .pipe(gulp.dest('./'))
         .pipe(browserSync.stream());
 
@@ -120,6 +125,7 @@ gulp.task('sass:prod', function () {
             browsers: ['last 2 versions'],
             cascade: false
         }))
+        .pipe(gap.prependFile('theme-header.txt'))
         .pipe(gulp.dest('./'));
 
 

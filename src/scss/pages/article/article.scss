@@ -4,9 +4,7 @@
 
 .article {
     @include font-primary;
+
+    padding-bottom: 6rem;
 }
 
-.article__content {
-    position: relative;
-    padding-bottom: 3rem;
-}

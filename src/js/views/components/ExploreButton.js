@@ -1,5 +1,4 @@
-
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite, TimelineLite } from 'gsap';
 import { template, bindAll } from 'lodash';
 

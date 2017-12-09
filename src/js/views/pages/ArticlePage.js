@@ -1,22 +1,21 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite } from 'gsap';
-import plyr from 'plyr';
 
+import FlexibleContent from 'views/components/FlexibleContent';
 
 const ArticlePage = View.extend({
-    ui: {
-        videos: '.js-video'
+
+    components: {
+        content: {type: FlexibleContent, selector: '.js-flexible-content'}
     },
 
-    onInitialized: function () {
-
-        if (this.ui.videos && this.ui.videos.length) this.ui.videos.forEach(v => {
-            plyr.setup(v, {});
-        })
-
+    transitionIn: function() {
+        TweenLite.fromTo(this.el, 0.4, {autoAlpha: 1}, {autoAlpha: 1});
     },
 
-
+    transitionOut: function (cb) {
+        TweenLite.to(this.el, 0.3, {opacity: 0, onComplete: cb})
+    }
 
 })
 

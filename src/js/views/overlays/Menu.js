@@ -1,7 +1,7 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite, TimelineLite } from 'gsap';
-import AppStore from '../../stores/AppStore';
-import AppActions from '../../actions/AppActions';
+import AppStore from 'stores/AppStore';
+import AppActions from 'actions/AppActions';
 
 const Menu = View.extend({
 

@@ -56,6 +56,7 @@ const _initializeView = function () {
 }
 
 const _initializeComponents = function (component) {
+
     var components = [];
     var elements = this.el.querySelectorAll(component.selector);
 
@@ -66,6 +67,7 @@ const _initializeComponents = function (component) {
 
     }
 
+    if (!components.length) return null;
 
     if (component.forceArray || components.length > 1) {
         return components;

@@ -1,9 +1,9 @@
-import { View } from '../../lib/View';
-import Size from '../../lib/Size';
+import { View } from 'lib/View';
+import Size from 'lib/Size';
 import { TweenLite, TimelineLite } from 'gsap';
 import { bindAll } from 'underscore';
-import ArticlesCollection from '../../data/ArticlesCollection';
-import ArticleExcerpt from './ArticleExcerpt';
+import ArticlesCollection from 'data/ArticlesCollection';
+import ArticleExcerpt from 'views/components/ArticleExcerpt';
 
 
 const Articles = View.extend({

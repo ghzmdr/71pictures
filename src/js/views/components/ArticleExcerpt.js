@@ -1,8 +1,8 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite, TimelineLite } from 'gsap';
 import { template, bindAll } from 'lodash';
 
-import ExploreButton from './ExploreButton';
+import ExploreButton from 'views/components/ExploreButton';
 
 const ArticleExcerpt = View.extend({
 
@@ -49,14 +49,20 @@ const ArticleExcerpt = View.extend({
         this.el.removeEventListener('mouseleave', this._mouseLeaveHandler);
     },
 
+    _createTimelineHover: function () {
+        this._timelineHover = new TimelineLite();
+        this._timelineHover.to(this.ui.panel, 0.7, {scaleX: 1.2, ease: Power2.easeOut})
+        this._timelineHover.to(this.ui.image, 0.7, {x: '-5%', ease: Power2.easeOut}, 0)
+        this._timelineHover.to(this.ui.link, 0.6, {x: '-7%', ease: Power2.easeOut}, 0.2)
+    },
+
     _mouseEnterHandler: function () {
-        TweenLite.to(this.ui.panel, 0.3, {scaleX: 1.2})
-        TweenLite.to(this.ui.image, 0.3, {x: '-5%'})
+        if (!this._timelineHover) this._createTimelineHover();
+        this._timelineHover.play();
     },
 
     _mouseLeaveHandler: function () {
-        TweenLite.to(this.ui.panel, 0.3, {scaleX: 1})
-        TweenLite.to(this.ui.image, 0.3, {x: '0%'})
+        this._timelineHover.reverse();
     },
 
     //this should happen in the library

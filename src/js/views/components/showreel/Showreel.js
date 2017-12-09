@@ -1,9 +1,10 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite, TimelineLite } from 'gsap';
-import ShowreelSlide from './ShowreelSlide';
-import ShowreelDescription from './ShowreelDescription';
-import ShowreelBullet from './ShowreelBullet';
 import { bindAll } from 'lodash';
+
+import ShowreelSlide from 'views/components/showreel/ShowreelSlide';
+import ShowreelDescription from 'views/components/showreel/ShowreelDescription';
+import ShowreelBullet from 'views/components/showreel/ShowreelBullet';
 
 export default View.extend({
 
@@ -33,15 +34,18 @@ export default View.extend({
     onInitialized: function() {
         this.components.slides[0].transitionIn();
         this.components.descriptions[0].transitionIn();
-        this.components.bullets[0].big();
 
-        if (this.components.slides.length > 0) {
-            this.components.bullets.forEach(
-                (b, i) => b.on('click', this._bulletClickHandler.bind(this, i))
-            );
+        if (this.components.bullets) {
+            this.components.bullets[0].big();
+
+            if (this.components.bullets.length > 0) {
+                this.components.bullets.forEach(
+                    (b, i) => b.on('click', this._bulletClickHandler.bind(this, i))
+                );
+            }
         }
 
-        if (this.components.slides.length > 0) {
+        if (this.components.slides.length > 1) {
             this._delayLoop(5);
         }
 

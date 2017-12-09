@@ -1,9 +1,5 @@
 /*
 
-    Theme Name: 71 Pictures v6.1.0
-    Author: ghzmdr (Vincent)
-    Author URI: https://ghzmdr.github.io/
-
     </////////////////////////////
 
 */
@@ -39,9 +35,6 @@
 @import 'components/content-components.scss';
 @import 'components/logo.scss';
 @import 'components/main-navigation.scss';
-@import 'components/masonry.scss';
-@import 'components/visuals-entry.scss';
-
 /*
  *   Partials
 */
@@ -72,6 +65,7 @@
  *   Grids
 */
 @import 'partials/grids/masonry.scss';
+@import 'partials/grids/masonry-item.scss';
 
 
 /*
