@@ -9,10 +9,6 @@ const HomePage = View.extend({
         showreel: {selector: '.js-showreel', type: Showreel}
     },
 
-    onInitialized: function() {
-        window.lazySizes.init();
-    },
-
     transitionIn: function() {
         TweenLite.to(this.el, 0.4, {opacity: 1});
     },

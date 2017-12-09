@@ -10,10 +10,6 @@ const VisualsPage = View.extend({
         content: {type: FlexibleContent, selector: '.js-flexible-content'}
     },
 
-    onInitialized: function () {
-        window.lazySizes.init();
-    },
-
     transitionIn: function() {
         TweenLite.fromTo(this.el, 0.4, {autoAlpha: 1}, {autoAlpha: 1});
     },
