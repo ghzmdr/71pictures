@@ -1,0 +1,16 @@
+.articles-selector {
+    margin-bottom: 4rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.articles-selector__types {
+    display: block;
+    width: 100%;
+}
+
+@include break-regular {
+    .articles-selector {
+        margin-bottom: 4rem;
+    }
+}

@@ -1,0 +1,7 @@
+/*
+
+    Theme Name: 71 Pictures v6.1.0
+    Author: ghzmdr (Vincent)
+    Author URI: https://ghzmdr.github.io/
+
+*/

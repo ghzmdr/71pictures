@@ -52,9 +52,11 @@ const _initializeView = function () {
     if (isFunction(this.onInitialized)) this.onInitialized();
     this.__isInitialized = true;
     this.trigger('initialized');
+
 }
 
 const _initializeComponents = function (component) {
+
     var components = [];
     var elements = this.el.querySelectorAll(component.selector);
 
@@ -65,7 +67,14 @@ const _initializeComponents = function (component) {
 
     }
 
-    return components.length < 2 ? components[0] : components;
+    if (!components.length) return null;
+
+    if (component.forceArray || components.length > 1) {
+        return components;
+    } else {
+        return components[0]
+    }
+
 }
 
 const _attachComponents = function() {

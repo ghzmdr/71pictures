@@ -1,12 +1,9 @@
 import { Collection, Model } from 'backbone';
 
-const ArticleModel = Model.extend({
-});
-
 const ArticlesCollection = Collection.extend({
+
     url: '/wp-json/wp/v2/articles/?_embed',
     typesUrl: '/wp-json/wp/v2/article-types',
-    model: ArticleModel,
 
     fetch: function() {
         var _models, _types;

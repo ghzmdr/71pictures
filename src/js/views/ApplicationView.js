@@ -1,11 +1,11 @@
 import Backbone from 'backbone';
-import { View } from '../lib/View';
-import Scroll from '../lib/Scroll';
-import Size from '../lib/Size';
-import Menu from './overlays/Menu';
-import MenuButton from './components/MenuButton';
-import MainNavigation from './components/MainNavigation';
-import AppStore from '../stores/AppStore';
+import { View } from 'lib/View';
+import Scroll from 'lib/Scroll';
+import Size from 'lib/Size';
+import Menu from 'views/overlays/Menu';
+import MenuButton from 'views/components/MenuButton';
+import MainNavigation from 'views/components/MainNavigation';
+import AppStore from 'stores/AppStore';
 
 const ApplicationView = View.extend({
 

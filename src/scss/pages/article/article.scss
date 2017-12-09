@@ -1,0 +1,10 @@
+.page-article {
+    padding: 0;
+}
+
+.article {
+    @include font-primary;
+
+    padding-bottom: 6rem;
+}
+

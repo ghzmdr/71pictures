@@ -1,0 +1,58 @@
+.masonry-item {
+    overflow: hidden;
+    position: relative;
+    padding: 1rem;
+}
+
+.masonry-item__image {
+    width: 100%;
+}
+
+.masonry-item__copy {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+
+    opacity: 0;
+    visibility: hidden;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: black;
+
+        opacity: 0.6;
+    }
+}
+
+.masonry-item:hover {
+    .masonry-item__copy {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.masonry-item {
+    width: 100%;
+}
+
+@include break-regular {
+    .masonry-item {
+        width: 50%;
+    }
+}
+
+
+@include break-wide {
+    .masonry-item {
+        width: 33.33333%;
+    }
+}

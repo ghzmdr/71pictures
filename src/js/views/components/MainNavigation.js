@@ -1,6 +1,6 @@
-import { View } from '../../lib/View';
+import { View } from 'lib/View';
 import { TweenLite, TimelineLite } from 'gsap';
-import AppStore from '../../stores/AppStore';
+import AppStore from 'stores/AppStore';
 
 const MainNavigation = View.extend({
 
