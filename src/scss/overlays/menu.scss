@@ -25,6 +25,16 @@
     @include v-align;
 }
 
+.menu__socials {
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    bottom: 2rem;
+    top: auto;
+    height: auto;
+}
+
 @include break-regular {
     .menu {
         width: 420px;
