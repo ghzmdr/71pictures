@@ -1,0 +1,42 @@
+.about-info {
+    font-size: 0;
+    padding: 1.6rem;
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+.about-info__header {
+    @include text-rendering;
+    @include font-primary;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.about-info__column {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.about-info__label {
+    // color: $color-red;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+@include break-regular {
+
+    .about-info__header {
+        font-size: 4rem;
+    }
+
+    .about-info__column {
+        width: 50%;
+        text-align: center;
+    }
+
+    .about-info__value {
+        font-size: 1.7rem;
+    }
+
+}
