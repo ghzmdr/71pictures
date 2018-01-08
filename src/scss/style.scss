@@ -23,6 +23,16 @@
 @import 'animations/flicker';
 
 
+//Lists
+@import 'partials/lists/list.scss';
+@import 'partials/lists/list-menu-links.scss';
+@import 'partials/lists/list-navigation-links.scss';
+@import 'partials/lists/list-navigation-socials.scss';
+@import 'partials/lists/list-article-types.scss';
+@import 'partials/lists/list-showreel-slides.scss';
+@import 'partials/lists/list-showreel-descriptions.scss';
+@import 'partials/lists/list-showreel-bullets.scss';
+
 /*
  *   Components
 */
@@ -49,16 +59,6 @@
 @import 'partials/buttons/button-article-type.scss';
 @import 'partials/buttons/button-showreel-bullet.scss';
 @import 'partials/buttons/button-explore.scss';
-
-//Lists
-@import 'partials/lists/list.scss';
-@import 'partials/lists/list-menu-links.scss';
-@import 'partials/lists/list-navigation-links.scss';
-@import 'partials/lists/list-navigation-socials.scss';
-@import 'partials/lists/list-article-types.scss';
-@import 'partials/lists/list-showreel-slides.scss';
-@import 'partials/lists/list-showreel-descriptions.scss';
-@import 'partials/lists/list-showreel-bullets.scss';
 
 
 /*
