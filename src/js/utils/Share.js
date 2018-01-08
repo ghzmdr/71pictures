@@ -1,5 +1,5 @@
 export function sharePopup(platform, url) {
-    debugger
+
     switch(platform) {
         case 'facebook':
             url = "https://www.facebook.com/sharer/sharer.php?u=" + url;
