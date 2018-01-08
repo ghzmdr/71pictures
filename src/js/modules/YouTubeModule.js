@@ -8,7 +8,7 @@ export default class YouTubeModule {
     constructor(el, options) {
         Object.assign(this, Events);
         this.el = el;
-        this.options = options || defaultOptions;
+        this._options = options || defaultOptions;
 
         if (window.YT && window.YT.Player) {
             this._init();

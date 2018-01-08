@@ -9,10 +9,31 @@
 <?php wp_head(); ?>
 <base href="<?php echo get_template_directory_uri(); ?>/">
 
-<meta property="og:url"                content="<?php bloginfo('wpurl') ?>" />
-<meta property="og:title"              content="<?php bloginfo('name') ?>" />
-<meta property="og:description"        content="<?php bloginfo('description') ?>" />
-<meta property="og:image"              content="<?php the_field('sharing_data', 'option')['image'] ?>" />
+<?php
+    global $wp;
+
+    $og_url = home_url( $wp->request );
+
+    $og_title = get_field('sharing_title', 'option');
+    if (get_field('sharing_title')) {
+        $og_title = get_field('sharing_title');
+    }
+
+    $og_description = get_field('sharing_description', 'option');
+    if (get_field('sharing_description')) {
+        $og_description = get_field('sharing_description');
+    }
+
+    $og_image = get_field('sharing_image', 'option');
+    if (get_field('sharing_image')) {
+        $og_image = get_field('sharing_image');
+    }
+?>
+
+<meta property="og:url"                content="<?php $og_url; ?>" />
+<meta property="og:title"              content="<?php $og_title; ?>" />
+<meta property="og:description"        content="<?php $og_description; ?>" />
+<meta property="og:image"              content="<?php $og_image; ?>" />
 <script async src="assets/js/lazysizes.min.js"></script>
 </head>
 

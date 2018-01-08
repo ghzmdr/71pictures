@@ -23,6 +23,18 @@
 @import 'animations/flicker';
 
 
+//Lists
+@import 'partials/lists/list.scss';
+@import 'partials/lists/list-menu-links.scss';
+@import 'partials/lists/list-menu-socials.scss';
+@import 'partials/lists/list-navigation-links.scss';
+@import 'partials/lists/list-navigation-socials.scss';
+@import 'partials/lists/list-article-socials.scss';
+@import 'partials/lists/list-article-types.scss';
+@import 'partials/lists/list-showreel-slides.scss';
+@import 'partials/lists/list-showreel-descriptions.scss';
+@import 'partials/lists/list-showreel-bullets.scss';
+
 /*
  *   Components
 */
@@ -32,8 +44,10 @@
 
 @import 'components/article-excerpt.scss';
 @import 'components/articles-selector.scss';
+@import 'components/about-info.scss';
 @import 'components/content-components.scss';
 @import 'components/logo.scss';
+@import 'components/article-share.scss';
 @import 'components/main-navigation.scss';
 /*
  *   Partials
@@ -44,21 +58,15 @@
 @import 'partials/buttons/button.scss';
 @import 'partials/buttons/button-menu.scss';
 @import 'partials/buttons/button-menu-link.scss';
+@import 'partials/buttons/button-menu-social.scss';
 @import 'partials/buttons/button-navigation-link.scss';
+@import 'partials/buttons/button-article-social.scss';
+@import 'partials/buttons/button-article-share.scss';
 @import 'partials/buttons/button-navigation-social.scss';
 @import 'partials/buttons/button-article-type.scss';
 @import 'partials/buttons/button-showreel-bullet.scss';
 @import 'partials/buttons/button-explore.scss';
-
-//Lists
-@import 'partials/lists/list.scss';
-@import 'partials/lists/list-menu-links.scss';
-@import 'partials/lists/list-navigation-links.scss';
-@import 'partials/lists/list-navigation-socials.scss';
-@import 'partials/lists/list-article-types.scss';
-@import 'partials/lists/list-showreel-slides.scss';
-@import 'partials/lists/list-showreel-descriptions.scss';
-@import 'partials/lists/list-showreel-bullets.scss';
+@import 'partials/buttons/button-contacts-link.scss';
 
 
 /*

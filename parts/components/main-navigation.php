@@ -22,23 +22,15 @@
             </a>
         </li>
     </ul>
-
+    <?php $socials = get_field('socials', 'options') ?>
     <ul class="list list--horizontal list-navigation-socials main-navigation__socials not-mobile">
+        <?php foreach($socials as $social) { ?>
         <li class="list__item list-navigation-socials__item">
-            <a href="" class="button button-navigation-social">
-                <img src="assets/svg/icons/socials/facebook.svg" class="icon icon-facebook button-navigation-social__icon" />
+            <a href="<?php echo $social['link'] ?>" class="button button-navigation-social">
+                <img src="assets/svg/icons/socials/<?php echo $social['platform'] ?>.svg" class="icon button-navigation-social__icon" />
             </a>
         </li>
-        <li class="list__item list-navigation-socials__item">
-            <a href="" class="button button-navigation-social">
-                <img src="assets/svg/icons/socials/twitter.svg" class="icon icon-twitter button-navigation-social__icon" />
-            </a>
-        </li>
-        <li class="list__item list-navigation-socials__item">
-            <a href="" class="button button-navigation-social">
-                <img src="assets/svg/icons/socials/youtube.svg" class="icon icon-youtube button-navigation-social__icon" />
-            </a>
-        </li>
+        <?php } ?>
     </ul>
 
 </div>
