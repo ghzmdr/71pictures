@@ -2,7 +2,7 @@
 
     <?php $content =  get_field('cnt') ?>
 
-    <?php foreach ($content as $block) {
+    <?php if ($content) foreach ($content as $block) {
 
         switch ($block['acf_fc_layout']) {
 

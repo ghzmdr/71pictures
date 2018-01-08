@@ -6,6 +6,7 @@ import Menu from 'views/overlays/Menu';
 import MenuButton from 'views/components/MenuButton';
 import MainNavigation from 'views/components/MainNavigation';
 import AppStore from 'stores/AppStore';
+import {sharePopup} from 'utils/Share';
 
 const ApplicationView = View.extend({
 
@@ -17,7 +18,8 @@ const ApplicationView = View.extend({
 
     events: {
         'click [href^="http"]': '_routeClickHandler',
-        'click [href^="/"]': '_routeClickHandler'
+        'click [href^="/"]': '_routeClickHandler',
+        'click [data-share-current]': '_shareClickHandler'
     },
 
     initialize: function () {
@@ -37,6 +39,11 @@ const ApplicationView = View.extend({
         const target = e.delegateTarget || e.target;
         e.preventDefault();
         Backbone.history.navigate(target.pathname, { trigger: true });
+    },
+
+    _shareClickHandler: function (e) {
+        const platform = (e.delegateTarget || e.target).dataset.shareCurrent;
+        sharePopup(platform, window.location.href);
     }
 })
 

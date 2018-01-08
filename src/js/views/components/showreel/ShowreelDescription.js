@@ -1,7 +1,13 @@
 import { View } from 'lib/View';
 import { TweenLite } from 'gsap';
 
+import ExploreButton from 'views/components/ExploreButton';
+
 export default View.extend({
+
+    components: {
+        buttonExplore: {type: ExploreButton, selector: '.js-button'}
+    },
 
     onInitialized: function () {
         TweenLite.set(this.el, {autoAlpha: 0});

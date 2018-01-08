@@ -51,9 +51,9 @@ const ArticleExcerpt = View.extend({
 
     _createTimelineHover: function () {
         this._timelineHover = new TimelineLite();
-        this._timelineHover.to(this.ui.panel, 0.7, {scaleX: 1.2, ease: Power2.easeOut})
-        this._timelineHover.to(this.ui.image, 0.7, {x: '-5%', ease: Power2.easeOut}, 0)
-        this._timelineHover.to(this.ui.link, 0.6, {x: '-7%', ease: Power2.easeOut}, 0.2)
+        this._timelineHover.to(this.ui.panel, 0.7, {scaleX: 1.2, ease: Power3.easeInOut})
+        this._timelineHover.to(this.ui.image, 0.7, {x: '-5%', ease: Power3.easeInOut}, 0)
+        this._timelineHover.to(this.ui.link, 0.6, {x: '-7%', ease: Power3.easeInOut}, 0.2)
     },
 
     _mouseEnterHandler: function () {

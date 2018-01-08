@@ -20,6 +20,7 @@
             <h1 class="article-header__title">
                 <?php the_title(); ?>
             </h1>
+
         </div>
 
 
@@ -29,6 +30,22 @@
     <div class="article-content">
         <div class="article-content-header">
             <time class="article-content-header__date"><?php echo get_the_date( 'd F Y') ?></time>
+
+            <div class="article-content-header__share article-share js-article-share">
+                <button class="button button-article-share js-button-share">Share:</button>
+                <ul class="list list--horizontal list-article-socials article-share__socials">
+                    <li class="list__item list-article-socials__item">
+                        <button class="button button-article-social js-social" data-share-current="facebook">
+                            <img src="assets/svg/icons/socials/facebook.svg" alt="" class="icon button-article__icon">
+                        </button>
+                    </li>
+                    <li class="list__item list-article-socials__item">
+                        <button class="button button-article-social js-social" data-share-current="twitter">
+                            <img src="assets/svg/icons/socials/twitter.svg" alt="" class="icon button-article__icon">
+                        </button>
+                    </li>
+                </ul>
+            </div>
             <!-- <div class="article-content-header__share">
                 <a href="" class="button button-article-share">Share</a>
             </div> -->
